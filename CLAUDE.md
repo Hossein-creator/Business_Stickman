@@ -33,10 +33,17 @@ Faceless stickman shorts made with HyperFrames (HTML + canvas → MP4).
      never the video. Save the data in `research/` and the findings in `research/swipe.md`.
    - Pick the idea that has the best chance of being the most viral video, and that teaches a
      real, useful lesson.
-2. **Story:** turn the top formulas into our own hook line and story, following the formula in
-   `STYLE_GUIDE.md` (hook at frame 0, counter/timeline, accelerating beats, payoff ~12 s, quote).
-3. **Build:** copy a project to `videos/NN-<name>/`, write the scene in `index.html`, add new props
+2. **Pick the topic:** start from the open list in `STYLE_GUIDE.md` ("Video ideas"), not from
+   scratch, and give it the strongest formula from the research. When making several videos,
+   mix the three kinds (mindset & money habits, business models, business ideas) and include at
+   least one with the core themes (gratitude, comparison, everyday characters). Move made ideas to
+   "Made" and add new ideas from the research to the open list.
+3. **Story:** follow `STYLE_GUIDE.md`: a hook that speaks to "you" and names the topic in frame 0,
+   a topic chip, a build-up with real numbers, a big payoff, a short quote. Videos 5, 6 and 7 are
+   the benchmark.
+4. **Build:** copy a project to `videos/NN-<name>/`, write the scene in `index.html`, add new props
    to `shared/lib/stickman.js`, then `./scripts/sync-shared.sh`.
-4. **Check:** `hyperframes check`, then snapshots at the key moments; look at them and fix.
-5. **Render** to `renders/NN-<name>.mp4` (60 fps, delivery quality), commit, push, and show the
-   videos in the session.
+5. **Check:** `hyperframes check`, then snapshots at the key moments; look at them and fix.
+6. **Render** to `renders/NN-<name>.mp4` (60 fps, delivery quality), commit, push, and show the
+   videos in the session. GitHub refuses files over 100 MB: if a render is above ~90 MB, render
+   again with `--crf 20` (or higher) before committing.

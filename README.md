@@ -18,6 +18,9 @@ Videos 1–4 run 18 s; from video 5 on they run 22 s, slower, with motion blur a
 | 4 | [`renders/04-bamboo.mp4`](renders/04-bamboo.mp4) | He waters a seed for 4 years while people laugh. Nothing grows. The camera dives underground: 4 years of roots. Then the bamboo shoots up 27 m in 6 weeks. | "No results yet doesn't mean no **progress**." |
 | 5 | [`renders/05-payday-loop.mp4`](renders/05-payday-loop.mp4) | Payday feels rich, day 29 is instant noodles under a rain cloud. Pull back: he runs in a hamster wheel made of days, and the years spin by. Loops seamlessly into frame 0. | "No plan for your money? Every month is the **same month.**" |
 | 6 | [`renders/06-snowball.mp4`](renders/06-snowball.mp4) | $100 a month rolls down a snowy mountain and grows to $149,036 in 30 years (8% example). A picture-in-picture shows someone who starts 10 years later: $58,902. | "Start small. But start **now.**" |
+| 7 | [`renders/07-coffee-money.mp4`](renders/07-coffee-money.mp4) | You pay $5 for a latte: the cup fills with every cost (beans, milk, cup, rent, staff, power) until only $0.60 profit is left. To make $3,000 a month the café must sell 167 cups a day. | "Revenue is vanity. **Profit** is sanity." |
+| 8 | [`renders/08-car-wash.mp4`](renders/08-car-wash.mp4) | Got $50? Buy a car-wash kit, wash a car for $10, repeat: $55 a day, $440 a month on weekends only. | "You don't need a lot of money. You need a **first customer.**" |
+| 9 | [`renders/09-money-leaks.mp4`](renders/09-money-leaks.mp4) | Your salary pours into a jar that leaks $115 a month (streaming, delivery fees, gym, apps, late fees): $21,039 in 10 years if invested. Plug the holes and the jar fills. | "Small leaks sink big ships. Check yours **tonight.**" |
 
 ## Layout
 
@@ -25,6 +28,7 @@ Videos 1–4 run 18 s; from video 5 on they run 22 s, slower, with motion blur a
 shared/            engine shared by every video
   lib/stickman.js    canvas engine: stickman rig, props, atmosphere, camera
   lib/stickman-props.js  rooms, desk work, garden, bamboo, roots, toasts, speech bubbles
+  lib/stickman-ui.js     clean infographic UI: topic chip, steps, cost rows, big numbers, icons
   lib/stickman-fx.js     effects: rays, flares, bursts, confetti, money rain, snow, springs, grade
   lib/gsap.min.js    GSAP 3.14.2 (timeline that HyperFrames seeks)
   fonts/             Plus Jakarta Sans

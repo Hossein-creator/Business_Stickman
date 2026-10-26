@@ -8,6 +8,12 @@ Faceless short videos (TikTok, Instagram Reels, YouTube Shorts) about **motivati
 life lessons, tied to money and business**.
 
 - **Themes:** gratitude, comparison, entrepreneurship, small business, discipline, time.
+- **Three kinds of video, rotated:**
+  1. **Mindset & money habits:** gratitude, comparison, discipline, time, saving (e.g. Payday Loop,
+     Snowball, Money Leaks).
+  2. **Business models:** how a business really makes money, cost by cost (e.g. Your $5 Coffee).
+  3. **Business ideas:** a business someone can start small, step by step with real numbers
+     (e.g. $50 Car Wash).
 - **Audience:** young adults from working and middle-class backgrounds (first target: Indonesia).
   The characters are everyday people: delivery riders, street-food sellers, people paying off
   installments, people saving spare change.
@@ -35,6 +41,23 @@ Every video is built to be the most viral version of its idea, not just a good o
 - **Real numbers.** When money is shown, compute it (e.g. compound interest), and put an honest
   footnote on assumptions ("8% average yearly return, not guaranteed").
 - **Rewatch value.** Prefer endings that loop into frame 0, or a final picture worth pausing on.
+
+## Instantly clear, speaks to the viewer
+
+- **The hook talks to "you"** and names the topic in the first frame: "You pay $5 for this
+  coffee.", "Got $50?", "You're not bad with money."
+- **Frame 0 shows the subject** (the cup, the dirty car, the leaking jar), never an empty scene.
+- **A topic chip stays on screen** (`ui.topic`, y = 196) from about 3 s until the ending text
+  takes over: "HOW A CAFÉ MAKES MONEY", "BUSINESS IDEA: CAR WASH".
+- **Clean infographic look:** one big central object, large labels, numbers that count up, rows
+  and steps from `stickman-ui.js` (`ui.step`, `ui.row`, `ui.bigNumber`). Few elements, lots of
+  air, nothing overlapping.
+
+## The benchmark: videos 5, 6 and 7
+
+The owner liked these best. Match them: one strong visual metaphor (hamster wheel, snowball,
+cup filling with costs), real numbers building up in front of the viewer, a big payoff with
+light and particles, slow and smooth pacing with motion blur.
 
 ## Pacing: slow, smooth, cinematic
 
@@ -108,14 +131,34 @@ Use several per video, always with a cause on screen:
    text are variables at the top of the file.
 4. Check and render (see `README.md`).
 
-## Video ideas (backlog)
+## Video ideas
 
+Pick from the open list first (see `CLAUDE.md`); when one is made, move it to "Made".
+
+### Open
+
+**Mindset & money habits**
 - **Gratitude chain:** a rider wants a car, the driver (installments) wants a scooter, the couple
   on the scooter wants the seller's freedom, the hospital patient wants to be the rider.
-  *"Your 'not enough' is someone else's 'if only'."*
+  *"Your 'not enough' is someone else's 'if only'."* (Close to a reference video: own story and look.)
 - **Waiting for capital:** one waits for $10,000, the other starts with $10.
-  *"You're waiting for money. You need to start."*
+  *"You're waiting for money. You need to start."* (Close to a reference video: own story and look.)
 - **Fake rich:** new phone on installments vs. a cart bought with cash. *"Look rich, or get rich."*
-- **Big number rise and fall:** $70 million to bankrupt, told with stickmen, no names.
+- **Rise and fall:** $70 million to bankrupt, told with stickmen, no names.
   *"It's not what you earn. It's what you keep."*
-- **Who stays:** when the stall is empty, one friend still comes every day (emotional twist).
+- **Who stays:** the stall is empty, but one friend still comes every day (emotional twist).
+
+**Business models**
+- **How a street-food cart makes money:** one portion of fried snacks, cost by cost.
+- **Why a $3 bottle of water costs 20 cents to make:** brand, shop, transport, margin.
+- **How a delivery app makes money:** the rider, the restaurant and the app split one order.
+
+**Business ideas**
+- **$100 phone-accessories stall:** buy, price, sell, profit per week.
+- **Laundry pickup service:** one scooter, a few regular customers, monthly numbers.
+- **Selling home-made frozen food:** batch cost, price per pack, weekend sales.
+
+### Made
+
+1 Spare Change · 2 Chapter 1 · 3 Same 24 Hours · 4 Bamboo · 5 Payday Loop · 6 The Snowball ·
+7 Your $5 Coffee · 8 $50 Car Wash · 9 Money Leaks
