@@ -26,6 +26,13 @@ Faceless stickman shorts made with HyperFrames (HTML + canvas → MP4).
      to paste account, followers, median, views and hook for 10–40 videos. If they skip it, use
      the latest `research/swipe.md` and say how old it is.
    - Formulas last a season: a swipe file younger than about a month can be reused.
+   - **Also look outside the niche, always:** take the most successful shorts of any topic
+     (sort YouTube search by view count, shorts ≤ 70 s; e.g. "animation #shorts",
+     "life lesson #shorts") and turn their formula into our niche: same hook shape, structure,
+     length and payoff, but our own money/business story and our own visuals. Copy the formula,
+     never the video. Save the data in `research/` and the findings in `research/swipe.md`.
+   - Pick the idea that has the best chance of being the most viral video, and that teaches a
+     real, useful lesson.
 2. **Story:** turn the top formulas into our own hook line and story, following the formula in
    `STYLE_GUIDE.md` (hook at frame 0, counter/timeline, accelerating beats, payoff ~12 s, quote).
 3. **Build:** copy a project to `videos/NN-<name>/`, write the scene in `index.html`, add new props
