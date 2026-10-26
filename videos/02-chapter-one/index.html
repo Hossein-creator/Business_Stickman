@@ -1,0 +1,253 @@
+<!doctype html>
+<html
+  lang="en"
+  data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"hook1","type":"string","label":"Hook line 1","default":"Why is his stall packed…"},
+    {"id":"hook2","type":"string","label":"Hook line 2","default":"and mine is empty?"},
+    {"id":"quote1a","type":"string","label":"Quote line 1 (before keyword)","default":"Don’t compare your"},
+    {"id":"quote1b","type":"string","label":"Quote keyword","default":"chapter 1"},
+    {"id":"quote2","type":"string","label":"Quote line 2","default":"to their chapter 10."},
+    {"id":"brand","type":"string","label":"Watermark","default":"BUSINESS STICKMAN"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/lib/gsap.min.js"></script>
+    <script src="assets/lib/stickman.js"></script>
+    <style>
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-800-normal.woff2") format("woff2"); font-weight: 800; }
+      :root { --ink: #eef1f6; --accent: #ffc23d; --muted: #8b93a3; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0a0c11; }
+      #root { position: relative; width: 100%; height: 100%; font-family: "Jakarta", sans-serif; }
+      #stage { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+      .lines { position: absolute; left: 80px; right: 80px; top: 240px; text-align: center; color: var(--ink); font-weight: 800; letter-spacing: -0.02em; }
+      .lines p { font-size: 64px; line-height: 1.18; }
+      .w { display: inline-block; white-space: pre; }
+      .key { color: var(--accent); text-shadow: 0 0 28px rgba(255, 194, 61, 0.55); }
+      .soft { color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="18" data-width="1080" data-height="1920">
+      <canvas id="stage" class="clip" data-start="0" data-duration="18" data-track-index="0"></canvas>
+
+      <div id="hook" class="lines clip" data-start="0" data-duration="3.6" data-track-index="1">
+        <p id="hook-l1"><span class="w" data-var-text="hook1">Why is his stall packed…</span></p>
+        <p id="hook-l2" class="soft"><span class="w" data-var-text="hook2">and mine is empty?</span></p>
+      </div>
+
+      <div id="quote" class="lines clip" data-start="14.7" data-duration="3.3" data-track-index="2">
+        <p><span class="w q" data-var-text="quote1a">Don’t compare your</span> <span class="w q key" data-var-text="quote1b">chapter 1</span></p>
+        <p><span class="w q" data-var-text="quote2">to their chapter 10.</span></p>
+      </div>
+
+      <audio id="sfx-think" class="clip" src="assets/sfx/pop.mp3" data-start="1.62" data-duration="0.72" data-track-index="5" data-volume="0.35"></audio>
+      <audio id="sfx-push" class="clip" src="assets/sfx/whoosh.mp3" data-start="3.0" data-duration="0.6" data-track-index="6" data-volume="0.3"></audio>
+      <audio id="sfx-rew1" class="clip" src="assets/sfx/whoosh-cinematic.mp3" data-start="4.1" data-duration="2.0" data-track-index="7" data-volume="0.4"></audio>
+      <audio id="sfx-rew2" class="clip" src="assets/sfx/glitch-3.mp3" data-start="4.2" data-duration="1.9" data-track-index="8" data-volume="0.25"></audio>
+      <audio id="sfx-y1" class="clip" src="assets/sfx/pop.mp3" data-start="6.02" data-duration="0.72" data-track-index="9" data-volume="0.35"></audio>
+      <audio id="sfx-y2" class="clip" src="assets/sfx/click-soft.mp3" data-start="7.32" data-duration="0.37" data-track-index="10" data-volume="0.5"></audio>
+      <audio id="sfx-loss" class="clip" src="assets/sfx/error.mp3" data-start="7.55" data-duration="1.0" data-track-index="11" data-volume="0.18"></audio>
+      <audio id="sfx-y3" class="clip" src="assets/sfx/pop.mp3" data-start="8.62" data-duration="0.72" data-track-index="9" data-volume="0.32"></audio>
+      <audio id="sfx-y4" class="clip" src="assets/sfx/click-soft.mp3" data-start="9.92" data-duration="0.37" data-track-index="10" data-volume="0.5"></audio>
+      <audio id="sfx-y5" class="clip" src="assets/sfx/pop.mp3" data-start="11.22" data-duration="0.72" data-track-index="9" data-volume="0.32"></audio>
+      <audio id="sfx-grow" class="clip" src="assets/sfx/impact-bass-2.mp3" data-start="11.1" data-duration="2.59" data-track-index="12" data-volume="0.4"></audio>
+      <audio id="sfx-shine" class="clip" src="assets/sfx/sparkle.mp3" data-start="12.0" data-duration="1.8" data-track-index="13" data-volume="0.3"></audio>
+      <audio id="sfx-back" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="12.62" data-duration="0.6" data-track-index="6" data-volume="0.3"></audio>
+      <audio id="sfx-light" class="clip" src="assets/sfx/click-soft.mp3" data-start="13.62" data-duration="0.37" data-track-index="10" data-volume="0.5"></audio>
+      <audio id="sfx-buy" class="clip" src="assets/sfx/chime.mp3" data-start="14.45" data-duration="2.5" data-track-index="14" data-volume="0.3"></audio>
+      <audio id="sfx-quote" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="14.75" data-duration="0.6" data-track-index="15" data-volume="0.25"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const DUR = 18;
+      const { W, H, C, E, clamp, lerp, tw, kf, rng } = SM;
+      let BRAND = "BUSINESS STICKMAN";
+
+      const GY = 1250;                 // street level (world)
+      const NX = 300, OX = 750;        // new seller cart / owner's shop
+      const REW0 = 4.2, REW1 = 6.0;    // rewind 2026 -> 2016
+      // the owner's ten years, one beat each
+      const STAGES = [
+        { t: 6.0, year: 2016, cap: "NO CUSTOMERS" },
+        { t: 7.3, year: 2018, cap: "LOSSES" },
+        { t: 8.6, year: 2020, cap: "CLOSED" },
+        { t: 9.9, year: 2023, cap: "ONE MORE TRY" },
+        { t: 11.2, year: 2026, cap: "CHAPTER 10" },
+      ];
+      const BACK = 12.6;               // back to the present
+      const stageAt = (t) => { let s = -1; STAGES.forEach((st, i) => { if (t >= st.t) s = i; }); return t >= BACK ? -1 : s; };
+
+      function street(ctx, t, camX) {
+        SM.background(ctx, "#161a24", "#0a0c11");
+        SM.city(ctx, GY - 120, camX, 0.3, 4, 0.2, "#151922");
+        SM.city(ctx, GY - 20, camX, 0.6, 9, 0.12, "#1b202a");
+      }
+      function lamp(ctx, x, on, t) {
+        SM.box(ctx, x - 6, GY - 420, 12, 420, 4, "#2b303b", 5);
+        SM.box(ctx, x - 6, GY - 430, 70, 12, 5, "#2b303b", 5);
+        const fl = on * (0.85 + 0.15 * Math.sin(t * 13) * Math.sin(t * 7.3));
+        SM.glow(ctx, x + 56, GY - 410, 260, "#ffcf7a", fl * 0.6);
+        SM.circle(ctx, x + 56, GY - 412, 10, SM.mixColor("#444a55", "#ffe2a8", fl), 4);
+      }
+      function crate(ctx, x, y) { SM.box(ctx, x - 40, y - 50, 80, 50, 6, C.wood, 5); SM.box(ctx, x - 40, y - 30, 80, 6, 2, C.woodDark, 0); }
+      function basket(ctx, x, y) {
+        ctx.beginPath(); ctx.moveTo(x - 36, y - 26); ctx.lineTo(x + 36, y - 26); ctx.lineTo(x + 26, y + 10); ctx.lineTo(x - 26, y + 10); ctx.closePath();
+        ctx.lineWidth = 5; ctx.strokeStyle = C.out; ctx.stroke(); ctx.fillStyle = "#a07a4e"; ctx.fill();
+        for (let i = 0; i < 3; i++) SM.circle(ctx, x - 16 + i * 16, y - 30, 9, "#d9913a", 4);
+      }
+      // a queue customer; idle sway offset per person so nobody moves in unison
+      function customer(ctx, x, i, t, a = 1, walkK = 1) {
+        const r = rng(i * 7 + 2);
+        const pose = walkK < 1 ? SM.walk(t * 9 + i, 1) : { ...SM.POSE.stand, head: Math.sin(t * (1.4 + r()) + i * 2) * 0.08, lean: Math.sin(t * 1.1 + i) * 0.03 };
+        SM.stickman(ctx, { x, y: GY, s: 0.9 + r() * 0.1, face: -1, pose, color: C.other, alpha: a });
+      }
+
+      // the owner's place at any moment: present (stage -1) or one of the stages
+      function ownerPlace(ctx, t, st, inPresent) {
+        const after = t >= BACK;
+        const shopGrow = after ? 1 : inPresent ? 1 - tw(t, REW0, REW1 - 0.3, E.in) : st === 4 ? tw(t, 11.25, 11.9, E.out) : 0;
+        const lit = after ? 1 : inPresent ? 1 - tw(t, REW0, REW0 + 0.6) : st === 4 ? tw(t, 11.5, 12.0) : st === 3 ? 0.6 : 0;
+        if (shopGrow > 0.01) SM.shop(ctx, OX + 10, GY, 0.78, { grow: shopGrow, sign: "NOODLES", light: lit, t });
+
+        // cart / basket / crate by stage
+        let pose = SM.POSE.work, ox = OX - 40;
+        if (inPresent || st >= 3) {
+          SM.stickman(ctx, { x: ox, y: GY - 10, pose: { ...SM.POSE.work, head: SM.POSE.work.head + Math.sin(t * 3) * 0.06 }, color: C.hero });
+          SM.cart(ctx, OX - 20, GY, 0.95, { awning: 1, sign: shopGrow > 0.6 ? null : "NOODLES", light: Math.max(lit, st === 3 ? 0.55 : 0), t });
+        } else if (st === 2) {
+          SM.cart(ctx, OX + 70, GY, 0.95, { awning: 0, light: 0, goods: 0, t });
+          SM.signBoard(ctx, OX + 70, GY - 200, "CLOSED", 0, 1);
+          crate(ctx, OX - 110, GY);
+          SM.stickman(ctx, { x: OX - 110, y: GY - 50, pose: SM.POSE.sitSlump, color: C.hero });
+        } else if (st === 1) {
+          SM.stickman(ctx, { x: ox, y: GY - 10, pose: SM.poseMix(SM.POSE.work, SM.POSE.slump, 0.5), color: C.hero });
+          SM.cart(ctx, OX - 20, GY, 0.95, { awning: 0, light: 0, goods: 2 / 5, t });
+          const fk = clamp((t - 7.5) / 1.0);
+          SM.text(ctx, "-$40", OX + 120, GY - 330 - fk * 60, { size: 46, color: C.coral, alpha: Math.sin(fk * Math.PI) });
+        } else if (st === 0) {
+          const j = SM.stickman(ctx, { x: OX, y: GY, pose: { ...SM.POSE.slump, aF: [0.9, 1.6] }, color: C.hero });
+          basket(ctx, j.handF[0] + 20, j.handF[1] + 10);
+        }
+        // queue: present walks out during rewind; in 2023 one customer; 2026 they return
+        if (inPresent) {
+          const out = after ? 0 : tw(t, REW0, REW0 + 1.2, E.in);
+          [0, 1, 2].forEach((i) => customer(ctx, 905 + i * 62 + out * 500, i, t, 1 - out));
+        } else if (st === 3) {
+          const k = tw(t, 10.1, 10.7, E.out);
+          customer(ctx, lerp(1200, 905, k), 0, t, 1, k);
+        } else if (st === 4) {
+          [0, 1, 2].forEach((i) => { const k = tw(t, 11.4 + i * 0.2, 12.1 + i * 0.2, E.out); customer(ctx, lerp(1250 + i * 80, 905 + i * 62, k), i, t, 1, k); });
+        }
+      }
+
+      function draw(ctx, t) {
+        const st = stageAt(t);
+        const inPresent = t < REW1 || t >= BACK;
+        const rew = tw(t, REW0, REW1, E.lin) * (t < REW1 ? 1 : 0);
+
+        // camera: wide -> push on the shop -> follow the journey -> pull back wide
+        const cam = kf(t, [
+          [0, { x: 575, y: 1060, z: 1.12 }],
+          [2.9, { x: 565, y: 1060, z: 1.16 }],
+          [3.9, { x: 800, y: 1050, z: 1.62 }],
+          [12.5, { x: 800, y: 1050, z: 1.68 }],
+          [13.3, { x: 570, y: 1060, z: 1.14 }],
+          [18, { x: 560, y: 1060, z: 1.2 }],
+        ], E.inOut);
+        // a little kick on each new year
+        let kick = 0;
+        STAGES.forEach((s) => { const k = clamp((t - s.t) / 0.35); if (k > 0 && k < 1) kick += Math.sin(k * Math.PI) * (1 - k) * 0.03; });
+        const shakeX = rew > 0 && rew < 1 ? Math.sin(t * 71) * 6 : 0;
+
+        ctx.save();
+        street(ctx, t, cam.x);
+        SM.camera(ctx, { x: cam.x + shakeX, y: cam.y, z: cam.z + kick, sx: W / 2, sy: 1120 });
+        SM.groundStrip(ctx, GY, 900);
+        lamp(ctx, 500, inPresent ? 1 : st >= 3 ? 1 : 0.35, t);
+
+        // ---- new seller (left): only seen in the present ----
+        if (inPresent) {
+          const resolve = tw(t, 13.2, 13.7);               // straightens up
+          const wipe = t > 13.7 && t < 14.4;
+          let p = SM.poseMix(SM.POSE.slump, SM.POSE.proud, resolve);
+          if (wipe) p = SM.poseMix(SM.POSE.proud, SM.POSE.wipe, Math.sin(clamp((t - 13.7) / 0.7) * Math.PI));
+          p = { ...p, head: p.head + (t < 3 ? 0.0 : 0) };
+          const j = SM.stickman(ctx, { x: NX - 30, y: GY - 10, pose: p, color: C.hero });
+          const bulb = t < 13.6 ? 0.12 + 0.08 * Math.sin(t * 9) : tw(t, 13.6, 13.9);
+          SM.cart(ctx, NX, GY, 0.95, { awning: 1, sign: "COFFEE", light: bulb, t, goods: 0.6 });
+          // first customer
+          if (t > 13.8) {
+            const k = tw(t, 13.8, 14.45, E.out);
+            SM.stickman(ctx, { x: lerp(610, 470, k), y: GY, s: 0.95, face: -1, pose: k < 1 ? SM.walk(t * 9, 1 - k * 0.5) : SM.poseMix(SM.POSE.stand, SM.POSE.give, Math.sin(clamp((t - 14.45) / 0.7) * Math.PI)), color: C.other });
+            if (t > 14.45) SM.coin(ctx, 420, GY - 260 - tw(t, 14.45, 15.1, E.out) * 50, 14, t * 6, 1 - tw(t, 14.9, 15.3));
+          }
+          // a dry leaf drifting past the empty cart
+          if (t < 3.5) { const lk = t / 3.5; ctx.save(); ctx.translate(lerp(-40, 640, lk), GY - 20 - Math.abs(Math.sin(lk * 9)) * 40); ctx.rotate(lk * 12); ctx.fillStyle = C.leafDry; ctx.beginPath(); ctx.ellipse(0, 0, 10, 5, 0, 0, Math.PI * 2); ctx.fill(); ctx.restore(); }
+          // thought bubble: the packed stall
+          const tk = tw(t, 1.5, 1.9, E.lin) * (1 - tw(t, 3.0, 3.3, E.lin));
+          const b = SM.thought(ctx, NX + 70, GY - 470, 190, 150, tk, [j.head[0] + 30, j.head[1] - 30]);
+          if (b && b.sc > 0.2) SM.icon(ctx, "crowd", NX + 70, GY - 470, 1.2 * b.sc);
+          // "0 SOLD" tag
+          SM.label(ctx, t < 13.6 ? "0 SOLD" : "1 SOLD", NX, GY + 50, { size: 22, color: t < 13.6 ? C.label : C.amber, alpha: t < 3.4 || t > 13.0 ? 1 : 0 });
+        }
+
+        // ---- owner's place (right) ----
+        ownerPlace(ctx, t, st, inPresent);
+        if (st === 0 || (st === 1 && t < 8.0)) { ctx.save(); SM.rain(ctx, t, st === 0 ? 1 : 0.5, 9, 0.1); ctx.restore(); }
+        ctx.restore();
+
+        // ---- memory grade during the journey / rewind ----
+        const memory = (t >= REW0 && t < BACK) ? Math.min(tw(t, REW0, REW0 + 0.4), 1 - tw(t, 11.6, 12.4)) : 0;
+        if (memory > 0) {
+          ctx.save(); ctx.globalCompositeOperation = "saturation"; ctx.fillStyle = `rgba(128,128,128,${0.75 * memory})`; ctx.fillRect(0, 0, W, H); ctx.restore();
+          ctx.save(); ctx.globalCompositeOperation = "soft-light"; ctx.fillStyle = `rgba(120,150,190,${0.35 * memory})`; ctx.fillRect(0, 0, W, H); ctx.restore();
+        }
+        if (rew > 0 && rew < 1) {
+          // tape-rewind streaks
+          const r = rng(Math.floor(t * 30) + 3);
+          for (let i = 0; i < 9; i++) { ctx.fillStyle = `rgba(255,255,255,${0.04 + r() * 0.08})`; ctx.fillRect(0, r() * H, W, 2 + r() * 6); }
+          SM.text(ctx, "◀◀", 90, 180, { size: 44, color: "rgba(255,255,255,0.7)", align: "left", alpha: 0.6 + 0.4 * Math.sin(t * 20) });
+        }
+        // flash on each stage cut
+        STAGES.forEach((s) => { const k = clamp((t - s.t) / 0.25); if (k > 0 && k < 1) { ctx.fillStyle = `rgba(255,255,255,${0.12 * (1 - k)})`; ctx.fillRect(0, 0, W, H); } });
+
+        // ---- HUD: year pill + chapter caption ----
+        const pillA = tw(t, 3.4, 3.7, E.back) * (1 - tw(t, 12.7, 13.0));
+        let year = 2026;
+        if (t >= REW0 && t < REW1) year = Math.round(2026 - 10 * E.inOut(rew));
+        if (st >= 0) year = STAGES[st].year;
+        const pulse = st >= 0 ? 1 + Math.sin(clamp((t - STAGES[st].t) / 0.3) * Math.PI) * 0.12 : 1;
+        const gold = st === 4;
+        SM.pill(ctx, String(year), W / 2, 450, { size: 36, alpha: pillA, scale: pillA * pulse, bg: gold ? C.amber : "#262b36", fg: gold ? "#2a1c00" : C.hero });
+        if (st >= 0) {
+          const ck = tw(t, STAGES[st].t + 0.05, STAGES[st].t + 0.35, E.out);
+          const capCol = st === 4 ? C.amber : st <= 2 ? C.coral : C.text;
+          ctx.save(); ctx.translate(0, (1 - ck) * 16);
+          SM.label(ctx, (st === 0 ? "CHAPTER 1 · " : "") + STAGES[st].cap, W / 2, 530, { size: 28, color: capCol, alpha: ck });
+          ctx.restore();
+        }
+        SM.label(ctx, BRAND, W / 2, 1600, { size: 16, color: "rgba(255,255,255,0.18)", spacing: 0.5 });
+        SM.vignette(ctx, memory > 0 ? 0.85 : 0.7);
+        SM.grain(ctx, t, memory > 0 ? 0.09 : 0.06);
+      }
+
+      document.fonts.load('800 40px "Jakarta"').then(() => {
+        try { const v = window.__hyperframes.getVariables(); if (v && v.brand) BRAND = v.brand; } catch (e) {}
+        tl.fromTo("#hook-l1", { opacity: 1 }, { opacity: 1, duration: 0.01 }, 0);
+        tl.fromTo("#hook-l2", { opacity: 0, y: 24, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.45, ease: "power3.out" }, 0.6);
+        tl.fromTo("#hook p", { opacity: 1, y: 0 }, { opacity: 0, y: -30, filter: "blur(6px)", duration: 0.5, ease: "power2.in", stagger: 0.06 }, 3.0);
+        tl.fromTo("#quote .q", { opacity: 0, y: 28, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power3.out", stagger: 0.32 }, 14.8);
+        tl.fromTo("#quote .key", { scale: 1 }, { scale: 1.08, duration: 0.25, ease: "power2.out", yoyo: true, repeat: 1 }, 15.5);
+        SM.mount("stage", DUR, draw, tl);
+        window.__timelines["main"] = tl;
+      });
+    </script>
+  </body>
+</html>
