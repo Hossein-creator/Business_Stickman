@@ -37,8 +37,9 @@ shared/            engine shared by every video
   fonts/             Plus Jakarta Sans
   sfx/               sound effects (Pixabay licence)
 videos/<name>/     one HyperFrames project per video (index.html is the film)
-renders/           finished MP4s
+renders/           finished MP4s + paste-ready captions (NN-name.caption.txt)
 scripts/sync-shared.sh   copies shared/ into every video project
+scripts/caption_lint.py  checks a caption (first 125 chars, 1 ask, ≤ 5 hashtags, no links)
 ```
 
 ## Working on a video
