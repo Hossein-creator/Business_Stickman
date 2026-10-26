@@ -60,6 +60,9 @@ life lessons, tied to money and business**.
 
 ## Making a new video
 
+0. **Research what is trending first** with `/anthropic-skills:ig-viral` (see `CLAUDE.md`). The
+   hook and structure of every new video start from `research/swipe.md`: the formulas that beat
+   their account's own median by 3x or more, rewritten as our own story.
 1. Copy an existing project: `cp -r videos/02-chapter-one videos/03-<name>` and rename the id in
    `meta.json` and `package.json`.
 2. Run `./scripts/sync-shared.sh` so the project has the latest engine, fonts and sounds.
