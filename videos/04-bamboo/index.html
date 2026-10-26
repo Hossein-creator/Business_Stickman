@@ -1,0 +1,230 @@
+<!doctype html>
+<html
+  lang="en"
+  data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"hook1","type":"string","label":"Hook line 1","default":"He watered it for 4 years."},
+    {"id":"hook2","type":"string","label":"Hook line 2","default":"Nothing grew."},
+    {"id":"quote1","type":"string","label":"Quote line 1","default":"No results yet"},
+    {"id":"quote2a","type":"string","label":"Quote line 2 (before keyword)","default":"doesn’t mean no"},
+    {"id":"quote2b","type":"string","label":"Quote keyword","default":"progress."},
+    {"id":"brand","type":"string","label":"Watermark","default":"BUSINESS STICKMAN"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/lib/gsap.min.js"></script>
+    <script src="assets/lib/stickman.js"></script>
+    <script src="assets/lib/stickman-props.js"></script>
+    <style>
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-800-normal.woff2") format("woff2"); font-weight: 800; }
+      :root { --ink: #eef1f6; --accent: #ffc23d; --muted: #8b93a3; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0a0c11; }
+      #root { position: relative; width: 100%; height: 100%; font-family: "Jakarta", sans-serif; }
+      #stage { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+      .lines { position: absolute; left: 80px; right: 80px; top: 230px; text-align: center; color: var(--ink); font-weight: 800; letter-spacing: -0.02em; }
+      .lines p { font-size: 66px; line-height: 1.18; }
+      .w { display: inline-block; white-space: pre; }
+      .key { color: var(--accent); text-shadow: 0 0 28px rgba(255, 194, 61, 0.55); }
+      .soft { color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="18" data-width="1080" data-height="1920">
+      <canvas id="stage" class="clip" data-start="0" data-duration="18" data-track-index="0"></canvas>
+
+      <div id="hook" class="lines clip" data-start="0" data-duration="3.0" data-track-index="1">
+        <p id="hook-l1"><span class="w" data-var-text="hook1">He watered it for 4 years.</span></p>
+        <p id="hook-l2" class="soft"><span class="w" data-var-text="hook2">Nothing grew.</span></p>
+      </div>
+
+      <div id="quote" class="lines clip" data-start="14.6" data-duration="3.4" data-track-index="2">
+        <p><span class="w q" data-var-text="quote1">No results yet</span></p>
+        <p><span class="w q" data-var-text="quote2a">doesn’t mean no</span> <span class="w q key" data-var-text="quote2b">progress.</span></p>
+      </div>
+
+      <audio id="sfx-y1" class="clip" src="assets/sfx/pop.mp3" data-start="2.62" data-duration="0.72" data-track-index="5" data-volume="0.38"></audio>
+      <audio id="sfx-y2" class="clip" src="assets/sfx/pop.mp3" data-start="4.42" data-duration="0.72" data-track-index="6" data-volume="0.34"></audio>
+      <audio id="sfx-laugh1" class="clip" src="assets/sfx/click-soft.mp3" data-start="5.02" data-duration="0.37" data-track-index="7" data-volume="0.5"></audio>
+      <audio id="sfx-y3" class="clip" src="assets/sfx/pop.mp3" data-start="6.12" data-duration="0.72" data-track-index="5" data-volume="0.32"></audio>
+      <audio id="sfx-laugh2" class="clip" src="assets/sfx/click-soft.mp3" data-start="6.72" data-duration="0.37" data-track-index="7" data-volume="0.5"></audio>
+      <audio id="sfx-y4" class="clip" src="assets/sfx/pop.mp3" data-start="7.62" data-duration="0.72" data-track-index="6" data-volume="0.3"></audio>
+      <audio id="sfx-down" class="clip" src="assets/sfx/whoosh-cinematic.mp3" data-start="8.9" data-duration="1.6" data-track-index="8" data-volume="0.35"></audio>
+      <audio id="sfx-roots" class="clip" src="assets/sfx/glitch-3.mp3" data-start="9.4" data-duration="1.5" data-track-index="9" data-volume="0.12"></audio>
+      <audio id="sfx-riser" class="clip" src="assets/sfx/riser.mp3" data-start="1.1" data-duration="10.03" data-track-index="10" data-volume="0.22"></audio>
+      <audio id="sfx-y5" class="clip" src="assets/sfx/ping.mp3" data-start="11.12" data-duration="1.32" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sfx-boom" class="clip" src="assets/sfx/impact-bass-2.mp3" data-start="10.9" data-duration="2.59" data-track-index="12" data-volume="0.45"></audio>
+      <audio id="sfx-up" class="clip" src="assets/sfx/whoosh.mp3" data-start="11.3" data-duration="0.6" data-track-index="13" data-volume="0.35"></audio>
+      <audio id="sfx-shine" class="clip" src="assets/sfx/sparkle.mp3" data-start="13.0" data-duration="1.8" data-track-index="14" data-volume="0.3"></audio>
+      <audio id="sfx-quote" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="14.62" data-duration="0.6" data-track-index="15" data-volume="0.28"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const DUR = 18;
+      const { W, H, C, E, clamp, lerp, tw, kf, rng } = SM;
+      let BRAND = "BUSINESS STICKMAN";
+
+      const GY = 1180;                     // ground (world)
+      const BX = 600;                      // the seed
+      const HX = 400;                      // the gardener
+      const YEARS = [2.6, 4.4, 6.1, 7.6];  // year 1..4 begin
+      const DOWN0 = 8.9, DOWN1 = 9.6;      // camera dives underground
+      const UP0 = 10.6;                    // back up
+      const GROW0 = 11.15, GROW1 = 13.0;   // year 5: the six weeks
+      const FULL = 2600;              // bamboo height in world px at the end
+      const yearAt = (t) => { let y = 0; YEARS.forEach((s, i) => { if (t >= s) y = i + 1; }); return t >= GROW0 ? 5 : y; };
+      const heightAt = (t) => FULL * E.inOut(tw(t, GROW0, GROW1, E.lin));
+
+      function sky(ctx, t, dawn) {
+        const g = ctx.createLinearGradient(0, 0, 0, H);
+        g.addColorStop(0, SM.mixColor("#141a26", "#1f2a44", dawn));
+        g.addColorStop(0.7, SM.mixColor("#10141d", "#4a3a3c", dawn));
+        g.addColorStop(1, "#0a0c11");
+        ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      }
+      // stars that drift for the passing seasons
+      function stars(ctx, t, camY) {
+        const r = rng(5);
+        for (let i = 0; i < 90; i++) {
+          const x = r() * W, y = ((r() * 5000 - camY * 0.3) % 5000 + 5000) % 5000 - 1600;
+          const tw2 = 0.5 + 0.5 * Math.sin(t * (1 + r() * 2) + i);
+          ctx.fillStyle = `rgba(230,236,255,${0.15 + 0.35 * tw2 * r()})`;
+          ctx.beginPath(); ctx.arc(x, y, 1 + r() * 1.8, 0, Math.PI * 2); ctx.fill();
+        }
+      }
+
+      function draw(ctx, t) {
+        const h = heightAt(t);
+        const year = yearAt(t);
+        const dawn = tw(t, GROW0, GROW1 + 1.0) * 0.8;
+
+        // camera: hold on the garden, dive underground, ride up with the tip, then pull back
+        const tipY = GY - h;
+        let cam;
+        if (t < GROW0) {
+          cam = kf(t, [
+            [0, { y: 980, z: 1.12 }], [DOWN0, { y: 1000, z: 1.18 }],
+            [DOWN1, { y: 1750, z: 1.15 }], [UP0, { y: 1750, z: 1.15 }],
+            [GROW0, { y: 1000, z: 1.12 }],
+          ], E.inOut);
+        } else {
+          const follow = Math.min(1000, tipY + 280);
+          const pull = tw(t, GROW1 - 0.1, GROW1 + 1.4, E.inOut);
+          cam = { y: lerp(follow, -560, pull), z: lerp(1.12, 0.5, pull) };
+        }
+        sky(ctx, t, dawn);
+        stars(ctx, t, cam.y);
+
+        ctx.save();
+        SM.camera(ctx, { x: 540, y: cam.y, z: cam.z, sx: W / 2, sy: 1000 });
+
+        // distant hills
+        ctx.fillStyle = "#151b22";
+        ctx.beginPath(); ctx.moveTo(-900, GY); for (let x = -900; x <= 2000; x += 60) ctx.lineTo(x, GY - 120 - Math.sin(x * 0.004) * 60 - Math.sin(x * 0.011) * 25); ctx.lineTo(2000, GY); ctx.fill();
+        SM.soil(ctx, GY, 1600);
+
+        // roots: they were growing the whole time
+        const rootProg = tw(t, DOWN0 + 0.15, UP0 - 0.1, E.out);   // hidden until the camera goes underground
+        const rootGlow = tw(t, DOWN1, DOWN1 + 0.5) * (1 - tw(t, GROW1, GROW1 + 1));
+        SM.roots(ctx, BX, GY + 6, rootProg, rootGlow, 2.0);
+
+        // the old tree / fence for scale
+        SM.tree(ctx, 920, GY, 0.95, kf(t, [[0, 0.1], [4.4, 0.7], [6.1, 0.0], [7.6, 0.6], [11, 0.1]], E.inOut), t);
+        SM.box(ctx, 100, GY - 70, 170, 12, 4, C.woodDark, 5); SM.box(ctx, 115, GY - 90, 12, 90, 3, C.wood, 5); SM.box(ctx, 240, GY - 90, 12, 90, 3, C.wood, 5);
+
+        // mound, then the bamboo
+        SM.mound(ctx, BX, GY, 1);
+        if (h > 0) SM.bamboo(ctx, BX, GY, h, t, tw(t, GROW1 - 0.2, GROW1 + 0.4) * (1 - tw(t, GROW1 + 1.4, GROW1 + 3)));
+        if (t > 10.0 && t < GROW0) { // a tiny shoot breaks the soil
+          const k = tw(t, 10.4, 11.0, E.back);
+          SM.bamboo(ctx, BX, GY, 40 * k, t, 0.4 * k);
+        }
+
+        // ---- gardener ----
+        const done = t >= GROW0;
+        let pG;
+        const waterOn = !done && (t < DOWN0);
+        if (waterOn) {
+          // waters, pauses on every new year, keeps going
+          let pause = 0; YEARS.forEach((s) => { const k = (t - s) / 0.6; if (k > 0 && k < 1) pause = Math.max(pause, Math.sin(k * Math.PI)); });
+          pG = SM.poseMix(SM.POSE.water, SM.POSE.slump, pause * 0.6);
+          pG = { ...pG, aF: [pG.aF[0] + Math.sin(t * 3) * 0.06, pG.aF[1] + Math.sin(t * 3) * 0.06] };
+        } else if (!done) {
+          pG = SM.POSE.stand;
+        } else {
+          const look = tw(t, GROW0, GROW0 + 0.6);
+          pG = SM.poseMix(SM.POSE.stand, SM.POSE.lookUp, look);
+          if (t > GROW1) pG = SM.poseMix(pG, SM.POSE.cheer, Math.sin(clamp((t - GROW1) / 1.0) * Math.PI / 2));
+        }
+        const jG = SM.stickman(ctx, { x: HX, y: GY, pose: pG, color: C.hero, glowA: done ? 0.3 * tw(t, GROW1, GROW1 + 0.8) : 0 });
+        if (waterOn) {
+          SM.wateringCan(ctx, jG.handF[0] + 10, jG.handF[1] + 8, 1, 0.55);
+          SM.drops(ctx, jG.handF[0] + 52, jG.handF[1] - 4, BX - 10, GY - 22, t, 0.9);
+        }
+
+        // ---- the doubters ----
+        const passer = (x0, x1, t0, t1, line, i) => {
+          if (t < t0 || t > t1 + 0.6) return;
+          const k = tw(t, t0, t1, E.lin);
+          const x = lerp(x0, x1, k);
+          const stop = k > 0.35 && k < 0.65;
+          const pose = stop ? SM.POSE.laugh : SM.walk(t * 9 + i, 1);
+          const a = 1 - tw(t, t1, t1 + 0.4);
+          const j = SM.stickman(ctx, { x, y: GY, s: 0.95, face: x1 < x0 ? -1 : 1, pose, color: C.other, alpha: a });
+          if (j) SM.say(ctx, x, GY - 330, line, stop ? tw(t, t0 + (t1 - t0) * 0.35, t0 + (t1 - t0) * 0.42, E.lin) * a : 0, j.head, { size: 30 });
+        };
+        // they walk slowly at the edges so the "stop" lands in the middle of their path
+        passer(1180, 760, 4.3, 6.0, "Give up.", 1);
+        passer(-150, 220, 5.9, 7.6, "Waste of time.", 2);
+
+        // neighbours return at the end, heads tilted back
+        if (done) {
+          const k = tw(t, GROW0 + 0.4, GROW0 + 1.2, E.out);
+          SM.stickman(ctx, { x: lerp(1200, 800, k), y: GY, s: 0.95, face: -1, pose: k < 1 ? SM.walk(t * 9, 1) : SM.POSE.lookUp, color: C.other });
+          SM.stickman(ctx, { x: lerp(-120, 200, k), y: GY, s: 0.95, face: 1, pose: k < 1 ? SM.walk(t * 9 + 1, 1) : SM.POSE.lookUp, color: C.other });
+        }
+
+        // height readout beside the stalk (world space, it rides with the tip)
+        const hk = done ? tw(t, GROW0, GROW0 + 0.3) * (1 - tw(t, GROW1 + 0.3, GROW1 + 0.7)) : (t > 2.6 && t < DOWN0 ? 1 : 0);
+        const cm = done ? Math.round(h / FULL * 27) + " m" : "0 cm";
+        SM.text(ctx, cm, BX + 70, (done ? Math.min(GY - 260, tipY + 40) : GY - 120), { size: done ? 64 : 42, color: done ? C.amber : C.coral, align: "left", alpha: hk });
+        ctx.restore();
+
+        // ---- HUD ----
+        const yIn = tw(t, 2.45, 2.75, E.back);
+        const yOut = 1 - tw(t, 14.3, 14.6);
+        const gold = year === 5;
+        const beat = (s) => clamp((t - s) / 0.3);
+        let pulse = 1; [...YEARS, GROW0].forEach((s) => { const k = beat(s); if (k > 0 && k < 1) pulse = 1 + Math.sin(k * Math.PI) * 0.14; });
+        const hide = t > DOWN0 && t < GROW0 ? 1 - Math.min(tw(t, DOWN0, DOWN0 + 0.3), 1 - tw(t, UP0 + 0.2, GROW0)) : 1;
+        SM.pill(ctx, gold ? "YEAR 5 · 6 WEEKS" : "YEAR " + Math.max(1, year), W / 2, 445, { size: 34, alpha: yIn * yOut * hide, scale: yIn * pulse, bg: gold ? C.amber : "#262b36", fg: gold ? "#2a1c00" : C.hero });
+        // underground caption
+        const uk = tw(t, DOWN1 - 0.2, DOWN1 + 0.2) * (1 - tw(t, UP0, UP0 + 0.3));
+        if (uk > 0) {
+          ctx.save(); ctx.globalAlpha = uk; SM.rr(ctx, W / 2 - 330, 1010, 660, 170, 40); ctx.fillStyle = "rgba(10,12,17,0.92)"; ctx.fill(); ctx.restore();
+          SM.label(ctx, "BUT UNDERGROUND…", W / 2, 1060, { size: 30, color: C.text, alpha: uk });
+          SM.text(ctx, "4 years of roots.", W / 2, 1125, { size: 58, color: C.amber, alpha: tw(t, DOWN1 + 0.25, DOWN1 + 0.55) * uk });
+        }
+        SM.label(ctx, BRAND, W / 2, 1600, { size: 16, color: "rgba(255,255,255,0.18)", spacing: 0.5 });
+        SM.vignette(ctx, 0.72);
+        SM.grain(ctx, t, 0.06);
+      }
+
+      document.fonts.load('800 40px "Jakarta"').then(() => {
+        try { const v = window.__hyperframes.getVariables(); if (v && v.brand) BRAND = v.brand; } catch (e) {}
+        tl.fromTo("#hook-l1", { opacity: 1 }, { opacity: 1, duration: 0.01 }, 0);
+        tl.fromTo("#hook-l2", { opacity: 0, y: 24, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.45, ease: "power3.out" }, 0.7);
+        tl.fromTo("#hook p", { opacity: 1, y: 0 }, { opacity: 0, y: -30, filter: "blur(6px)", duration: 0.5, ease: "power2.in", stagger: 0.06 }, 2.35);
+        tl.fromTo("#quote .q", { opacity: 0, y: 28, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power3.out", stagger: 0.32 }, 14.7);
+        tl.fromTo("#quote .key", { scale: 1 }, { scale: 1.1, duration: 0.25, ease: "power2.out", yoyo: true, repeat: 1 }, 15.6);
+        SM.mount("stage", DUR, draw, tl);
+        window.__timelines["main"] = tl;
+      });
+    </script>
+  </body>
+</html>

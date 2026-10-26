@@ -1,0 +1,207 @@
+<!doctype html>
+<html
+  lang="en"
+  data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"hook1","type":"string","label":"Hook line 1","default":"Same 24 hours."},
+    {"id":"hook2","type":"string","label":"Hook line 2","default":"Watch where they go."},
+    {"id":"quote1","type":"string","label":"Quote line 1","default":"Everyone gets 24 hours."},
+    {"id":"quote2a","type":"string","label":"Quote line 2 (before keyword)","default":"Not everyone"},
+    {"id":"quote2b","type":"string","label":"Quote keyword","default":"uses"},
+    {"id":"quote2c","type":"string","label":"Quote line 2 (after keyword)","default":"them."},
+    {"id":"brand","type":"string","label":"Watermark","default":"BUSINESS STICKMAN"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/lib/gsap.min.js"></script>
+    <script src="assets/lib/stickman.js"></script>
+    <script src="assets/lib/stickman-props.js"></script>
+    <style>
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-800-normal.woff2") format("woff2"); font-weight: 800; }
+      :root { --ink: #eef1f6; --accent: #ffc23d; --muted: #8b93a3; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0a0c11; }
+      #root { position: relative; width: 100%; height: 100%; font-family: "Jakarta", sans-serif; }
+      #stage { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+      .lines { position: absolute; left: 80px; right: 80px; top: 230px; text-align: center; color: var(--ink); font-weight: 800; letter-spacing: -0.02em; }
+      .lines p { font-size: 66px; line-height: 1.18; }
+      .w { display: inline-block; white-space: pre; }
+      .key { color: var(--accent); text-shadow: 0 0 28px rgba(255, 194, 61, 0.55); }
+      .soft { color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="18" data-width="1080" data-height="1920">
+      <canvas id="stage" class="clip" data-start="0" data-duration="18" data-track-index="0"></canvas>
+
+      <div id="hook" class="lines clip" data-start="0" data-duration="3.2" data-track-index="1">
+        <p id="hook-l1"><span class="w" data-var-text="hook1">Same 24 hours.</span></p>
+        <p id="hook-l2" class="soft"><span class="w" data-var-text="hook2">Watch where they go.</span></p>
+      </div>
+
+      <div id="quote" class="lines clip" data-start="14.4" data-duration="3.6" data-track-index="2">
+        <p><span class="w q" data-var-text="quote1">Everyone gets 24 hours.</span></p>
+        <p><span class="w q" data-var-text="quote2a">Not everyone</span> <span class="w q key" data-var-text="quote2b">uses</span> <span class="w q" data-var-text="quote2c">them.</span></p>
+      </div>
+
+      <audio id="sfx-riser" class="clip" src="assets/sfx/riser.mp3" data-start="1.97" data-duration="10.03" data-track-index="5" data-volume="0.2"></audio>
+      <audio id="sfx-pill" class="clip" src="assets/sfx/pop.mp3" data-start="2.42" data-duration="0.72" data-track-index="6" data-volume="0.4"></audio>
+      <audio id="sfx-k1" class="clip" src="assets/sfx/click-soft.mp3" data-start="3.02" data-duration="0.37" data-track-index="7" data-volume="0.45"></audio>
+      <audio id="sfx-h1" class="clip" src="assets/sfx/pop.mp3" data-start="3.1" data-duration="0.72" data-track-index="8" data-volume="0.22"></audio>
+      <audio id="sfx-k2" class="clip" src="assets/sfx/click-soft.mp3" data-start="4.42" data-duration="0.37" data-track-index="7" data-volume="0.45"></audio>
+      <audio id="sfx-h2" class="clip" src="assets/sfx/pop.mp3" data-start="4.5" data-duration="0.72" data-track-index="8" data-volume="0.2"></audio>
+      <audio id="sfx-k3" class="clip" src="assets/sfx/click-soft.mp3" data-start="5.62" data-duration="0.37" data-track-index="7" data-volume="0.42"></audio>
+      <audio id="sfx-k4" class="clip" src="assets/sfx/click-soft.mp3" data-start="6.72" data-duration="0.37" data-track-index="7" data-volume="0.42"></audio>
+      <audio id="sfx-h3" class="clip" src="assets/sfx/pop.mp3" data-start="6.8" data-duration="0.72" data-track-index="8" data-volume="0.2"></audio>
+      <audio id="sfx-k5" class="clip" src="assets/sfx/click-soft.mp3" data-start="7.62" data-duration="0.37" data-track-index="7" data-volume="0.4"></audio>
+      <audio id="sfx-k6" class="clip" src="assets/sfx/click-soft.mp3" data-start="8.42" data-duration="0.37" data-track-index="7" data-volume="0.4"></audio>
+      <audio id="sfx-k7" class="clip" src="assets/sfx/click-soft.mp3" data-start="9.12" data-duration="0.37" data-track-index="7" data-volume="0.38"></audio>
+      <audio id="sfx-k8" class="clip" src="assets/sfx/click-soft.mp3" data-start="9.72" data-duration="0.37" data-track-index="7" data-volume="0.38"></audio>
+      <audio id="sfx-k9" class="clip" src="assets/sfx/click-soft.mp3" data-start="10.22" data-duration="0.37" data-track-index="7" data-volume="0.36"></audio>
+      <audio id="sfx-k10" class="clip" src="assets/sfx/click-soft.mp3" data-start="10.72" data-duration="0.37" data-track-index="7" data-volume="0.36"></audio>
+      <audio id="sfx-k11" class="clip" src="assets/sfx/click-soft.mp3" data-start="11.12" data-duration="0.37" data-track-index="7" data-volume="0.34"></audio>
+      <audio id="sfx-k12" class="clip" src="assets/sfx/click-soft.mp3" data-start="11.52" data-duration="0.37" data-track-index="7" data-volume="0.34"></audio>
+      <audio id="sfx-impact" class="clip" src="assets/sfx/impact-bass-1.mp3" data-start="12.02" data-duration="2.12" data-track-index="9" data-volume="0.42"></audio>
+      <audio id="sfx-shine" class="clip" src="assets/sfx/sparkle.mp3" data-start="12.1" data-duration="1.8" data-track-index="10" data-volume="0.3"></audio>
+      <audio id="sfx-o1" class="clip" src="assets/sfx/ping.mp3" data-start="12.45" data-duration="1.32" data-track-index="11" data-volume="0.28"></audio>
+      <audio id="sfx-batt" class="clip" src="assets/sfx/error.mp3" data-start="12.65" data-duration="1.62" data-track-index="12" data-volume="0.16"></audio>
+      <audio id="sfx-o2" class="clip" src="assets/sfx/ping.mp3" data-start="12.85" data-duration="1.32" data-track-index="13" data-volume="0.26"></audio>
+      <audio id="sfx-o3" class="clip" src="assets/sfx/ping.mp3" data-start="13.25" data-duration="1.32" data-track-index="11" data-volume="0.24"></audio>
+      <audio id="sfx-quote" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="14.42" data-duration="0.6" data-track-index="14" data-volume="0.28"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const DUR = 18;
+      const { W, H, C, E, clamp, lerp, tw, kf, rng } = SM;
+      let BRAND = "BUSINESS STICKMAN";
+
+      const N0 = 2.6, N1 = 12.0;                     // night counter 1 -> 365
+      const BEATS = [3.0, 4.4, 5.6, 6.7, 7.6, 8.4, 9.1, 9.7, 10.2, 10.7, 11.1, 11.5];
+      const PAY = 12.0;
+      const FA = 880, FB = 1260;                     // floors of the two rooms
+      const XL = 90, XR = 990;                       // building interior walls
+      const nightAt = (t) => Math.round(1 + 364 * Math.pow(clamp((t - N0) / (N1 - N0)), 1.9));
+      const beatsDone = (t) => BEATS.filter((b) => t >= b).length;
+      // a short dip to dark on each new night: time-lapse feel
+      const blink = (t) => { let d = 0; BEATS.forEach((b) => { const k = (t - b + 0.12) / 0.24; if (k > 0 && k < 1) d = Math.max(d, Math.sin(k * Math.PI)); }); return d; };
+
+      function room(ctx, y0, y1, tint) {
+        const g = ctx.createLinearGradient(0, y0, 0, y1);
+        g.addColorStop(0, tint[0]); g.addColorStop(1, tint[1]);
+        ctx.fillStyle = g; ctx.fillRect(XL, y0, XR - XL, y1 - y0);
+        ctx.fillStyle = "rgba(0,0,0,0.18)"; ctx.fillRect(XL, y1 - 46, XR - XL, 46);   // skirting shadow
+      }
+      function slab(ctx, y, h) { SM.box(ctx, XL - 30, y, XR - XL + 60, h, 6, "#3a404d", 6); }
+
+      function draw(ctx, t) {
+        SM.background(ctx, "#121620", "#07090d");
+        SM.city(ctx, 1450, t * 4, 1, 15, 0.12, "#141821");
+        SM.rain(ctx, t, 0.6, 3, 0.1);
+
+        const push = kf(t, [[0, { z: 1.0, y: 920 }], [11.8, { z: 1.05, y: 920 }], [12.6, { z: 1.12, y: 990 }], [14.2, { z: 1.12, y: 990 }], [15.0, { z: 1.07, y: 940 }], [18, { z: 1.09, y: 940 }]], E.inOut);
+        ctx.save();
+        SM.camera(ctx, { x: W / 2, y: push.y, z: push.z, sx: W / 2, sy: 940 });
+
+        const bl = blink(t) * (t < PAY ? 1 : 0);
+        const pay = tw(t, PAY, PAY + 0.8);
+        const nb = beatsDone(t);
+
+        // building shell
+        SM.box(ctx, XL - 40, 500, XR - XL + 80, FB + 70 - 500, 14, "#262b36", 6);
+        slab(ctx, 500, 30);
+
+        // ---------- room A: scrolling ----------
+        room(ctx, 530, FA, ["#1b2130", "#141924"]);
+        SM.windowSky(ctx, 150, 600, 140, 120, t, 0, 0.7);
+        SM.label(ctx, "SCROLLING", 210, 568, { size: 22, color: SM.mixColor("#8a93a3", C.coral, pay * 0.7), align: "left" });
+        SM.bed(ctx, 340, FA, 1);
+        const dimA = tw(t, PAY + 0.6, PAY + 1.0);
+        const pA = SM.poseMix(SM.POSE.sitPhone, { ...SM.POSE.sitPhone, lean: 0.5, head: 0.95, aB: [0.4, 0.6], aF: [0.3, 0.5] }, dimA);
+        const jA = SM.stickman(ctx, { x: 430, y: FA - 76, pose: { ...pA, head: pA.head + Math.sin(t * 1.6) * 0.03 }, color: SM.mixColor(C.hero, "#aab2c0", tw(t, 7, 12)) });
+        const ph = [(jA.handF[0] + jA.handB[0]) / 2 + 6, (jA.handF[1] + jA.handB[1]) / 2 - 4];
+        const screen = (1 - dimA) * (0.75 + 0.25 * Math.sin(t * 7));
+        SM.glow(ctx, ph[0], ph[1], 240, "#7fb8ff", screen * 0.55);
+        SM.phone(ctx, ph[0], ph[1], 0.9, screen);
+        // hearts: quick dopamine on every night
+        BEATS.forEach((b, i) => {
+          for (let h = 0; h < 3; h++) {
+            const k = clamp((t - b - h * 0.12) / 1.1);
+            if (k <= 0 || k >= 1) continue;
+            const r = rng(i * 9 + h);
+            SM.heart(ctx, ph[0] + (r() - 0.5) * 70 + Math.sin(k * 6 + h) * 10, ph[1] - 30 - k * 170, 0.8 + r() * 0.4, 1 - k);
+          }
+        });
+        // counter A
+        const cA = clamp((t - 2.6) / 0.5);
+        SM.label(ctx, "SCROLLED", 840, 600, { size: 18, alpha: cA });
+        SM.text(ctx, (nightAt(t) * 4).toLocaleString("en-US") + " h", 840, 645, { size: 50, color: SM.mixColor(C.text, C.coral, pay), alpha: cA });
+        SM.toast(ctx, 700, 740, "BATTERY 1%", tw(t, PAY + 0.65, PAY + 1.0, E.lin), { col: C.coral, w: 280 });
+        // darkness when the phone dies
+        ctx.fillStyle = `rgba(4,6,10,${0.45 * dimA + 0.35 * bl})`; ctx.fillRect(XL, 530, XR - XL, FA - 530);
+
+        slab(ctx, FA, 40);
+
+        // ---------- room B: building ----------
+        const lampOn = 1 - bl * 0.6;
+        room(ctx, FA + 40, FB, [SM.mixColor("#1f2230", "#3a2c1c", 0.5 + pay * 0.4), "#151821"]);
+        SM.windowSky(ctx, 130, 970, 140, 120, t, tw(t, PAY, PAY + 1.4), 0);
+        SM.label(ctx, "BUILDING", 190, FA + 78, { size: 22, color: SM.mixColor("#8a93a3", C.amber, 0.6 + pay * 0.4), align: "left" });
+        SM.chartBoard(ctx, 470, 945, 210, 105, Math.min(1, nb / BEATS.length * 0.8 + pay * 0.2), pay);
+        SM.desk(ctx, 520, FB, 1);
+        SM.deskLamp(ctx, 625, FB - 110, 1, lampOn * (0.8 + pay * 0.2));
+        SM.books(ctx, 790, FB, Math.min(nb, 12), 1);
+        SM.chair(ctx, 345, FB, 1);
+        // worker: seated typing, stands and cheers at the payoff
+        const stand = t > PAY + 0.55;
+        if (!stand) {
+          const typ = Math.sin(t * 22) * 0.06;
+          const p = { ...SM.POSE.sitWork, aF: [SM.POSE.sitWork.aF[0], SM.POSE.sitWork.aF[1] + typ], aB: [SM.POSE.sitWork.aB[0], SM.POSE.sitWork.aB[1] - typ], head: SM.POSE.sitWork.head + Math.sin(t * 1.3) * 0.04 };
+          SM.stickman(ctx, { x: 350, y: FB - 66, pose: p, color: C.hero, glowA: 0.15 });
+        } else {
+          const ck = tw(t, PAY + 0.55, PAY + 0.9, E.back);
+          SM.stickman(ctx, { x: 395, y: FB, pose: SM.poseMix(SM.POSE.stand, SM.POSE.cheer, ck), color: C.hero, glowA: 0.4 * pay, squash: t < PAY + 0.7 ? 0.5 * (1 - ck) : 0 });
+        }
+        SM.laptop(ctx, 560, FB - 110, 1, lampOn * 0.7, pay > 0 ? "#ffd27a" : "#8fc7ff");
+        // orders arrive
+        ["NEW ORDER +$49", "NEW ORDER +$49", "NEW ORDER +$120"].forEach((s, i) => {
+          const k = tw(t, PAY + 0.4 + i * 0.4, PAY + 0.75 + i * 0.4, E.lin);
+          SM.toast(ctx, 760, 1100 - i * 84, s, k, { w: 330 });
+        });
+        // counter B
+        SM.label(ctx, "BUILT", 840, FA + 78, { size: 18, alpha: cA * (1 - tw(t, PAY + 0.2, PAY + 0.5)) });
+        SM.text(ctx, (nightAt(t) * 4).toLocaleString("en-US") + " h", 840, FA + 123, { size: 50, color: SM.mixColor(C.text, C.amber, tw(t, 9, 12)), alpha: cA * (1 - tw(t, PAY + 0.2, PAY + 0.5)) });
+        ctx.fillStyle = `rgba(4,6,10,${0.3 * bl})`; ctx.fillRect(XL, FA + 40, XR - XL, FB - FA - 40);
+
+        slab(ctx, FB, 70);
+        SM.groundStrip(ctx, FB + 70, 800);
+        if (pay > 0) SM.glow(ctx, 520, 1080, 500 + pay * 200, C.amber, pay * 0.5 * (1 - tw(t, PAY + 1.5, PAY + 3)));
+        ctx.restore();
+
+        // ---------- HUD ----------
+        const pIn = tw(t, 2.3, 2.6, E.back), pOut = 1 - tw(t, 14.1, 14.4);
+        const gold = t >= PAY;
+        const pulse = gold && t < PAY + 0.5 ? 1 + Math.sin((t - PAY) / 0.5 * Math.PI) * 0.18 : 1;
+        SM.pill(ctx, gold ? "1 YEAR" : "NIGHT " + nightAt(t), W / 2, 445, { size: 34, alpha: pIn * pOut, scale: pIn * pulse, bg: gold ? C.amber : "#262b36", fg: gold ? "#2a1c00" : C.hero });
+        SM.label(ctx, BRAND, W / 2, 1600, { size: 16, color: "rgba(255,255,255,0.18)", spacing: 0.5 });
+        SM.vignette(ctx, 0.7);
+        SM.grain(ctx, t, 0.06);
+      }
+
+      document.fonts.load('800 40px "Jakarta"').then(() => {
+        try { const v = window.__hyperframes.getVariables(); if (v && v.brand) BRAND = v.brand; } catch (e) {}
+        tl.fromTo("#hook-l1", { opacity: 1 }, { opacity: 1, duration: 0.01 }, 0);
+        tl.fromTo("#hook-l2", { opacity: 0, y: 24, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.45, ease: "power3.out" }, 0.6);
+        tl.fromTo("#hook p", { opacity: 1, y: 0 }, { opacity: 0, y: -30, filter: "blur(6px)", duration: 0.5, ease: "power2.in", stagger: 0.06 }, 2.55);
+        tl.fromTo("#quote .q", { opacity: 0, y: 28, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power3.out", stagger: 0.3 }, 14.5);
+        tl.fromTo("#quote .key", { scale: 1 }, { scale: 1.1, duration: 0.25, ease: "power2.out", yoyo: true, repeat: 1 }, 15.5);
+        SM.mount("stage", DUR, draw, tl);
+        window.__timelines["main"] = tl;
+      });
+    </script>
+  </body>
+</html>

@@ -77,6 +77,4 @@ life lessons, tied to money and business**.
   *"Your 'not enough' is someone else's 'if only'."*
 - **Waiting for capital:** one waits for $10,000, the other starts with $10.
   *"You're waiting for money. You need to start."*
-- **1% a day:** two seeds, one watered every day. *"Small steps. Every day. That's the secret."*
-- **Time is money:** scrolling hours vs. learning hours. *"Same 24 hours. Different choices."*
 - **Fake rich:** new phone on installments vs. a cart bought with cash. *"Look rich, or get rich."*
