@@ -100,4 +100,5 @@ git -c user.name="Hossein-creator" -c user.email="hosseinahmadi009911@gmail.com"
 git push
 ```
 
-- Show the video and the caption in the session (SendUserFile).
+- Send **only the video** in the session (SendUserFile, the .mp4). No summary of the story, no
+  caption file in the message: the caption is on GitHub next to the video.

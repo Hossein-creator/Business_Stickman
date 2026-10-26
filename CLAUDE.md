@@ -50,8 +50,8 @@ Project skills in `.claude/skills/`: `generiere` (this whole loop as a checklist
 4. **Build:** copy a project to `videos/NN-<name>/`, write the scene in `index.html`, add new props
    to `shared/lib/stickman.js`, then `./scripts/sync-shared.sh`.
 5. **Check:** `hyperframes check`, then snapshots at the key moments; look at them and fix.
-6. **Render** to `renders/NN-<name>.mp4` (60 fps, delivery quality), commit, push, and show the
-   videos in the session. GitHub refuses files over 100 MB: if a render is above ~90 MB, render
+6. **Render** to `renders/NN-<name>.mp4` (60 fps, delivery quality), commit, push, and send **only the video** in the
+   session: no write-up of the story or the steps. GitHub refuses files over 100 MB: if a render is above ~90 MB, render
    again with `--crf 20` (or higher) before committing.
 7. **Caption, always, when a video is done: run `/anthropic-skills:ig-caption`.** Job A (the video
    carries the hook): line 1 (≤ 125 characters) names the topic and holds the one ask (usually
@@ -62,4 +62,4 @@ Project skills in `.claude/skills/`: `generiere` (this whole loop as a checklist
    no AI words. Save it next to the video as
    `renders/NN-<name>.caption.txt` (paste-ready), check it with
    `python3 scripts/caption_lint.py renders/NN-<name>.caption.txt`, commit and push it with the
-   render, and show it in the session.
+   render. Do not send the caption in the session.
