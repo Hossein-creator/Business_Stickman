@@ -1,0 +1,5 @@
+{"name": "Gym (1,000 members, room for 100 at a time)", "price": 20.00,
+ "split": {"Rent": 4.00, "Staff": 3.00, "Machines": 3.00, "Power & water": 2.00, "Cleaning & other": 2.00, "Profit": 6.00},
+ "scale": {"n": 1000, "label": "members a month", "of": "Profit"},
+ "px_per_dollar": 40,
+ "assumptions": "Example gym: $20 a month, 1,000 members, room for 100 at a time. Real gyms differ by city and size."}

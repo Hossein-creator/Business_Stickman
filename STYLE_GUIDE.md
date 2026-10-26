@@ -157,8 +157,9 @@ Pick from the open list first (see `CLAUDE.md`); when one is made, move it to "M
 - **How a barbershop makes money:** one $8 haircut, chair rent, tools, time per cut.
 - **How a bubble-tea shop makes money:** one $3 cup, tapioca, milk, cup and straw, rent, profit.
 - **How a phone-credit kiosk makes money:** tiny margin, many sales a day.
-- **How a gym makes money:** most members pay and never come.
 - **How a ride-hailing app sets prices:** surge pricing, the rider's cut, the app's cut.
+- **How a cinema makes money:** the ticket mostly goes to the film studio; the popcorn pays the rent.
+- **How a free app makes money:** you are not the customer, the advertiser is.
 
 **Business ideas**
 - **$100 phone-accessories stall:** buy, price, sell, profit per week.
@@ -173,4 +174,4 @@ Pick from the open list first (see `CLAUDE.md`); when one is made, move it to "M
 
 1 Spare Change · 2 Chapter 1 · 3 Same 24 Hours · 4 Bamboo · 5 Payday Loop · 6 The Snowball ·
 7 Your $5 Coffee · 8 $50 Car Wash · 9 Money Leaks · 10 Delivery App · 11 $80 Coffee Bike ·
-12 Look Rich or Get Rich
+12 Look Rich or Get Rich · 13 How a Gym Makes Money
