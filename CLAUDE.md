@@ -34,9 +34,11 @@ Faceless stickman shorts made with HyperFrames (HTML + canvas → MP4).
    - Pick the idea that has the best chance of being the most viral video, and that teaches a
      real, useful lesson.
 2. **Pick the topic:** start from the open list in `STYLE_GUIDE.md` ("Video ideas"), not from
-   scratch, and give it the strongest formula from the research. When making several videos,
-   mix the three kinds (mindset & money habits, business models, business ideas) and include at
-   least one with the core themes (gratitude, comparison, everyday characters). Move made ideas to
+   scratch, and give it the strongest formula from the research. Make most videos business models
+   and business ideas (like 7 Your $5 Coffee and 8 $50 Car Wash, the user's favourites): about two
+   of every three. The rest are mindset & money habits with the core themes (gratitude,
+   comparison, everyday characters), in the style of 1, 2, 4 and 5. See "What works best" in
+   `STYLE_GUIDE.md`. Move made ideas to
    "Made" and add new ideas from the research to the open list.
 3. **Story:** follow `STYLE_GUIDE.md`: a hook that speaks to "you" and names the topic in frame 0,
    a topic chip, a build-up with real numbers, a big payoff, a short quote.

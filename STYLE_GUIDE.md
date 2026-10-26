@@ -8,7 +8,7 @@ Faceless short videos (TikTok, Instagram Reels, YouTube Shorts) about **motivati
 life lessons, tied to money and business**.
 
 - **Themes:** gratitude, comparison, entrepreneurship, small business, discipline, time.
-- **Three kinds of video, rotated:**
+- **Three kinds of video** (most videos are kinds 2 and 3, see "What works best"):
   1. **Mindset & money habits:** gratitude, comparison, discipline, time, saving (e.g. Payday Loop,
      Snowball, Money Leaks).
   2. **Business models:** how a business really makes money, cost by cost (e.g. Your $5 Coffee).
@@ -18,6 +18,15 @@ life lessons, tied to money and business**.
   The characters are everyday people: delivery riders, street-food sellers, people paying off
   installments, people saving spare change.
 - **Language on screen:** English.
+
+## What works best (user feedback)
+
+- **Favourites:** 1 Spare Change, 2 Chapter 1, 4 Bamboo, 5 Payday Loop, 7 Your $5 Coffee,
+  8 $50 Car Wash.
+- **Make the most of 7 and 8:** business models (one product taken apart cost by cost) and
+  business ideas (start small, step by step with real numbers). When making several videos, about
+  two of every three are of these two kinds; the rest are mindset & money (in the style of 1, 2,
+  4, 5: one strong picture, one lesson, an emotional or seamless ending).
 
 ## Format
 
@@ -146,11 +155,19 @@ Pick from the open list first (see `CLAUDE.md`); when one is made, move it to "M
 - **How a street-food cart makes money:** one portion of fried snacks, cost by cost.
 - **Why a $3 bottle of water costs 20 cents to make:** brand, shop, transport, margin.
 - **How a delivery app makes money:** the rider, the restaurant and the app split one order.
+- **How a barbershop makes money:** one $8 haircut, chair rent, tools, time per cut.
+- **How a bubble-tea shop makes money:** one $3 cup, tapioca, milk, cup and straw, rent, profit.
+- **How a phone-credit (pulsa) kiosk makes money:** tiny margin, many sales a day.
+- **How a gym makes money:** most members pay and never come.
 
 **Business ideas**
 - **$100 phone-accessories stall:** buy, price, sell, profit per week.
 - **Laundry pickup service:** one scooter, a few regular customers, monthly numbers.
 - **Selling home-made frozen food:** batch cost, price per pack, weekend sales.
+- **$30 shoe-cleaning service:** brushes and cleaner, $5 per pair, weekend stand.
+- **$80 coffee-on-a-bike:** thermos and cups, sell at a bus stop at 6 a.m.
+- **$20 phone-photo service for small shops:** take product photos for online sellers.
+- **$60 plant stall:** cuttings in recycled pots, cost per pot vs price.
 
 ### Made
 
