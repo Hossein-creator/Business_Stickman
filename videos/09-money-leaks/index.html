@@ -1,0 +1,218 @@
+<!doctype html>
+<html
+  lang="en"
+  data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"hook1","type":"string","label":"Hook line 1","default":"You’re not bad with money."},
+    {"id":"hook2","type":"string","label":"Hook line 2","default":"You’re leaking it."},
+    {"id":"quote1","type":"string","label":"Quote line 1","default":"Small leaks sink big ships."},
+    {"id":"quote2a","type":"string","label":"Quote line 2 (before keyword)","default":"Check yours"},
+    {"id":"quote2b","type":"string","label":"Quote keyword","default":"tonight."},
+    {"id":"brand","type":"string","label":"Watermark","default":"BUSINESS STICKMAN"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/lib/gsap.min.js"></script>
+    <script src="assets/lib/stickman.js"></script>
+    <script src="assets/lib/stickman-props.js"></script>
+    <script src="assets/lib/stickman-fx.js"></script>
+    <script src="assets/lib/stickman-ui.js"></script>
+    <style>
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-800-normal.woff2") format("woff2"); font-weight: 800; }
+      :root { --ink: #eef1f6; --accent: #ffc23d; --muted: #9aa3b3; --bad: #ef6f5e; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0a0c11; }
+      #root { position: relative; width: 100%; height: 100%; font-family: "Jakarta", sans-serif; }
+      #stage { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+      .lines { position: absolute; left: 60px; right: 60px; top: 250px; text-align: center; color: var(--ink); font-weight: 800; letter-spacing: -0.02em; }
+      .lines p { font-size: 66px; line-height: 1.16; }
+      .w { display: inline-block; white-space: pre; }
+      .key { position: relative; color: var(--accent); text-shadow: 0 0 30px rgba(255, 194, 61, 0.6); }
+      .bad { color: var(--bad); text-shadow: 0 0 30px rgba(239, 111, 94, 0.5); }
+      .bar { position: absolute; left: 0; right: 0; bottom: -4px; height: 8px; border-radius: 4px; background: var(--accent); transform-origin: left center; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-motion-blur="on" data-motion-blur-events="on" data-composition-id="main" data-start="0" data-duration="22" data-width="1080" data-height="1920">
+      <canvas id="stage" class="clip" data-start="0" data-duration="22" data-track-index="0"></canvas>
+
+      <div id="hook" class="lines clip" data-start="0" data-duration="2.9" data-track-index="1">
+        <p id="hook-l1"><span class="w" data-var-text="hook1">You’re not bad with money.</span></p>
+        <p id="hook-l2" class="bad"><span class="w" data-var-text="hook2">You’re leaking it.</span></p>
+      </div>
+
+      <div id="quote" class="lines clip" data-start="18.6" data-duration="3.4" data-track-index="2">
+        <p><span class="w q" data-var-text="quote1">Small leaks sink big ships.</span></p>
+        <p><span class="w q" data-var-text="quote2a">Check yours</span> <span class="w q key"><span data-var-text="quote2b">tonight.</span><span class="bar"></span></span></p>
+      </div>
+
+      <audio id="sfx-l1" class="clip" src="assets/sfx/error.mp3" data-start="3.0" data-duration="0.9" data-track-index="5" data-volume="0.12"></audio>
+      <audio id="sfx-c1" class="clip" src="assets/sfx/pop.mp3" data-start="3.25" data-duration="0.72" data-track-index="6" data-volume="0.28"></audio>
+      <audio id="sfx-c2" class="clip" src="assets/sfx/pop.mp3" data-start="4.85" data-duration="0.72" data-track-index="7" data-volume="0.28"></audio>
+      <audio id="sfx-c3" class="clip" src="assets/sfx/pop.mp3" data-start="6.45" data-duration="0.72" data-track-index="6" data-volume="0.28"></audio>
+      <audio id="sfx-c4" class="clip" src="assets/sfx/pop.mp3" data-start="8.05" data-duration="0.72" data-track-index="7" data-volume="0.28"></audio>
+      <audio id="sfx-c5" class="clip" src="assets/sfx/pop.mp3" data-start="9.65" data-duration="0.72" data-track-index="6" data-volume="0.28"></audio>
+      <audio id="sfx-year" class="clip" src="assets/sfx/notification.mp3" data-start="11.0" data-duration="2.46" data-track-index="8" data-volume="0.22"></audio>
+      <audio id="sfx-ten" class="clip" src="assets/sfx/impact-bass-2.mp3" data-start="12.2" data-duration="2.59" data-track-index="9" data-volume="0.35"></audio>
+      <audio id="sfx-p1" class="clip" src="assets/sfx/click-soft.mp3" data-start="14.12" data-duration="0.37" data-track-index="10" data-volume="0.5"></audio>
+      <audio id="sfx-p2" class="clip" src="assets/sfx/click-soft.mp3" data-start="14.57" data-duration="0.37" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sfx-p3" class="clip" src="assets/sfx/click-soft.mp3" data-start="15.02" data-duration="0.37" data-track-index="10" data-volume="0.5"></audio>
+      <audio id="sfx-p4" class="clip" src="assets/sfx/click-soft.mp3" data-start="15.47" data-duration="0.37" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sfx-p5" class="clip" src="assets/sfx/click-soft.mp3" data-start="15.92" data-duration="0.37" data-track-index="10" data-volume="0.5"></audio>
+      <audio id="sfx-full" class="clip" src="assets/sfx/sparkle.mp3" data-start="16.7" data-duration="1.8" data-track-index="12" data-volume="0.35"></audio>
+      <audio id="sfx-win" class="clip" src="assets/sfx/impact-bass-1.mp3" data-start="17.3" data-duration="2.12" data-track-index="13" data-volume="0.4"></audio>
+      <audio id="sfx-quote" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="18.65" data-duration="0.6" data-track-index="14" data-volume="0.28"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const DUR = 22;
+      const { W, H, C, E, clamp, lerp, tw, kf, rng } = SM;
+      const FX = SM.fx, UI = SM.ui;
+      let BRAND = "BUSINESS STICKMAN";
+
+      const JAR = { x0: 390, x1: 690, y0: 600, y1: 1160 };
+      const GY = 1250;
+      const LEAKS = [
+        { name: "Unused streaming", amt: 15, ico: "play", y: 1100, t: 3.0 },
+        { name: "Delivery fees", amt: 40, ico: "scooter", y: 1050, t: 4.6 },
+        { name: "Unused gym", amt: 30, ico: "dumbbell", y: 995, t: 6.2 },
+        { name: "Subscriptions", amt: 12, ico: "phoneApp", y: 940, t: 7.8 },
+        { name: "Late fees", amt: 18, ico: "late", y: 885, t: 9.4 },
+      ];
+      const FIX0 = 14.1, FULL = 16.7;
+      const FV = (m, years) => { const r = 0.08 / 12, n = years * 12; return m * (Math.pow(1 + r, n) - 1) / r; };
+      const plugAt = (i) => FIX0 + i * 0.45;
+      const money = (n) => "$" + Math.round(n).toLocaleString("en-US");
+
+      function draw(ctx, t) {
+        SM.background(ctx, "#141823", "#08090d");
+        SM.groundStrip(ctx, GY, 700);
+        const hh = FX.handheld(t, 0.6);
+        ctx.save(); ctx.translate(hh.dx, hh.dy);
+
+        // how many holes are open right now (at frame 0 the first one already drips)
+        const open = LEAKS.map((L, i) => {
+          const o = i === 0 ? Math.max(0.45, tw(t, L.t, L.t + 0.3)) : tw(t, L.t, L.t + 0.3);
+          return o * (1 - tw(t, plugAt(i), plugAt(i) + 0.15));
+        });
+        const openSum = open.reduce((a, b) => a + b, 0);
+        // the level: drains while it leaks, fills once the holes are plugged
+        const level = lerp(0.82, 0.5, clamp(openSum / 5 * tw(t, 0, 10.5, E.lin) * 1.4)) + tw(t, FIX0 + 0.3, FULL, E.inOut) * 0.45;
+        const lv = Math.min(0.97, level);
+        const full = tw(t, FULL - 0.3, FULL + 0.3);
+
+        // salary pipe pouring in
+        SM.box(ctx, JAR.x0 + 40, 470, 260, 40, 14, "#3b4252", 6);
+        SM.box(ctx, JAR.x0 + 120, 500, 50, 70, 10, "#3b4252", 6);
+        SM.label(ctx, "SALARY", JAR.x0 + 170, 490, { size: 18, color: C.text });
+        const surfY = JAR.y1 - (JAR.y1 - JAR.y0) * lv;
+        ctx.fillStyle = "#ffcf5a"; ctx.fillRect(JAR.x0 + 133, 568, 24, surfY - 568);
+        ctx.fillStyle = "rgba(255,255,255,0.4)"; ctx.fillRect(JAR.x0 + 137, 568, 5, surfY - 568);
+
+        // liquid
+        if (full > 0) SM.glow(ctx, 540, 880, 520, C.amber, full * 0.8);
+        ctx.save(); SM.rr(ctx, JAR.x0, JAR.y0, JAR.x1 - JAR.x0, JAR.y1 - JAR.y0, 44); ctx.clip();
+        ctx.fillStyle = "rgba(160,190,220,0.08)"; ctx.fillRect(JAR.x0, JAR.y0, 400, 600);
+        const g = ctx.createLinearGradient(0, surfY, 0, JAR.y1);
+        g.addColorStop(0, "#ffd77a"); g.addColorStop(1, "#e89a1c");
+        ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(JAR.x0, JAR.y1);
+        for (let x = JAR.x0; x <= JAR.x1; x += 10) ctx.lineTo(x, surfY + Math.sin(x * 0.03 + t * 3) * 7 + Math.sin(x * 0.07 - t * 2) * 3);
+        ctx.lineTo(JAR.x1, JAR.y1); ctx.closePath(); ctx.fill();
+        // coins suspended in the liquid
+        for (let i = 0; i < 14; i++) { const q = rng(i + 4), cy = JAR.y1 - 40 - q() * 420; if (cy > surfY + 20) SM.coin(ctx, JAR.x0 + 40 + q() * 220, cy + Math.sin(t * 1.5 + i) * 6, 14, t * 2 + i, 0.8); }
+        ctx.restore();
+        SM.rr(ctx, JAR.x0, JAR.y0, JAR.x1 - JAR.x0, JAR.y1 - JAR.y0, 44); ctx.lineWidth = 8; ctx.strokeStyle = C.out; ctx.stroke();
+        ctx.strokeStyle = "rgba(255,255,255,0.3)"; ctx.lineWidth = 7; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(JAR.x0 + 30, JAR.y0 + 60); ctx.lineTo(JAR.x0 + 30, JAR.y0 + 200); ctx.stroke();
+        SM.label(ctx, "YOUR MONEY", 540, JAR.y1 + 46, { size: 20, color: "rgba(255,255,255,0.7)" });
+        UI.glint(ctx, JAR.x0, JAR.y0, JAR.x1 - JAR.x0, JAR.y1 - JAR.y0, tw(t, FULL, FULL + 0.8, E.inOut));
+
+        // leaks: jets, puddle, labels
+        let puddle = 0;
+        LEAKS.forEach((L, i) => {
+          const side = i % 2 ? 1 : -1, hx = side > 0 ? JAR.x1 : JAR.x0, hy = L.y;
+          const o = open[i];
+          puddle += tw(t, L.t, plugAt(i), E.lin);
+          // hole
+          SM.circle(ctx, hx, hy, 10, "#1d2230", 5);
+          if (o > 0.01) {
+            ctx.save(); ctx.lineCap = "round";
+            const pts = []; for (let s = 0; s <= 1.0001; s += 0.05) pts.push([hx + side * s * 150 * o, hy + s * s * (GY - hy - 6)]);
+            ctx.strokeStyle = "#e89a1c"; ctx.lineWidth = 16 * o; ctx.beginPath(); pts.forEach((p, j) => j ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.stroke();
+            ctx.strokeStyle = "#ffd77a"; ctx.lineWidth = 7 * o; ctx.setLineDash([18, 14]); ctx.lineDashOffset = -t * 160; ctx.stroke(); ctx.setLineDash([]);
+            ctx.restore();
+          }
+          // label card
+          const k = tw(t, L.t + 0.2, L.t + 0.6, E.back) * (1 - tw(t, 10.8, 11.1));
+          if (k > 0) {
+            const cx = side > 0 ? 890 : 190, cy = hy - 150;
+            ctx.save(); ctx.translate(cx, cy); ctx.scale(k, k);
+            SM.rr(ctx, -150, -46, 300, 92, 22); ctx.fillStyle = "#1d222d"; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = SM.withA(C.coral, 0.5); ctx.stroke();
+            UI.ico(ctx, L.ico, -108, 0, 0.9);
+            SM.text(ctx, L.name, -66, -16, { size: 20, color: C.text, align: "left" });
+            SM.text(ctx, "−$" + L.amt + " / month", -66, 18, { size: 26, color: C.coral, align: "left" });
+            ctx.restore();
+          }
+        });
+        // puddle of lost money on the floor (dries up after the fix)
+        const pw = Math.min(1, puddle / 4) * (1 - tw(t, FIX0 + 1.5, FULL + 0.8));
+        if (pw > 0) { ctx.fillStyle = SM.withA("#e89a1c", 0.65); ctx.beginPath(); ctx.ellipse(540, GY + 8, 330 * pw, 26 * pw, 0, 0, Math.PI * 2); ctx.fill(); }
+
+        // the owner: confused, then plugs every hole
+        const fixing = t > FIX0 - 0.4 && t < FULL;
+        let pose = t < FIX0 - 0.4 ? { ...SM.POSE.stand, head: 0.25 + Math.sin(t * 1.5) * 0.1, aF: [0.9, 2.2] } : SM.POSE.reach;
+        if (t >= FULL) pose = SM.poseMix(SM.POSE.reach, SM.POSE.cheer, tw(t, FULL, FULL + 0.4, E.back));
+        const jo = SM.stickman(ctx, { x: 110, y: GY, pose, color: C.hero, glowA: full * 0.4 });
+        // corks fly from the hand into each hole
+        LEAKS.forEach((L, i) => {
+          const k = tw(t, plugAt(i) - 0.35, plugAt(i), E.inOut);
+          const side = i % 2 ? 1 : -1, hx = side > 0 ? JAR.x1 : JAR.x0;
+          if (k <= 0) return;
+          const x = lerp(jo.handF[0], hx + side * 8, k), y = lerp(jo.handF[1], L.y, k) - Math.sin(k * Math.PI) * 160;
+          ctx.save(); ctx.translate(x, y); ctx.rotate(side * Math.PI / 2 * k); SM.box(ctx, -12, -15, 24, 30, 6, "#b88a5a", 5); ctx.restore();
+          FX.burst(ctx, hx, L.y, t, plugAt(i), { n: 10, speed: 300, size: 5, life: 0.5, seed: i + 2 });
+        });
+
+        // payoff light
+        FX.rays(ctx, 540, 880, t, full * (1 - tw(t, 19.5, 20.5)) * 0.7, "#ffd27a", 14, 1200);
+        FX.ring(ctx, 540, 880, t, FULL, { r1: 700, color: "#ffe29a" });
+        ctx.restore();
+        FX.confetti(ctx, t, FULL + 0.6, { life: 3, n: 60 });
+
+        // ---- HUD: the leak counter becomes the win counter ----
+        const leakSum = LEAKS.reduce((a, L, i) => a + L.amt * tw(t, L.t + 0.2, L.t + 0.5), 0);
+        const hudA = tw(t, 2.9, 3.3);
+        let big, cap, col;
+        if (t < 11.0) { big = "−" + money(leakSum) + " / month"; cap = "LEAKING"; col = C.coral; }
+        else if (t < 12.2) { big = "−$1,380 / year"; cap = "EVERY YEAR"; col = C.coral; }
+        else if (t < FULL) { big = "−" + money(FV(115, 10)); cap = "IN 10 YEARS, IF YOU HAD INVESTED IT*"; col = C.coral; }
+        else { big = "+" + money(FV(115, 10)); cap = "YOURS IN 10 YEARS, INVESTED*"; col = C.amber; }
+        const pulse = [11.0, 12.2, 17.3].reduce((p, s) => { const k = (t - s) / 0.45; return k > 0 && k < 1 ? 1 + Math.sin(k * Math.PI) * 0.14 : p; }, 1);
+        const hudOut = 1 - tw(t, 18.3, 18.6);
+        UI.bigNumber(ctx, big, cap, W / 2, 360, hudA * hudOut, { size: 78 * pulse, color: col, glowA: t >= FULL ? 0.5 : 0.25 });
+        // under the quote: the full jar keeps the win number
+        UI.topic(ctx, "WHERE YOUR MONEY LEAKS", 196, tw(t, 2.9, 3.3) * (1 - tw(t, 18.3, 18.6)));
+        SM.label(ctx, "*8% AVERAGE YEARLY RETURN · NOT GUARANTEED · EXAMPLE AMOUNTS", W / 2, 1360, { size: 15, color: "rgba(255,255,255,0.45)", spacing: 0.12, alpha: tw(t, 12.2, 12.6) });
+        SM.label(ctx, BRAND, W / 2, 1640, { size: 16, color: "rgba(255,255,255,0.2)", spacing: 0.5 });
+        FX.leak(ctx, t, 0.1 + full * 0.25);
+        SM.vignette(ctx, 0.65);
+        SM.grain(ctx, t, 0.05);
+      }
+
+      document.fonts.load('800 40px "Jakarta"').then(() => {
+        try { const v = window.__hyperframes.getVariables(); if (v && v.brand) BRAND = v.brand; } catch (e) {}
+        tl.fromTo("#hook-l1", { opacity: 1 }, { opacity: 1, duration: 0.01 }, 0);
+        tl.fromTo("#hook-l2", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power4.out" }, 0.6);
+        tl.fromTo("#hook p", { opacity: 1, y: 0 }, { opacity: 0, y: -24, filter: "blur(8px)", duration: 0.4, ease: "power3.in", stagger: 0.06 }, 2.45);
+        tl.fromTo("#quote .q", { opacity: 0, filter: "blur(12px)", y: 14 }, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.55, ease: "power4.out", stagger: 0.3 }, 18.7);
+        tl.fromTo("#quote .bar", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "expo.out" }, 19.6);
+        SM.mount("stage", DUR, draw, tl);
+        window.__timelines["main"] = tl;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,272 @@
+<!doctype html>
+<html
+  lang="en"
+  data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"hook1","type":"string","label":"Hook line 1","default":"You pay $5 for this coffee."},
+    {"id":"hook2","type":"string","label":"Hook line 2","default":"Where does your money go?"},
+    {"id":"twist1","type":"string","label":"Twist line 1","default":"To make $3,000 a month"},
+    {"id":"twist2","type":"string","label":"Twist line 2","default":"they must sell"},
+    {"id":"quote1a","type":"string","label":"Quote line 1","default":"Revenue is vanity."},
+    {"id":"quote2a","type":"string","label":"Quote keyword","default":"Profit"},
+    {"id":"quote2b","type":"string","label":"Quote line 2 (after keyword)","default":"is sanity."},
+    {"id":"brand","type":"string","label":"Watermark","default":"BUSINESS STICKMAN"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/lib/gsap.min.js"></script>
+    <script src="assets/lib/stickman.js"></script>
+    <script src="assets/lib/stickman-props.js"></script>
+    <script src="assets/lib/stickman-fx.js"></script>
+    <script src="assets/lib/stickman-ui.js"></script>
+    <style>
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-800-normal.woff2") format("woff2"); font-weight: 800; }
+      :root { --ink: #eef1f6; --accent: #ffc23d; --muted: #9aa3b3; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0a0c11; }
+      #root { position: relative; width: 100%; height: 100%; font-family: "Jakarta", sans-serif; }
+      #stage { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+      .lines { position: absolute; left: 60px; right: 60px; top: 250px; text-align: center; color: var(--ink); font-weight: 800; letter-spacing: -0.02em; }
+      .lines p { font-size: 68px; line-height: 1.16; }
+      .w { display: inline-block; white-space: pre; }
+      .key { position: relative; color: var(--accent); text-shadow: 0 0 30px rgba(255, 194, 61, 0.6); }
+      .bar { position: absolute; left: 0; right: 0; bottom: -4px; height: 8px; border-radius: 4px; background: var(--accent); transform-origin: left center; }
+      .soft { color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-motion-blur="on" data-motion-blur-events="on" data-composition-id="main" data-start="0" data-duration="22" data-width="1080" data-height="1920">
+      <canvas id="stage" class="clip" data-start="0" data-duration="22" data-track-index="0"></canvas>
+
+      <div id="hook" class="lines clip" data-start="0" data-duration="3.0" data-track-index="1">
+        <p id="hook-l1"><span class="w" data-var-text="hook1">You pay $5 for this coffee.</span></p>
+        <p id="hook-l2" class="soft"><span class="w" data-var-text="hook2">Where does your money go?</span></p>
+      </div>
+
+      <div id="twist" class="lines clip" data-start="14.6" data-duration="3.6" data-track-index="2">
+        <p class="t"><span class="w" data-var-text="twist1">To make $3,000 a month</span></p>
+        <p class="t soft"><span class="w" data-var-text="twist2">they must sell</span></p>
+      </div>
+
+      <div id="quote" class="lines clip" data-start="18.4" data-duration="3.6" data-track-index="3">
+        <p><span class="w q" data-var-text="quote1a">Revenue is vanity.</span></p>
+        <p><span class="w q key"><span data-var-text="quote2a">Profit</span><span class="bar"></span></span> <span class="w q" data-var-text="quote2b">is sanity.</span></p>
+      </div>
+
+      <audio id="sfx-pay" class="clip" src="assets/sfx/click-soft.mp3" data-start="1.2" data-duration="0.37" data-track-index="5" data-volume="0.5"></audio>
+      <audio id="sfx-zoom" class="clip" src="assets/sfx/whoosh-cinematic.mp3" data-start="2.55" data-duration="1.4" data-track-index="6" data-volume="0.35"></audio>
+      <audio id="sfx-l1" class="clip" src="assets/sfx/pop.mp3" data-start="3.42" data-duration="0.72" data-track-index="7" data-volume="0.3"></audio>
+      <audio id="sfx-l2" class="clip" src="assets/sfx/click-soft.mp3" data-start="4.82" data-duration="0.37" data-track-index="8" data-volume="0.45"></audio>
+      <audio id="sfx-l3" class="clip" src="assets/sfx/pop.mp3" data-start="6.22" data-duration="0.72" data-track-index="7" data-volume="0.28"></audio>
+      <audio id="sfx-l4" class="clip" src="assets/sfx/click-soft.mp3" data-start="7.62" data-duration="0.37" data-track-index="8" data-volume="0.45"></audio>
+      <audio id="sfx-l5" class="clip" src="assets/sfx/pop.mp3" data-start="9.02" data-duration="0.72" data-track-index="7" data-volume="0.28"></audio>
+      <audio id="sfx-l6" class="clip" src="assets/sfx/click-soft.mp3" data-start="10.42" data-duration="0.37" data-track-index="8" data-volume="0.45"></audio>
+      <audio id="sfx-riser" class="clip" src="assets/sfx/riser.mp3" data-start="2.6" data-duration="10.03" data-track-index="9" data-volume="0.16"></audio>
+      <audio id="sfx-profit" class="clip" src="assets/sfx/impact-bass-1.mp3" data-start="12.62" data-duration="2.12" data-track-index="10" data-volume="0.42"></audio>
+      <audio id="sfx-shine" class="clip" src="assets/sfx/sparkle.mp3" data-start="12.7" data-duration="1.8" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sfx-grid" class="clip" src="assets/sfx/whoosh.mp3" data-start="14.6" data-duration="0.6" data-track-index="12" data-volume="0.3"></audio>
+      <audio id="sfx-count" class="clip" src="assets/sfx/ping.mp3" data-start="16.3" data-duration="1.32" data-track-index="13" data-volume="0.3"></audio>
+      <audio id="sfx-keep" class="clip" src="assets/sfx/sparkle.mp3" data-start="18.7" data-duration="1.8" data-track-index="15" data-volume="0.25"></audio>
+      <audio id="sfx-quote" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="18.45" data-duration="0.6" data-track-index="14" data-volume="0.28"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const DUR = 22;
+      const { W, H, C, E, clamp, lerp, tw, kf, rng } = SM;
+      const FX = SM.fx, UI = SM.ui;
+      let BRAND = "BUSINESS STICKMAN";
+
+      // where $5 goes (example numbers for a small café)
+      const LAYERS = [
+        { label: "Coffee beans", amt: 0.35, col: "#8a5a36", ico: "beans", t: 3.4 },
+        { label: "Milk", amt: 0.30, col: "#e9dcc5", ico: "milk", t: 4.8 },
+        { label: "Cup & lid", amt: 0.25, col: "#aab2c0", ico: "cup", t: 6.2 },
+        { label: "Rent", amt: 1.10, col: "#5b6b8c", ico: "shop", t: 7.6 },
+        { label: "Staff", amt: 1.60, col: "#6fa7ac", ico: "staff", t: 9.0 },
+        { label: "Power, machine, fees", amt: 0.80, col: "#8a7fd0", ico: "bolt", t: 10.4 },
+        { label: "PROFIT", amt: 0.60, col: C.amber, ico: "coin", t: 12.6 },
+      ];
+      const CUP = { cx: 300, bottom: 1250, h: 540, wTop: 380, wBot: 290 };   // big infographic cup
+      const PXD = CUP.h / 5;                                              // pixels per dollar
+      const ZOOM0 = 2.55, ZOOM1 = 3.35, GRID0 = 14.6;
+      const cash = (n) => "$" + n.toFixed(2);
+
+      function cupPath(ctx, c, inset = 0) {
+        const top = c.bottom - c.h;
+        ctx.beginPath();
+        ctx.moveTo(c.cx - c.wTop / 2 + inset, top + inset);
+        ctx.lineTo(c.cx + c.wTop / 2 - inset, top + inset);
+        ctx.lineTo(c.cx + c.wBot / 2 - inset, c.bottom - inset);
+        ctx.lineTo(c.cx - c.wBot / 2 + inset, c.bottom - inset);
+        ctx.closePath();
+      }
+      // scene A: the café counter, the customer gets the cup
+      function cafe(ctx, t) {
+        const g = ctx.createLinearGradient(0, 600, 0, 1400);
+        g.addColorStop(0, "#2a2119"); g.addColorStop(1, "#15110d");
+        ctx.fillStyle = g; ctx.fillRect(-200, 500, W + 400, 900);
+        // menu board
+        SM.box(ctx, 150, 640, 360, 220, 18, "#1b1a17", 6);
+        SM.text(ctx, "MENU", 330, 690, { size: 30, color: C.amber });
+        [["LATTE", "$5"], ["ESPRESSO", "$3"], ["TEA", "$3"]].forEach(([a, b], i) => { SM.text(ctx, a, 190, 750 + i * 40, { size: 26, color: C.text, align: "left" }); SM.text(ctx, b, 470, 750 + i * 40, { size: 26, color: i === 0 ? C.amber : C.text, align: "right" }); });
+        // pendant lamps
+        [620, 860].forEach((x) => { ctx.strokeStyle = "#3b3430"; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(x, 500); ctx.lineTo(x, 640); ctx.stroke(); SM.glow(ctx, x, 680, 260, C.amber, 0.55); ctx.beginPath(); ctx.moveTo(x - 40, 680); ctx.lineTo(x + 40, 680); ctx.lineTo(x + 20, 640); ctx.lineTo(x - 20, 640); ctx.closePath(); ctx.fillStyle = "#3b3430"; ctx.fill(); });
+        // barista behind the counter
+        SM.stickman(ctx, { x: 360, y: 1180, pose: { ...SM.POSE.give, head: 0.05 + Math.sin(t * 2) * 0.03 }, color: C.other });
+        SM.box(ctx, 120, 1150, 560, 200, 16, "#4a3628", 6);
+        SM.box(ctx, 120, 1150, 560, 26, 10, "#6b4f3a", 6);
+        // espresso machine
+        SM.box(ctx, 160, 1020, 150, 132, 14, "#9aa3b3", 6); SM.box(ctx, 185, 1050, 100, 30, 8, "#3b4252", 0);
+        // customer
+        const handK = tw(t, 0.9, 1.5, E.out);
+        const jC = SM.stickman(ctx, { x: 760, y: 1350, face: -1, pose: SM.poseMix(SM.POSE.stand, SM.POSE.give, Math.sin(clamp((t - 0.6) / 1.2) * Math.PI) * 0.9), color: C.hero });
+        // the cup sits on the counter at the zoom target
+        drawSmallCup(ctx, 560, 1150, 1);
+        // the $5 bill goes in
+        if (t > 0.6 && t < 1.6) { const k = tw(t, 0.6, 1.4, E.inOut); ctx.save(); ctx.translate(lerp(jC.handF[0], 520, k), lerp(jC.handF[1], 1130, k) - Math.sin(k * Math.PI) * 60); ctx.rotate(k * 0.6); SM.box(ctx, -34, -17, 68, 34, 5, "#8fcf86", 4); SM.text(ctx, "$5", 0, 1, { size: 20, color: "#2f5a2a" }); ctx.restore(); }
+        SM.pill(ctx, "$5.00", 560, 980, { size: 30, bg: C.amber, fg: "#2a1c00", scale: E.back(tw(t, 1.3, 1.7, E.lin)), alpha: tw(t, 1.3, 1.5) });
+      }
+      function drawSmallCup(ctx, x, y, s) {
+        ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+        ctx.beginPath(); ctx.moveTo(-34, -96); ctx.lineTo(34, -96); ctx.lineTo(26, 0); ctx.lineTo(-26, 0); ctx.closePath();
+        ctx.lineWidth = 6; ctx.strokeStyle = C.out; ctx.stroke(); ctx.fillStyle = C.paper; ctx.fill();
+        SM.box(ctx, -40, -112, 80, 18, 6, "#5b4636", 6);
+        SM.box(ctx, -30, -64, 60, 30, 6, "#8a5a36", 0);
+        ctx.restore();
+      }
+
+      function draw(ctx, t) {
+        SM.background(ctx, "#151922", "#08090d");
+        const hh = FX.handheld(t, 0.7);
+
+        // ---- scene A, then zoom into the cup ----
+        if (t < ZOOM1 + 0.1) {
+          const zk = tw(t, ZOOM0, ZOOM1, E.in);
+          const z = lerp(1, 7, zk);
+          ctx.save();
+          SM.camera(ctx, { x: lerp(560, 560, zk) + hh.dx, y: lerp(1000, 1100, zk) + hh.dy, z, sx: W / 2, sy: 1000 });
+          cafe(ctx, t);
+          ctx.restore();
+        }
+        const flash = t < ZOOM1 ? tw(t, ZOOM1 - 0.3, ZOOM1, E.lin) : 1 - tw(t, ZOOM1, ZOOM1 + 0.45, E.out);
+        if (t < ZOOM0) { SM.vignette(ctx, 0.7); SM.grain(ctx, t, 0.05); SM.label(ctx, BRAND, W / 2, 1640, { size: 16, color: "rgba(255,255,255,0.2)", spacing: 0.5 }); return; }
+        if (t < ZOOM1) { ctx.fillStyle = `rgba(240,234,220,${flash})`; ctx.fillRect(0, 0, W, H); return; }
+
+        // ---- scene B: the infographic ----
+        const inK = tw(t, ZOOM1, ZOOM1 + 0.6, E.outQuint);
+        const gridK = tw(t, GRID0, GRID0 + 0.8, E.inOut);
+        ctx.save();
+        ctx.globalAlpha = inK;
+        ctx.translate(hh.dx * 0.5, hh.dy * 0.5);
+
+        // cup shrinks into the grid at the twist
+        const cupS = lerp(1, 0.25, gridK), cupY = lerp(0, -380, gridK), cupX = lerp(0, 240, gridK);
+        ctx.save();
+        ctx.translate(CUP.cx + cupX, CUP.bottom + cupY); ctx.scale(cupS * lerp(1.08, 1, inK), cupS * lerp(1.08, 1, inK)); ctx.translate(-CUP.cx, -CUP.bottom);
+        ctx.globalAlpha *= 1 - tw(t, GRID0 + 0.6, GRID0 + 1.0);
+        // lid + cup body
+        const top = CUP.bottom - CUP.h;
+        SM.box(ctx, CUP.cx - CUP.wTop / 2 - 18, top - 46, CUP.wTop + 36, 40, 14, "#5b4636", 7);
+        SM.box(ctx, CUP.cx - 60, top - 66, 120, 24, 10, "#5b4636", 6);
+        cupPath(ctx, CUP); ctx.fillStyle = "rgba(255,255,255,0.06)"; ctx.fill();
+        // liquid layers fill from the bottom
+        ctx.save(); cupPath(ctx, CUP, 6); ctx.clip();
+        let y = CUP.bottom, layerMid = [];
+        LAYERS.forEach((L, i) => {
+          const k = tw(t, L.t, L.t + 0.8, E.outQuint);
+          const hgt = L.amt * PXD * k;
+          if (k > 0) {
+            const wave = (x) => Math.sin(x * 0.04 + t * 4 + i) * 6 * (1 - k * 0.7);
+            ctx.beginPath(); ctx.moveTo(0, y);
+            for (let x = CUP.cx - 220; x <= CUP.cx + 220; x += 10) ctx.lineTo(x, y - hgt + (k < 1 ? wave(x) : 0));
+            ctx.lineTo(CUP.cx + 220, y); ctx.closePath();
+            ctx.fillStyle = L.col; ctx.fill();
+            ctx.fillStyle = "rgba(255,255,255,0.10)"; ctx.fillRect(CUP.cx - 220, y - hgt, 440, 4);
+          }
+          layerMid.push(y - L.amt * PXD / 2);
+          y -= L.amt * PXD * (k > 0 ? 1 : 0);
+        });
+        // profit layer glow
+        const pk = tw(t, 12.6, 13.2);
+        if (pk > 0) { ctx.globalCompositeOperation = "lighter"; SM.glow(ctx, CUP.cx, layerMid[6], 260, C.amber, pk * (0.6 + 0.2 * Math.sin(t * 6))); ctx.globalCompositeOperation = "source-over"; }
+        ctx.restore();
+        cupPath(ctx, CUP); ctx.lineWidth = 8; ctx.strokeStyle = C.out; ctx.stroke();
+        UI.glint(ctx, CUP.cx - CUP.wTop / 2, top, CUP.wTop, CUP.h, tw(t, 12.7, 13.5, E.inOut));
+        // icons inside each layer
+        LAYERS.forEach((L, i) => { const k = tw(t, L.t + 0.3, L.t + 0.7, E.back); if (k > 0 && L.amt * PXD > 40) UI.ico(ctx, L.ico, CUP.cx, layerMid[i], Math.min(1.1, L.amt * PXD / 60) * k); });
+        ctx.restore();
+
+        // rows on the right, bottom-up like the layers, with connector lines
+        const rowsOut = tw(t, GRID0 - 0.3, GRID0 + 0.3);
+        ctx.save(); ctx.globalAlpha *= 1 - rowsOut;
+        LAYERS.forEach((L, i) => {
+          const ry = 1210 - i * 78 - (i === 6 ? 20 : 0);
+          const k = tw(t, L.t + 0.1, L.t + 0.7, E.lin);
+          if (k <= 0) return;
+          // connector from layer to row
+          ctx.strokeStyle = SM.withA(L.col === "#e9dcc5" ? "#cfc3ad" : L.col, 0.6 * k); ctx.lineWidth = 3;
+          ctx.beginPath(); ctx.moveTo(CUP.cx + CUP.wBot / 2 + 30, layerMid[i]); ctx.lineTo(540, ry); ctx.stroke();
+          UI.row(ctx, 540, ry, 490, L.label, (i === 6 ? "+" : "") + cash(L.amt), L.col, k, { size: i === 6 ? 32 : 28, strong: i === 6 });
+        });
+        // total cost line
+        const costK = tw(t, 11.8, 12.3);
+        SM.label(ctx, "COSTS  " + cash(4.40) + "  OF  " + cash(5), 785, 1300, { size: 22, color: C.coral, alpha: costK });
+        ctx.restore();
+
+        // payoff: rays + burst on the profit layer
+        FX.rays(ctx, CUP.cx, 760, t, tw(t, 12.6, 13.0) * (1 - tw(t, 14.2, 14.8)) * 0.7, "#ffd27a", 14, 1100);
+        FX.burst(ctx, CUP.cx, 760, t, 12.65, { n: 30, kind: "coin", speed: 800, size: 8, life: 1.5, seed: 4 });
+
+        // ---- twist: 167 cups a day ----
+        if (t > GRID0 + 0.3) {
+          const cols = 13, n = 167, cw = 62;
+          for (let i = 0; i < n; i++) {
+            const k = tw(t, GRID0 + 0.4 + i * 0.006, GRID0 + 0.8 + i * 0.006, E.back) * (1 - tw(t, 18.1, 18.5));
+            if (k <= 0) continue;
+            const cx = 540 + ((i % cols) - (cols - 1) / 2) * cw * 1.05, cy = 600 + Math.floor(i / cols) * cw * 0.8;
+            drawSmallCup(ctx, cx, cy + 24, 0.3 * k);
+          }
+          const cnt = Math.round(167 * tw(t, GRID0 + 0.5, GRID0 + 1.8, E.out));
+          UI.bigNumber(ctx, cnt + " cups", "EVERY SINGLE DAY", W / 2, 1290, tw(t, GRID0 + 0.4, GRID0 + 0.8) * (1 - tw(t, 18.1, 18.5)), { size: 100 });
+        }
+        // what the café keeps, under the quote
+        const keepK = tw(t, 18.6, 19.2, E.back);
+        if (keepK > 0) {
+          FX.rays(ctx, W / 2, 880, t, keepK * 0.6, "#ffd27a", 12, 900);
+          SM.coin(ctx, W / 2, 880, 120 * keepK, Math.sin(t * 1.5) * 0.4, 1);
+          SM.text(ctx, "$0.60", W / 2, 1080, { size: 96, color: C.amber, alpha: clamp(keepK) });
+          SM.label(ctx, "WHAT THE CAFÉ KEEPS FROM YOUR $5", W / 2, 1150, { size: 22, alpha: clamp(keepK) });
+        }
+        FX.burst(ctx, W / 2, 880, t, 18.7, { n: 26, kind: "spark", speed: 700, size: 7, life: 1.2, seed: 8 });
+        ctx.restore();
+
+        if (flash > 0) { ctx.fillStyle = `rgba(240,234,220,${flash})`; ctx.fillRect(0, 0, W, H); }
+        // ---- chrome ----
+        UI.topic(ctx, "HOW A CAFÉ MAKES MONEY", 196, tw(t, 3.0, 3.4) * (1 - tw(t, 14.4, 14.7)));
+        SM.label(ctx, "EXAMPLE NUMBERS FOR A SMALL CAFÉ · REAL COSTS VARY", W / 2, 1360, { size: 15, color: "rgba(255,255,255,0.45)", spacing: 0.12, alpha: tw(t, 3.6, 4.0) * (1 - tw(t, 14.4, 14.7) + tw(t, 18.4, 18.8)) });
+        SM.label(ctx, BRAND, W / 2, 1640, { size: 16, color: "rgba(255,255,255,0.2)", spacing: 0.5 });
+        FX.leak(ctx, t, 0.12 + tw(t, 12.6, 13.0) * 0.25 * (1 - tw(t, 14, 15)));
+        SM.vignette(ctx, 0.65);
+        SM.grain(ctx, t, 0.05);
+      }
+
+      document.fonts.load('800 40px "Jakarta"').then(() => {
+        try { const v = window.__hyperframes.getVariables(); if (v && v.brand) BRAND = v.brand; } catch (e) {}
+        tl.fromTo("#hook-l1", { opacity: 1 }, { opacity: 1, duration: 0.01 }, 0);
+        tl.fromTo("#hook-l2", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power4.out" }, 0.7);
+        tl.fromTo("#hook p", { opacity: 1, y: 0 }, { opacity: 0, y: -24, filter: "blur(8px)", duration: 0.4, ease: "power3.in", stagger: 0.06 }, 2.5);
+        tl.fromTo("#twist .t", { opacity: 0, filter: "blur(12px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "power4.out", stagger: 0.35 }, 14.7);
+        tl.fromTo("#twist .t", { opacity: 1 }, { opacity: 0, filter: "blur(8px)", duration: 0.35, ease: "power2.in" }, 17.9);
+        tl.fromTo("#quote .q", { opacity: 0, filter: "blur(12px)", y: 14 }, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.55, ease: "power4.out", stagger: 0.3 }, 18.5);
+        tl.fromTo("#quote .bar", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "expo.out" }, 19.4);
+        SM.mount("stage", DUR, draw, tl);
+        window.__timelines["main"] = tl;
+      });
+    </script>
+  </body>
+</html>
