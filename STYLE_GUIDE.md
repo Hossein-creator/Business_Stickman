@@ -18,9 +18,47 @@ life lessons, tied to money and business**.
 | | |
 |---|---|
 | Size | 1080 × 1920 (9:16), rendered at 60 fps |
-| Length | about 18 s |
+| Length | about 22 s (slower and smoother than the first four videos, which ran 18 s) |
 | Built with | [HyperFrames](https://hyperframes.heygen.com): HTML + canvas, rendered to MP4 |
 | Safe zone | All words between y = 168 and y = 1330. Below that, only scenery (the app UI covers it) |
+
+## Goal: the most viral video every time
+
+Every video is built to be the most viral version of its idea, not just a good one:
+
+- **Topics must mean something.** One real lesson about money, time or work that a viewer can use
+  today (pay yourself first, start early, consistency, compare less). No empty hype.
+- **Borrow formats that already travel.** Take the most successful shorts in any niche (see
+  `research/swipe.md`) and turn their formula into our niche: a simple lesson with one object,
+  X vs Y, a seamless loop, a satisfying transformation, a relatable daily problem, an emotional
+  twist, a warning hook. Copy the formula, never the video.
+- **Real numbers.** When money is shown, compute it (e.g. compound interest), and put an honest
+  footnote on assumptions ("8% average yearly return, not guaranteed").
+- **Rewatch value.** Prefer endings that loop into frame 0, or a final picture worth pausing on.
+
+## Pacing: slow, smooth, cinematic
+
+- Each beat gets **1.5–2.5 s**; let the meaning land and hold the reaction before the next beat.
+- Arrivals use long ease-outs (`expo.out`, `power4.out`); camera moves ease both ways and take
+  1–2 s; exits are shorter than entrances.
+- Render with **motion blur** (`data-motion-blur="on" data-motion-blur-events="on"` on the root).
+- Text: per-word blur-in (0.5 s, 0.28 s apart), the keyword gets an underline swipe.
+
+## Effects toolbox (`shared/lib/stickman-fx.js`)
+
+Use several per video, always with a cause on screen:
+
+| Effect | Use it for |
+|---|---|
+| `fx.rays`, `fx.flare`, `fx.leak` | the payoff, a reveal, sunrise |
+| `fx.burst` (sparks, coins, snow), `fx.ring` | an impact or a win |
+| `fx.confetti`, `fx.moneyRain` | payday, success |
+| `fx.snow`, `SM.rain`, `SM.motes` | weather and mood (with depth: near flakes big and soft) |
+| `fx.speedLines` | time passing fast, spins |
+| `fx.grade` | drain colour when life goes grey, flood it back at the payoff |
+| `fx.handheld` | always on: the camera is never perfectly still |
+| `fx.spring` | overshoot on anything that lands |
+| picture-in-picture | showing a second life at the same time (see `06-snowball`) |
 
 ## The formula (why people watch to the end)
 
@@ -30,9 +68,9 @@ life lessons, tied to money and business**.
    the result.
 3. **Contrast.** Two paths side by side, or one person's past against their present. One path
    goes grey and rainy, the other gets warm light.
-4. **Accelerate.** Beats get faster toward the payoff (3.0 s, 4.6 s, 6.0 s … 11.7 s).
-5. **The payoff** is a transformation with light, sparkle and an impact sound (about 12–13 s).
-6. **The quote** (about 14.5–18 s) is one short, quotable sentence in two lines with one amber
+4. **Build up.** Time speeds up toward the payoff, but each beat still has room to land.
+5. **The payoff** is a transformation with light, particles and an impact sound (about 12–15 s).
+6. **The insight / quote** (last 4–6 s) is one short, quotable sentence in two lines with one amber
    keyword, revealed word by word. Nothing in the picture repeats it.
 
 ## Look
@@ -78,3 +116,6 @@ life lessons, tied to money and business**.
 - **Waiting for capital:** one waits for $10,000, the other starts with $10.
   *"You're waiting for money. You need to start."*
 - **Fake rich:** new phone on installments vs. a cart bought with cash. *"Look rich, or get rich."*
+- **Big number rise and fall:** $70 million to bankrupt, told with stickmen, no names.
+  *"It's not what you earn. It's what you keep."*
+- **Who stays:** when the stall is empty, one friend still comes every day (emotional twist).

@@ -1,0 +1,246 @@
+<!doctype html>
+<html
+  lang="en"
+  data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"hook1","type":"string","label":"Hook line 1","default":"Payday:"},
+    {"id":"hook2","type":"string","label":"Hook line 2","default":"I’m rich."},
+    {"id":"quote1","type":"string","label":"Quote line 1","default":"No plan for your money?"},
+    {"id":"quote2a","type":"string","label":"Quote line 2 (before keyword)","default":"Every month is the"},
+    {"id":"quote2b","type":"string","label":"Quote keyword","default":"same month."},
+    {"id":"brand","type":"string","label":"Watermark","default":"BUSINESS STICKMAN"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/lib/gsap.min.js"></script>
+    <script src="assets/lib/stickman.js"></script>
+    <script src="assets/lib/stickman-props.js"></script>
+    <script src="assets/lib/stickman-fx.js"></script>
+    <style>
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-800-normal.woff2") format("woff2"); font-weight: 800; }
+      :root { --ink: #eef1f6; --accent: #ffc23d; --muted: #8b93a3; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0a0c11; }
+      #root { position: relative; width: 100%; height: 100%; font-family: "Jakarta", sans-serif; }
+      #stage { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+      .lines { position: absolute; left: 70px; right: 70px; top: 230px; text-align: center; color: var(--ink); font-weight: 800; letter-spacing: -0.02em; }
+      .lines p { font-size: 70px; line-height: 1.16; }
+      .w { display: inline-block; white-space: pre; }
+      .key { position: relative; color: var(--accent); text-shadow: 0 0 30px rgba(255, 194, 61, 0.6); }
+      .bar { position: absolute; left: 0; right: 0; bottom: -4px; height: 8px; border-radius: 4px; background: var(--accent); transform-origin: left center; }
+      .soft { color: var(--accent); text-shadow: 0 0 30px rgba(255, 194, 61, 0.6); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-motion-blur="on" data-motion-blur-events="on" data-composition-id="main" data-start="0" data-duration="22" data-width="1080" data-height="1920">
+      <canvas id="stage" class="clip" data-start="0" data-duration="22" data-track-index="0"></canvas>
+
+      <div id="hook" class="lines clip" data-start="0" data-duration="2.6" data-track-index="1">
+        <p id="hook-l1"><span class="w" data-var-text="hook1">Payday:</span></p>
+        <p id="hook-l2" class="soft"><span class="w" data-var-text="hook2">I’m rich.</span></p>
+      </div>
+
+      <div id="quote" class="lines clip" data-start="17.3" data-duration="3.9" data-track-index="2">
+        <p><span class="w q" data-var-text="quote1">No plan for your money?</span></p>
+        <p><span class="w q" data-var-text="quote2a">Every month is the</span> <span class="w q key"><span data-var-text="quote2b">same month.</span><span class="bar"></span></span></p>
+      </div>
+
+      <!-- the last half second rebuilds frame 0 so the video loops seamlessly -->
+      <div id="hookEnd" class="lines clip" data-start="21.3" data-duration="0.7" data-track-index="3">
+        <p class="e"><span class="w" data-var-text="hook1">Payday:</span></p>
+        <p class="e soft"><span class="w" data-var-text="hook2">I’m rich.</span></p>
+      </div>
+
+      <audio id="sfx-buy1" class="clip" src="assets/sfx/pop.mp3" data-start="2.82" data-duration="0.72" data-track-index="5" data-volume="0.32"></audio>
+      <audio id="sfx-buy2" class="clip" src="assets/sfx/click-soft.mp3" data-start="3.52" data-duration="0.37" data-track-index="6" data-volume="0.5"></audio>
+      <audio id="sfx-buy3" class="clip" src="assets/sfx/pop.mp3" data-start="4.22" data-duration="0.72" data-track-index="5" data-volume="0.3"></audio>
+      <audio id="sfx-low" class="clip" src="assets/sfx/error.mp3" data-start="8.6" data-duration="1.62" data-track-index="7" data-volume="0.14"></audio>
+      <audio id="sfx-riser" class="clip" src="assets/sfx/riser.mp3" data-start="1.6" data-duration="10.03" data-track-index="8" data-volume="0.18"></audio>
+      <audio id="sfx-pay" class="clip" src="assets/sfx/impact-bass-1.mp3" data-start="11.62" data-duration="2.12" data-track-index="9" data-volume="0.45"></audio>
+      <audio id="sfx-shine" class="clip" src="assets/sfx/sparkle.mp3" data-start="11.65" data-duration="1.8" data-track-index="10" data-volume="0.3"></audio>
+      <audio id="sfx-reveal" class="clip" src="assets/sfx/whoosh-cinematic.mp3" data-start="12.4" data-duration="2.2" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sfx-spin" class="clip" src="assets/sfx/glitch-3.mp3" data-start="14.2" data-duration="2.8" data-track-index="12" data-volume="0.1"></audio>
+      <audio id="sfx-quote" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="17.35" data-duration="0.6" data-track-index="13" data-volume="0.28"></audio>
+      <audio id="sfx-loop" class="clip" src="assets/sfx/whoosh.mp3" data-start="21.15" data-duration="0.6" data-track-index="14" data-volume="0.3"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const DUR = 22;
+      const { W, H, C, E, clamp, lerp, tw, kf, rng } = SM;
+      const FX = SM.fx;
+      let BRAND = "BUSINESS STICKMAN";
+
+      const WC = { x: 540, y: 1060 }, R = 420;           // the wheel
+      const FEET = WC.y + R - 22;                          // runner stands on the rim floor
+      const STEP = (Math.PI * 2) / 30;                     // one day per 12 degrees
+      const PAY2 = 11.6, REVEAL0 = 12.3, REVEAL1 = 14.0, SPIN0 = 14.0, SPIN1 = 17.2, BACKIN = 21.0;
+      const LASTDAY = 30 * 120 + 1;                        // ten years of paydays later
+
+      // day as a continuous number: 1 = payday
+      function dayAt(t) {
+        if (t < PAY2) return kf(t, [[0, 1], [2.4, 1.35], [5.0, 5], [8.0, 20], [11.0, 29], [PAY2, 31]], E.inOut);
+        if (t < SPIN0) return 31 + tw(t, PAY2, SPIN0, E.out) * 0.6;
+        return lerp(31.6, LASTDAY, tw(t, SPIN0, SPIN1, E.inOut));
+      }
+      const frac = (d) => (((d - 1) % 30) + 30) % 30 / 30;       // 0 payday .. 1 end of month
+      const balance = (d) => kf(frac(d), [[0, 2000], [0.13, 600], [0.63, 40], [0.95, 3], [1, 3]], E.inOut);
+      const money = (n) => "$" + Math.round(n).toLocaleString("en-US");
+
+      function wheel(ctx, phi, t, glowA) {
+        // stand
+        SM.box(ctx, WC.x - 300, WC.y + R + 60, 600, 26, 10, "#2b303b", 6);
+        ctx.lineWidth = 26; ctx.lineCap = "round"; ctx.strokeStyle = SM.C.out;
+        ctx.beginPath(); ctx.moveTo(WC.x - 240, WC.y + R + 70); ctx.lineTo(WC.x, WC.y); ctx.lineTo(WC.x + 240, WC.y + R + 70); ctx.stroke();
+        ctx.lineWidth = 14; ctx.strokeStyle = "#3a404d"; ctx.stroke();
+        // spokes
+        ctx.save(); ctx.translate(WC.x, WC.y); ctx.rotate(phi);
+        for (let i = 0; i < 10; i++) { ctx.rotate(Math.PI / 5); ctx.lineWidth = 12; ctx.strokeStyle = SM.C.out; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, R); ctx.stroke(); ctx.lineWidth = 6; ctx.strokeStyle = "#4a5266"; ctx.stroke(); }
+        ctx.restore();
+        SM.circle(ctx, WC.x, WC.y, 34, "#4a5266", 7);
+        // rim band
+        if (glowA > 0) SM.glow(ctx, WC.x, WC.y + R, 420, C.amber, glowA);
+        ctx.lineWidth = 62; ctx.strokeStyle = SM.C.out; ctx.beginPath(); ctx.arc(WC.x, WC.y, R + 14, 0, Math.PI * 2); ctx.stroke();
+        ctx.lineWidth = 50; ctx.strokeStyle = "#3d4454"; ctx.stroke();
+        ctx.lineWidth = 6; ctx.strokeStyle = "rgba(255,255,255,0.06)"; ctx.beginPath(); ctx.arc(WC.x, WC.y, R - 6, 0, Math.PI * 2); ctx.stroke();
+        // day tiles on the rim (day d sits at the bottom when phi = (d-1)*STEP)
+        for (let i = 0; i < 30; i++) {
+          const a = Math.PI / 2 + phi - i * STEP;
+          const x = WC.x + Math.cos(a) * (R + 14), y = WC.y + Math.sin(a) * (R + 14);
+          ctx.save(); ctx.translate(x, y); ctx.rotate(a - Math.PI / 2);
+          const pay = i === 0;
+          SM.box(ctx, -34, -18, 68, 36, 9, pay ? C.amber : "#262b36", 4);
+          ctx.fillStyle = pay ? "#2a1c00" : "#9aa3b3"; ctx.font = `800 ${pay ? 15 : 20}px ${SM.FONT}`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+          ctx.fillText(pay ? "PAYDAY" : String(i + 1), 0, 1);
+          ctx.restore();
+        }
+      }
+      function noodles(ctx, x, y, s) {
+        ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+        ctx.beginPath(); ctx.moveTo(-50, -10); ctx.lineTo(50, -10); ctx.quadraticCurveTo(46, 40, 0, 42); ctx.quadraticCurveTo(-46, 40, -50, -10); ctx.closePath();
+        ctx.lineWidth = 6; ctx.strokeStyle = SM.C.out; ctx.stroke(); ctx.fillStyle = C.paper; ctx.fill();
+        ctx.fillStyle = C.coral; ctx.fillRect(-46, 6, 92, 10);
+        ctx.strokeStyle = "#e8c372"; ctx.lineWidth = 4; for (let i = 0; i < 4; i++) { ctx.beginPath(); ctx.moveTo(-30 + i * 18, -10); ctx.quadraticCurveTo(-24 + i * 18, -26, -30 + i * 18, -38); ctx.stroke(); }
+        ctx.restore();
+      }
+      function cloud(ctx, x, y, t, a) {
+        if (a <= 0) return;
+        ctx.save(); ctx.globalAlpha *= a;
+        ctx.strokeStyle = "rgba(170,190,220,0.6)"; ctx.lineWidth = 3;
+        for (let i = 0; i < 14; i++) { const r = rng(i + 2), k = (t * 1.6 + r()) % 1; const rx = x - 90 + r() * 180; ctx.beginPath(); ctx.moveTo(rx, y + 20 + k * 220); ctx.lineTo(rx - 4, y + 34 + k * 220); ctx.stroke(); }
+        [[-60, 0, 46], [0, -24, 60], [60, 0, 46], [0, 14, 50]].forEach(([dx, dy, r]) => SM.circle(ctx, x + dx, y + dy, r, "#5a6274", 0));
+        ctx.restore();
+      }
+
+      function draw(ctx, t) {
+        const d = dayAt(t);
+        const f = frac(d);
+        const phi = (d - 1) * STEP;
+        const bal = balance(d);
+        const broke = clamp((f - 0.45) / 0.45) * (t < SPIN0 ? 1 : 0);   // how bad the month feels
+        const payFlash = Math.max(1 - tw(t, 0, 2.2), tw(t, PAY2 - 0.05, PAY2 + 0.1) * (1 - tw(t, PAY2 + 0.4, PAY2 + 2.0)), tw(t, BACKIN + 0.2, BACKIN + 0.5));
+
+        // camera: tight on the runner -> reveal the wheel -> back in for the loop
+        const tight = { x: 540, y: FEET - 150, z: 1.75 }, wide = { x: 540, y: 1080, z: 0.98 };
+        let cam = t < REVEAL0 ? tight : t < REVEAL1 ? SM.mix(tight, wide, tw(t, REVEAL0, REVEAL1, E.inOut)) : t < BACKIN ? wide : SM.mix(wide, tight, tw(t, BACKIN, DUR, E.inOut));
+        const hh = FX.handheld(t, t > SPIN0 && t < SPIN1 ? 0.4 : 1);
+
+        // backdrop: dark stage with a top spotlight
+        SM.background(ctx, "#141823", "#07090d");
+        ctx.save();
+        SM.camera(ctx, { x: cam.x + hh.dx, y: cam.y + hh.dy, z: cam.z, sx: W / 2, sy: 1060, rot: hh.rot });
+        const g = ctx.createLinearGradient(0, 0, 0, 1700);
+        g.addColorStop(0, "rgba(255,230,180,0.10)"); g.addColorStop(1, "rgba(255,230,180,0)");
+        ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(400, -400); ctx.lineTo(680, -400); ctx.lineTo(1000, 1600); ctx.lineTo(80, 1600); ctx.closePath(); ctx.fill();
+        SM.groundStrip(ctx, WC.y + R + 86, 900);
+
+        if (payFlash > 0) FX.rays(ctx, WC.x, FEET - 160, t, payFlash, "#ffd27a", 16, 1500);
+        wheel(ctx, phi, t, payFlash * 0.8);
+
+        // runner: mood follows the month
+        const speed = Math.abs(dayAt(t + 0.02) - d) / 0.02 * STEP * R;     // rim speed px/s
+        const phase = phi * R / 95 * Math.PI;
+        let mood = SM.walk(phase, 1.05);
+        if (f < 0.12 || t > BACKIN + 0.2) mood = { ...SM.walk(phase, 1.2), aB: [-2.4, -2.7], aF: [2.3, 2.6], head: -0.25, lean: -0.05 };
+        if (broke > 0) mood = SM.poseMix(mood, { ...SM.walk(phase, 0.55), lean: 0.38, head: 0.6 }, broke);
+        const hop = (t < 2.4 || t > BACKIN + 0.2 || (t > PAY2 && t < PAY2 + 1)) ? Math.abs(Math.sin(t * 7)) * 26 : 0;
+        const jR = SM.stickman(ctx, { x: WC.x, y: FEET - hop, pose: mood, color: SM.mixColor(C.hero, "#aab2c0", broke * 0.8), glowA: payFlash * 0.35 });
+
+        // purchases early in the month
+        const buys = [[2.8, "coffee"], [3.5, "shoe"], [4.2, "bag"]];
+        buys.forEach(([b, ic], i) => {
+          const k = tw(t, b, b + 0.35, E.lin) * (1 - tw(t, b + 1.0, b + 1.3, E.lin));
+          const bx = WC.x + (i % 2 ? -210 : 210), by = FEET - 420;
+          const bb = SM.thought(ctx, bx, by, 170, 140, k, [jR.head[0] + (i % 2 ? -20 : 20), jR.head[1] - 20]);
+          if (bb && bb.sc > 0.2) SM.icon(ctx, ic, bx, by, 0.9 * bb.sc);
+          const pk = tw(t, b + 0.2, b + 1.1, E.out);
+          if (pk > 0 && pk < 1) SM.text(ctx, i === 2 ? "PAY LATER" : "-$" + [45, 180, 230][i], bx + (i % 2 ? -10 : 10), by - 110 - pk * 50, { size: i === 2 ? 30 : 40, color: C.coral, alpha: 1 - pk });
+        });
+        // end of the month: noodles and a rain cloud
+        const nk = tw(t, 8.8, 9.2, E.lin) * (1 - tw(t, 10.9, 11.2));
+        const nb = SM.thought(ctx, WC.x + 210, FEET - 420, 180, 150, nk, [jR.head[0] + 20, jR.head[1] - 20]);
+        if (nb && nb.sc > 0.2) noodles(ctx, WC.x + 210, FEET - 420, 1.0 * nb.sc);
+        cloud(ctx, WC.x, FEET - 420, t, tw(t, 8.0, 8.6) * (1 - tw(t, 11.0, 11.4)));
+
+        // payday bursts
+        FX.burst(ctx, WC.x, FEET - 220, t, PAY2, { n: 46, kind: "coin", speed: 1100, size: 9, life: 1.6, seed: 3 });
+        FX.ring(ctx, WC.x, FEET - 160, t, PAY2, { r1: 600, color: "#ffe29a" });
+        FX.burst(ctx, WC.x, FEET - 220, t, BACKIN + 0.35, { n: 30, kind: "coin", speed: 900, size: 9, life: 1.4, seed: 5 });
+        ctx.restore();
+
+        // ---- screen-space layers ----
+        FX.moneyRain(ctx, t, -0.4, { life: 2.6, seed: 3 });
+        FX.confetti(ctx, t, -0.6, { life: 2.8 });
+        FX.confetti(ctx, t, PAY2, { life: 2.6, seed: 11 });
+        FX.moneyRain(ctx, t, PAY2 + 0.1, { life: 2.2, seed: 9 });
+        FX.confetti(ctx, t, BACKIN + 0.4, { life: 2.8 });
+        FX.moneyRain(ctx, t, BACKIN + 0.6, { life: 2.6, seed: 3 });
+        const spinA = tw(t, SPIN0, SPIN0 + 0.6) * (1 - tw(t, SPIN1 - 0.6, SPIN1));
+        FX.speedLines(ctx, W / 2, 1060, t, spinA);
+
+        // grade: the month drains colour, payday floods it back
+        FX.grade(ctx, broke * 0.75, "#6f8fb8", broke * 0.3);
+        FX.leak(ctx, t, payFlash * 0.35);
+
+        // HUD: day / month pill + balance
+        const inSpin = t >= SPIN0 && t < BACKIN;
+        const month = Math.floor((d - 1) / 30) + 1;
+        const pillA = tw(t, 2.3, 2.6, E.back) * (1 - tw(t, 17.1, 17.35)) + tw(t, 21.1, 21.3) * 0;
+        const dayN = Math.round(((d - 1) % 30)) + 1;
+        const isPay = f < 0.03 || f > 0.985;
+        const pulse = 1 + FX.spring(t, PAY2, 2.4, 0.4) * 0 + (t > PAY2 && t < PAY2 + 0.6 ? Math.sin((t - PAY2) / 0.6 * Math.PI) * 0.18 : 0);
+        SM.pill(ctx, inSpin ? (month > 12 ? "YEAR " + Math.ceil(month / 12) : "MONTH " + month) : isPay ? "PAYDAY" : "DAY " + dayN, W / 2, 385, {
+          size: 34, alpha: pillA, scale: Math.max(0.001, pillA) * pulse, bg: isPay ? C.amber : "#262b36", fg: isPay ? "#2a1c00" : C.hero,
+        });
+        const balA = tw(t, 2.4, 2.8) * (1 - tw(t, 17.0, 17.3));
+        const balCol = SM.mixColor(C.amber, C.coral, clamp((2000 - bal) / 1800));
+        const shake = f > 0.9 && t < PAY2 ? Math.sin(t * 60) * 3 : 0;
+        SM.text(ctx, money(bal), W / 2 + shake, 478, { size: 84, color: balCol, alpha: balA });
+        SM.label(ctx, "BALANCE", W / 2, 540, { size: 20, alpha: balA });
+        SM.label(ctx, BRAND, W / 2, 1640, { size: 16, color: "rgba(255,255,255,0.18)", spacing: 0.5 });
+        SM.vignette(ctx, 0.72);
+        SM.grain(ctx, t, 0.06);
+      }
+
+      document.fonts.load('800 40px "Jakarta"').then(() => {
+        try { const v = window.__hyperframes.getVariables(); if (v && v.brand) BRAND = v.brand; } catch (e) {}
+        // hook: on screen at frame 0, the second line lands with a spring
+        tl.fromTo("#hook-l1", { opacity: 1 }, { opacity: 1, duration: 0.01 }, 0);
+        tl.fromTo("#hook-l2", { opacity: 1, scale: 1 }, { opacity: 1, scale: 1, duration: 0.01 }, 0);
+        tl.fromTo("#hook p", { opacity: 1, y: 0 }, { opacity: 0, y: -24, filter: "blur(8px)", duration: 0.45, ease: "power3.in", stagger: 0.08 }, 2.05);
+        // quote: per word blur-in, slow and smooth; the keyword gets an underline swipe
+        tl.fromTo("#quote .q", { opacity: 0, filter: "blur(12px)", y: 14 }, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.55, ease: "power4.out", stagger: 0.28 }, 17.4);
+        tl.fromTo("#quote .bar", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "expo.out" }, 18.5);
+        tl.fromTo("#quote p", { opacity: 1 }, { opacity: 0, filter: "blur(8px)", duration: 0.4, ease: "power2.in" }, 20.8);
+        // loop: the hook comes back exactly as frame 0
+        tl.fromTo("#hookEnd .e", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.35, ease: "power3.out", stagger: 0.08 }, 21.35);
+        SM.mount("stage", DUR, draw, tl);
+        window.__timelines["main"] = tl;
+      });
+    </script>
+  </body>
+</html>

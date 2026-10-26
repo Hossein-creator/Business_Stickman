@@ -1,0 +1,306 @@
+<!doctype html>
+<html
+  lang="en"
+  data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"hook1","type":"string","label":"Hook line 1","default":"$100 a month."},
+    {"id":"hook2","type":"string","label":"Hook line 2","default":"Watch it roll."},
+    {"id":"insight1","type":"string","label":"Insight line 1","default":"Starting 10 years earlier:"},
+    {"id":"insight2","type":"string","label":"Insight number","default":"+$90,134"},
+    {"id":"quote1","type":"string","label":"Quote line 1","default":"Start small."},
+    {"id":"quote2a","type":"string","label":"Quote line 2 (before keyword)","default":"But start"},
+    {"id":"quote2b","type":"string","label":"Quote keyword","default":"now."},
+    {"id":"brand","type":"string","label":"Watermark","default":"BUSINESS STICKMAN"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/lib/gsap.min.js"></script>
+    <script src="assets/lib/stickman.js"></script>
+    <script src="assets/lib/stickman-props.js"></script>
+    <script src="assets/lib/stickman-fx.js"></script>
+    <style>
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-800-normal.woff2") format("woff2"); font-weight: 800; }
+      :root { --ink: #eef1f6; --accent: #ffc23d; --muted: #9aa3b3; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0a0c11; }
+      #root { position: relative; width: 100%; height: 100%; font-family: "Jakarta", sans-serif; }
+      #stage { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+      .lines { position: absolute; left: 70px; right: 70px; top: 230px; text-align: center; color: var(--ink); font-weight: 800; letter-spacing: -0.02em; }
+      .lines p { font-size: 70px; line-height: 1.16; }
+      .lines p.big { font-size: 120px; line-height: 1.1; }
+      .w { display: inline-block; white-space: pre; }
+      .key { position: relative; color: var(--accent); text-shadow: 0 0 30px rgba(255, 194, 61, 0.6); }
+      .bar { position: absolute; left: 0; right: 0; bottom: -4px; height: 8px; border-radius: 4px; background: var(--accent); transform-origin: left center; }
+      .soft { color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-motion-blur="on" data-motion-blur-events="on" data-composition-id="main" data-start="0" data-duration="22" data-width="1080" data-height="1920">
+      <canvas id="stage" class="clip" data-start="0" data-duration="22" data-track-index="0"></canvas>
+
+      <div id="hook" class="lines clip" data-start="0" data-duration="2.6" data-track-index="1">
+        <p id="hook-l1"><span class="w" data-var-text="hook1">$100 a month.</span></p>
+        <p id="hook-l2" class="soft"><span class="w" data-var-text="hook2">Watch it roll.</span></p>
+      </div>
+
+      <div id="insight" class="lines clip" data-start="16.8" data-duration="2.4" data-track-index="2">
+        <p class="i"><span class="w" data-var-text="insight1">Starting 10 years earlier:</span></p>
+        <p class="i big key"><span data-var-text="insight2">+$90,134</span></p>
+      </div>
+
+      <div id="quote" class="lines clip" data-start="19.2" data-duration="2.8" data-track-index="3">
+        <p><span class="w q" data-var-text="quote1">Start small.</span></p>
+        <p><span class="w q" data-var-text="quote2a">But start</span> <span class="w q key"><span data-var-text="quote2b">now.</span><span class="bar"></span></span></p>
+      </div>
+
+      <audio id="sfx-push" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="1.6" data-duration="0.6" data-track-index="5" data-volume="0.3"></audio>
+      <audio id="sfx-riser" class="clip" src="assets/sfx/riser.mp3" data-start="4.5" data-duration="10.03" data-track-index="6" data-volume="0.22"></audio>
+      <audio id="sfx-hop" class="clip" src="assets/sfx/pop.mp3" data-start="7.3" data-duration="0.72" data-track-index="7" data-volume="0.35"></audio>
+      <audio id="sfx-y10" class="clip" src="assets/sfx/ping.mp3" data-start="8.3" data-duration="1.32" data-track-index="8" data-volume="0.28"></audio>
+      <audio id="sfx-pip" class="clip" src="assets/sfx/whoosh.mp3" data-start="8.35" data-duration="0.6" data-track-index="9" data-volume="0.25"></audio>
+      <audio id="sfx-y20" class="clip" src="assets/sfx/ping.mp3" data-start="11.7" data-duration="1.32" data-track-index="8" data-volume="0.3"></audio>
+      <audio id="sfx-crash" class="clip" src="assets/sfx/impact-bass-2.mp3" data-start="14.3" data-duration="2.59" data-track-index="10" data-volume="0.5"></audio>
+      <audio id="sfx-shine" class="clip" src="assets/sfx/sparkle.mp3" data-start="14.75" data-duration="1.8" data-track-index="11" data-volume="0.32"></audio>
+      <audio id="sfx-late" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="15.8" data-duration="0.6" data-track-index="12" data-volume="0.25"></audio>
+      <audio id="sfx-insight" class="clip" src="assets/sfx/impact-bass-1.mp3" data-start="17.15" data-duration="2.12" data-track-index="13" data-volume="0.35"></audio>
+      <audio id="sfx-quote" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="19.25" data-duration="0.6" data-track-index="14" data-volume="0.28"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const DUR = 22;
+      const { W, H, C, E, clamp, lerp, tw, kf, rng } = SM;
+      const FX = SM.fx;
+      let BRAND = "BUSINESS STICKMAN";
+
+      // ---- the money ----
+      const FV = (years) => { const r = 0.08 / 12, n = Math.max(0, years) * 12; return 100 * (Math.pow(1 + r, n) - 1) / r; };
+      const Y0 = 2.0, Y1 = 14.5;                              // 30 years play between these
+      const yearsAt = (t) => 30 * Math.pow(clamp((t - Y0) / (Y1 - Y0)), 1.6);
+      const tOfYears = (y) => Y0 + Math.pow(y / 30, 1 / 1.6) * (Y1 - Y0);
+      const radius = (v) => 18 + 300 * Math.sqrt(Math.max(0, v) / 149036);
+      const money = (n) => "$" + Math.round(n).toLocaleString("en-US");
+
+      // ---- the slope ----
+      const SL = 0.5, CS = Math.cos(Math.atan(SL)), SN = Math.sin(Math.atan(SL));
+      const SPEED = 520, UEND = SPEED * (Y1 - 2.3);           // where the valley starts
+      const ground = (u) => u < UEND ? { x: u * CS, y: u * SN } : { x: UEND * CS + (u - UEND), y: UEND * SN };
+      const normal = (u) => u < UEND ? { x: SN, y: -CS } : { x: 0, y: -1 };
+      // distance travelled: a push, a long roll, a hard stop in the valley
+      function uAt(t, start) {
+        const k = t - start;
+        if (k <= 0) return 0;
+        const push = Math.min(k, 0.6), roll = Math.max(0, k - 0.6);
+        let u = 0.5 * (SPEED / 0.6) * push * push + SPEED * roll;
+        return u;
+      }
+      const HERO_START = 1.7;
+      const heroU = (t) => { const u = uAt(t, HERO_START); return u < UEND ? u : UEND + (1 - Math.exp(-(u - UEND) / 260)) * 260; };
+      const LATE_START = tOfYears(10) - 0.2;
+
+      function tree(ctx, x, y, s) {
+        ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+        SM.box(ctx, -8, -30, 16, 30, 3, "#3a2c22", 4);
+        for (let i = 0; i < 3; i++) {
+          const w = 70 - i * 16, yy = -30 - i * 42;
+          ctx.beginPath(); ctx.moveTo(-w, yy); ctx.lineTo(0, yy - 70); ctx.lineTo(w, yy); ctx.closePath();
+          ctx.lineWidth = 5; ctx.strokeStyle = C.out; ctx.stroke(); ctx.fillStyle = i % 2 ? "#2d5145" : "#33594c"; ctx.fill();
+          ctx.beginPath(); ctx.moveTo(-w * 0.45, yy - 38); ctx.lineTo(0, yy - 70); ctx.lineTo(w * 0.45, yy - 38); ctx.quadraticCurveTo(0, yy - 30, -w * 0.45, yy - 38); ctx.fillStyle = "#e6eef7"; ctx.fill();
+        }
+        ctx.restore();
+      }
+      function snowball(ctx, cx, cy, r, roll, glowA) {
+        if (glowA > 0) SM.glow(ctx, cx, cy, r * 2.4, C.amber, glowA);
+        ctx.save();
+        ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.lineWidth = Math.max(5, r * 0.04); ctx.strokeStyle = C.out; ctx.stroke();
+        const g = ctx.createRadialGradient(cx - r * 0.35, cy - r * 0.4, r * 0.1, cx, cy, r);
+        g.addColorStop(0, "#ffffff"); g.addColorStop(0.7, "#e3ecf6"); g.addColorStop(1, "#b9c9dc");
+        ctx.fillStyle = g; ctx.fill(); ctx.clip();
+        // rolling texture: coins and lumps turn with the ball
+        ctx.translate(cx, cy); ctx.rotate(roll);
+        const n = 8 + Math.floor(r / 14);
+        for (let i = 0; i < n; i++) {
+          const q = rng(i * 5 + 3), a = q() * Math.PI * 2, d = Math.sqrt(q()) * r * 0.85;
+          if (i % 3 === 0) SM.coin(ctx, Math.cos(a) * d, Math.sin(a) * d, Math.max(6, r * 0.09), 0, 0.9);
+          else { ctx.fillStyle = "rgba(150,170,195,0.35)"; ctx.beginPath(); ctx.arc(Math.cos(a) * d, Math.sin(a) * d, r * (0.05 + q() * 0.06), 0, Math.PI * 2); ctx.fill(); }
+        }
+        ctx.restore();
+      }
+      // the whole snowy world for one ball; used for the main view and the picture-in-picture
+      function world(ctx, t, u, v, who, startT) {
+        // mountain body under the slope line
+        const far = ground(-2000), end = ground(UEND + 6000);
+        ctx.beginPath(); ctx.moveTo(far.x, far.y);
+        ctx.lineTo(0, 0); ctx.lineTo(ground(UEND).x, ground(UEND).y); ctx.lineTo(end.x, end.y);
+        ctx.lineTo(end.x, end.y + 4000); ctx.lineTo(far.x, far.y + 4000); ctx.closePath();
+        const g = ctx.createLinearGradient(0, -400, 0, UEND * SN + 800);
+        g.addColorStop(0, "#9fb2c8"); g.addColorStop(1, "#6c7f96");
+        ctx.fillStyle = g; ctx.fill();
+        ctx.lineWidth = 8; ctx.strokeStyle = "#e9f1fa"; ctx.beginPath(); ctx.moveTo(far.x, far.y); ctx.lineTo(0, 0); ctx.lineTo(ground(UEND).x, ground(UEND).y); ctx.lineTo(end.x, end.y); ctx.stroke();
+        // trees planted along the slope (behind the ball)
+        for (let i = -4; i < 40; i++) {
+          const q = rng(i * 17 + 5), tu = i * 330 + q() * 160, p = ground(tu);
+          tree(ctx, p.x - 30 - q() * 60, p.y + 6, 0.8 + q() * 0.6);
+        }
+        // the groove the ball leaves
+        const r = radius(v);
+        ctx.strokeStyle = "rgba(90,110,140,0.35)"; ctx.lineWidth = Math.max(6, r * 0.3); ctx.lineCap = "round";
+        const a = ground(0), b = ground(u);
+        ctx.beginPath(); ctx.moveTo(a.x, a.y + 4); ctx.lineTo(Math.min(b.x, ground(UEND).x), Math.min(b.y, ground(UEND).y) + 4); if (u > UEND) ctx.lineTo(b.x, b.y + 4); ctx.stroke();
+        // the ball
+        const p = ground(u), n = normal(u);
+        const cx = p.x + n.x * r, cy = p.y + n.y * r;
+        // snow spray behind it
+        for (let i = 0; i < 18; i++) {
+          const q = rng(i * 7 + Math.floor(t * 20)), k = q();
+          ctx.fillStyle = `rgba(240,246,255,${0.5 * (1 - k)})`;
+          ctx.beginPath(); ctx.arc(p.x - k * (60 + r * 0.6) * CS, p.y - 6 - k * r * 0.5 - q() * 20, 3 + q() * r * 0.06, 0, Math.PI * 2); ctx.fill();
+        }
+        snowball(ctx, cx, cy, r, u / Math.max(30, r) * 0.9, who === "hero" ? 0.25 * tw(t, 12, 14.5) : 0);
+        return { cx, cy, r, p };
+      }
+
+      function draw(ctx, t) {
+        const years = yearsAt(t), v = FV(years);
+        const u = heroU(t);
+        const r = radius(v);
+        const p = ground(u), n = normal(u);
+        const crash = tw(t, 14.25, 14.6);
+
+        // ---- sky: deep blue, moon, aurora ----
+        const sg = ctx.createLinearGradient(0, 0, 0, H);
+        sg.addColorStop(0, "#0b1022"); sg.addColorStop(0.55, "#16223a"); sg.addColorStop(1, "#0a0d14");
+        ctx.fillStyle = sg; ctx.fillRect(0, 0, W, H);
+        ctx.save(); ctx.globalCompositeOperation = "lighter";
+        for (let k = 0; k < 3; k++) {
+          ctx.beginPath();
+          for (let x = -50; x <= W + 50; x += 20) { const y = 300 + k * 70 + Math.sin(x * 0.006 + t * 0.6 + k) * 70 + Math.sin(x * 0.013 - t * 0.4) * 30; x === -50 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); }
+          ctx.lineWidth = 90 - k * 20; ctx.strokeStyle = SM.withA(k === 1 ? "#7a6cff" : "#3fe0b0", 0.07 + 0.03 * Math.sin(t + k)); ctx.stroke();
+        }
+        ctx.restore();
+        SM.circle(ctx, 820, 250, 46, "#f3ecd2", 0); SM.glow(ctx, 820, 250, 220, "#f3ecd2", 0.35);
+        // far ridges (parallax)
+        const camX = p.x;
+        [["#1a2438", 0.08, 900, 260], ["#22304a", 0.16, 1050, 200]].forEach(([col, par, base, amp], li) => {
+          ctx.fillStyle = col; ctx.beginPath(); ctx.moveTo(-10, H);
+          for (let x = -10; x <= W + 10; x += 30) { const wx = x + camX * par; ctx.lineTo(x, base - Math.abs(Math.sin(wx * 0.004 + li)) * amp - Math.sin(wx * 0.011) * 40); }
+          ctx.lineTo(W + 10, H); ctx.fill();
+        });
+
+        // ---- camera follows the ball ----
+        const lead = { x: p.x + n.x * r + 120, y: p.y + n.y * r - 120 };
+        let z = lerp(1.45, 0.82, clamp(years / 30));
+        let cam = { x: lead.x, y: lead.y };
+        // end: a wide shot of the valley holding both balls
+        const endK = tw(t, 15.0, 16.6, E.inOut);
+        const valley = ground(UEND + 140);
+        cam = { x: lerp(cam.x, valley.x - 120, endK), y: lerp(cam.y, valley.y - 330, endK) };
+        z = lerp(z, 0.78, endK);
+        const shake = crash > 0 && crash < 1 ? Math.sin(t * 80) * 14 * (1 - crash) : 0;
+        const hh = FX.handheld(t, 0.8);
+        ctx.save();
+        SM.camera(ctx, { x: cam.x + hh.dx + shake, y: cam.y + hh.dy, z, sx: W / 2, sy: 1080, rot: hh.rot });
+
+        const ball = world(ctx, t, u, v, "hero");
+
+        // ---- the hero: pushes, runs, hops on, surfs, cheers ----
+        const HOP0 = 7.0, HOP1 = 7.5;
+        if (t < HOP0) {
+          const runU = Math.max(-120, u - r - 50);
+          const g = ground(runU);
+          const pose = t < HERO_START + 0.4 ? SM.poseMix(SM.POSE.stand, { ...SM.POSE.reach, lean: 0.45 }, tw(t, 0.6, HERO_START)) : SM.walk(t * 13, 1.15);
+          SM.stickman(ctx, { x: g.x, y: g.y, pose: { ...pose, lean: (pose.lean || 0) + 0.15 }, color: C.hero });
+        } else {
+          const top = { x: ball.cx, y: ball.cy - ball.r };
+          const k = tw(t, HOP0, HOP1, E.inOut);
+          const from = ground(heroU(HOP0) - radius(FV(yearsAt(HOP0))) - 50);
+          const x = lerp(from.x, top.x, k), y = lerp(from.y, top.y, k) - Math.sin(k * Math.PI) * 220;
+          const surf = { lean: -0.05, head: -0.1 + Math.sin(t * 3) * 0.08, aB: [-1.45 + Math.sin(t * 4) * 0.2, -1.6], aF: [1.45 - Math.sin(t * 4) * 0.2, 1.6], lB: [0.35, 0.12], lF: [-0.35, -0.12] };
+          let pose = k < 1 ? SM.poseMix(SM.POSE.cheer, surf, k) : surf;
+          if (t > 14.6) pose = SM.poseMix(surf, SM.POSE.cheer, tw(t, 14.6, 15.0, E.back));
+          SM.stickman(ctx, { x, y, pose, color: C.hero, glowA: tw(t, 14.6, 15.2) * 0.5, squash: t > 14.6 && t < 14.9 ? 0.4 : 0 });
+        }
+
+        // ---- the late starter rolls into the valley ----
+        if (t > 15.6) {
+          const lk = tw(t, 15.6, 16.7, E.out);
+          const lv = FV(20), lr = radius(lv);
+          const lu = UEND - 1100 + lk * (ball.p ? 760 : 0);
+          const lp = ground(lu), ln = normal(lu);
+          snowball(ctx, lp.x + ln.x * lr, lp.y + ln.y * lr, lr, lu / lr, 0);
+          SM.stickman(ctx, { x: lp.x - lr - 60 * CS, y: lp.y - 60 * SN + 30, pose: lk < 1 ? SM.walk(t * 12, 1) : SM.POSE.lookUp, color: C.other });
+          const lab = tw(t, 16.4, 16.8);
+          SM.text(ctx, money(lv), lp.x + ln.x * lr, lp.y + ln.y * lr - lr - 70, { size: 64, color: C.text, alpha: lab });
+          SM.label(ctx, "STARTED 10 YEARS LATER", lp.x + ln.x * lr, lp.y + ln.y * lr - lr - 130, { size: 22, alpha: lab });
+        }
+        if (t > 15.6) {
+          const lab = tw(t, 15.7, 16.1);
+          SM.text(ctx, money(FV(30)), ball.cx + 230, ball.cy - ball.r - 70, { size: 76, color: C.amber, alpha: lab });
+          SM.label(ctx, "STARTED EARLY", ball.cx + 230, ball.cy - ball.r - 135, { size: 24, color: C.amber, alpha: lab });
+        }
+        // crash: snow explosion
+        FX.burst(ctx, ball.cx, ball.cy + ball.r * 0.6, t, 14.35, { n: 70, speed: 1500, life: 1.8, gravity: 1800, colors: ["#ffffff", "#e3ecf6", "#c9d8ea"], size: 16, seed: 2, spread: Math.PI * 1.1 });
+        FX.ring(ctx, ball.cx, ball.cy, t, 14.4, { r1: 900, color: "#ffffff", width: 14 });
+        ctx.restore();
+
+        // ---- screen-space light and weather ----
+        FX.rays(ctx, W / 2, 1000, t, tw(t, 14.5, 15.0) * (1 - tw(t, 18.5, 19.5)) * 0.8, "#ffd27a", 16, 1600);
+        FX.flare(ctx, W / 2, 1000, tw(t, 14.4, 14.6) * (1 - tw(t, 14.7, 15.6)));
+        FX.snow(ctx, t, 1, 0.35);
+
+        // ---- picture-in-picture: the late starter ----
+        const pipA = tw(t, LATE_START, LATE_START + 0.4, E.back) * (1 - tw(t, 14.2, 14.5));
+        if (pipA > 0.01) {
+          const px = 830, py = 760, pr = 165 * pipA;
+          const ly = Math.max(0, yearsAt(t) - 10), lv = FV(ly), lu = uAt(t, LATE_START + 0.3);
+          ctx.save();
+          ctx.beginPath(); ctx.arc(px, py, pr, 0, Math.PI * 2); ctx.clip();
+          ctx.fillStyle = "#121a2c"; ctx.fillRect(px - pr, py - pr, pr * 2, pr * 2);
+          const lp = ground(lu), lr = radius(lv);
+          ctx.translate(px, py); ctx.scale(0.55, 0.55); ctx.translate(-(lp.x + 60), -(lp.y - 140));
+          const lb = world(ctx, t, lu, lv, "late");
+          const g = ground(Math.max(-120, lu - lr - 50));
+          SM.stickman(ctx, { x: g.x, y: g.y, pose: lu < 1 ? { ...SM.POSE.reach, lean: 0.45 } : SM.walk(t * 13, 1.1), color: C.other });
+          ctx.restore();
+          ctx.save(); ctx.globalAlpha = pipA;
+          ctx.beginPath(); ctx.arc(px, py, pr, 0, Math.PI * 2); ctx.lineWidth = 8; ctx.strokeStyle = "#e9f1fa"; ctx.stroke();
+          SM.label(ctx, "10 YEARS LATER", px, py + pr + 34, { size: 20, color: C.text });
+          SM.text(ctx, money(lv), px, py + pr + 78, { size: 40, color: C.text });
+          ctx.restore();
+        }
+
+        // ---- HUD ----
+        const hudA = tw(t, 2.3, 2.6, E.back) * (1 - tw(t, 15.0, 15.4));
+        const milestone = [10, 20].map(tOfYears).concat([Y1]);
+        let pulse = 1; milestone.forEach((m) => { const k = (t - m) / 0.5; if (k > 0 && k < 1) pulse = 1 + Math.sin(k * Math.PI) * 0.16; });
+        SM.pill(ctx, "YEAR " + Math.min(30, Math.max(1, Math.ceil(years))), W / 2, 385, { size: 34, alpha: hudA, scale: Math.max(0.001, hudA) * pulse, bg: years >= 29.9 ? C.amber : "#262b36", fg: years >= 29.9 ? "#2a1c00" : C.hero });
+        SM.text(ctx, money(v), W / 2, 480, { size: 84 * pulse, color: SM.mixColor(C.hero, C.amber, clamp(years / 12)), alpha: hudA });
+        SM.label(ctx, "YOU PUT IN " + money(Math.round(years * 12) * 100), W / 2, 545, { size: 20, alpha: hudA });
+        // honest footnote
+        SM.label(ctx, "EXAMPLE: $100/MONTH · 8% AVERAGE YEARLY RETURN · NOT GUARANTEED", W / 2, 1350, { size: 15, color: "rgba(255,255,255,0.5)", spacing: 0.12, alpha: tw(t, 15.5, 16.0) });
+        SM.label(ctx, BRAND, W / 2, 1640, { size: 16, color: "rgba(255,255,255,0.2)", spacing: 0.5 });
+        FX.leak(ctx, t, 0.15 + tw(t, 14.5, 15.0) * 0.25, "#7a9cff");
+        SM.vignette(ctx, 0.7);
+        SM.grain(ctx, t, 0.055);
+      }
+
+      document.fonts.load('800 40px "Jakarta"').then(() => {
+        try { const v = window.__hyperframes.getVariables(); if (v && v.brand) BRAND = v.brand; } catch (e) {}
+        tl.fromTo("#hook-l1", { opacity: 1 }, { opacity: 1, duration: 0.01 }, 0);
+        tl.fromTo("#hook-l2", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power4.out" }, 0.6);
+        tl.fromTo("#hook p", { opacity: 1, y: 0 }, { opacity: 0, y: -24, filter: "blur(8px)", duration: 0.45, ease: "power3.in", stagger: 0.08 }, 2.05);
+        tl.fromTo("#insight .i", { opacity: 0, filter: "blur(12px)", scale: 0.92 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "expo.out", stagger: 0.35 }, 16.85);
+        tl.fromTo("#insight .i", { opacity: 1 }, { opacity: 0, filter: "blur(8px)", duration: 0.35, ease: "power2.in" }, 18.8);
+        tl.fromTo("#quote .q", { opacity: 0, filter: "blur(12px)", y: 14 }, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.55, ease: "power4.out", stagger: 0.3 }, 19.3);
+        tl.fromTo("#quote .bar", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "expo.out" }, 20.3);
+        SM.mount("stage", DUR, draw, tl);
+        window.__timelines["main"] = tl;
+      });
+    </script>
+  </body>
+</html>
