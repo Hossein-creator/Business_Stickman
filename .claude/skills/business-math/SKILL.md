@@ -10,13 +10,13 @@ every number on screen comes out of `calc.py`, never out of the head.
 
 ## Steps
 
-1. **Find real prices.** Search the web for current prices in Indonesia (street-food, kopi,
+1. **Find real prices.** Search the web for typical current prices that hold in many countries (street food, coffee,
    cups, thermoses, laundry per kg, haircut, ...). Convert to USD at today's rate and round to
    friendly numbers ($0.35, not $0.347). Keep prices typical, not best case.
 2. **Write the numbers** to `videos/NN-<name>/numbers.json` (it is committed with the video):
    - Business idea: `kit`, `price`, `unit_cost`, `units_per_day`, `days_per_month`,
      optional `hours_per_day`.
-   - Business model: `price`, `split` (every party that gets a share), optional `scale`
+   - Business model: `price`, `split` (every party that gets a share), optional `assumptions` (own footnote line), optional `scale`
      (`n`, `label`, `of`) and `px_per_dollar` for the money bar.
    - Examples are in the docstring of `calc.py`.
 3. **Run it:**
@@ -34,7 +34,7 @@ every number on screen comes out of `calc.py`, never out of the head.
 
 - Conservative beats exciting: fewer sales a day, more days off, all costs counted.
 - One person, one city, one day: say who and where the numbers are for.
-- Money for young people in Indonesia: a monthly result far above a minimum wage (~$330) needs
+- International audience: a monthly result far above an entry-level wage (~$500) needs
   a reason in the story, or it reads as a scam.
 - Round once, at the end. On screen show at most two decimals and no more than 4 digits where
   possible ($624, $5.8M).

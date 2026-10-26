@@ -16,14 +16,16 @@ Two shapes, both may be in one file:
      "scale": {"n": 2000000, "label": "orders a day", "of": "App"},
      "px_per_dollar": 32}
 
+Optional "assumptions": "..." replaces the default footnote line.
+
 Prints every number the video and the caption need, an honest assumptions line, and
 WARN lines for anything that looks too good to be true. Exit code 1 on FAIL.
 """
 import json
 import sys
 
-# Rough sanity limits for one person in Indonesia (2026). Above these the video must say why.
-MONTHLY_WAGE = 330      # about a Jakarta minimum wage per month, in USD
+# Rough sanity limits for one person, international audience (2026). Above these the video must say why.
+MONTHLY_WAGE = 500      # a rough entry-level monthly wage in many countries, in USD
 MAX_UNITS_ONE_PERSON = 150
 MAX_DAYS = 26
 
@@ -104,8 +106,8 @@ def model(d, out, warn, fail):
         out.append("SCALE")
         out.append(f"  x {sc['n']:,} {sc.get('label', '')}: {money(part * sc['n'])}"
                    + (f" for {sc['of']}" if sc.get("of") else ""))
-    return (f"Example split of a {money(price)} order. Real shares change by city, "
-            "restaurant and promotion.")
+    return (f"Example split of {money(price)}. Real shares change by business, city "
+            "and season.")
 
 
 def main():
@@ -124,7 +126,7 @@ def main():
 
     print("\n".join(out))
     print("\nASSUMPTIONS (footnote and caption)")
-    for n in notes:
+    for n in ([d["assumptions"]] if "assumptions" in d else notes):
         print("  " + n)
     for w in warn:
         print("WARN  " + w)

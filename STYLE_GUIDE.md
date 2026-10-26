@@ -14,7 +14,8 @@ life lessons, tied to money and business**.
   2. **Business models:** how a business really makes money, cost by cost (e.g. Your $5 Coffee).
   3. **Business ideas:** a business someone can start small, step by step with real numbers
      (e.g. $50 Car Wash).
-- **Audience:** young adults from working and middle-class backgrounds (first target: Indonesia).
+- **Audience:** international: young people everywhere who want to understand money and start
+  something of their own. Stories and prices work in any country (shown in USD, simple English).
   The characters are everyday people: delivery riders, street-food sellers, people paying off
   installments, people saving spare change.
 - **Language on screen:** English.
@@ -155,7 +156,7 @@ Pick from the open list first (see `CLAUDE.md`); when one is made, move it to "M
 - **Why a $3 bottle of water costs 20 cents to make:** brand, shop, transport, margin.
 - **How a barbershop makes money:** one $8 haircut, chair rent, tools, time per cut.
 - **How a bubble-tea shop makes money:** one $3 cup, tapioca, milk, cup and straw, rent, profit.
-- **How a phone-credit (pulsa) kiosk makes money:** tiny margin, many sales a day.
+- **How a phone-credit kiosk makes money:** tiny margin, many sales a day.
 - **How a gym makes money:** most members pay and never come.
 - **How a ride-hailing app sets prices:** surge pricing, the rider's cut, the app's cut.
 

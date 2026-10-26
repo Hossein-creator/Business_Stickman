@@ -46,7 +46,7 @@ checklist that runs them in order. Do every step, every time. Nothing stays only
 | 18.4–22 | Quote, two lines, one amber keyword, word by word |
 
 Write the hook, quote and topic chip down before building. Read them out loud: short words, no
-jargon, a 16-year-old in Jakarta understands them at once.
+jargon, a 16-year-old anywhere in the world understands them at once.
 
 ## 4. Build
 
