@@ -21,13 +21,16 @@ Videos 1–4 run 18 s; from video 5 on they run 22 s, slower, with motion blur a
 | 7 | [`renders/07-coffee-money.mp4`](renders/07-coffee-money.mp4) | You pay $5 for a latte: the cup fills with every cost (beans, milk, cup, rent, staff, power) until only $0.60 profit is left. To make $3,000 a month the café must sell 167 cups a day. | "Revenue is vanity. **Profit** is sanity." |
 | 8 | [`renders/08-car-wash.mp4`](renders/08-car-wash.mp4) | Got $50? Buy a car-wash kit, wash a car for $10, repeat: $55 a day, $440 a month on weekends only. | "You don't need a lot of money. You need a **first customer.**" |
 | 9 | [`renders/09-money-leaks.mp4`](renders/09-money-leaks.mp4) | Your salary pours into a jar that leaks $115 a month (streaming, delivery fees, gym, apps, late fees): $21,039 in 10 years if invested. Plug the holes and the jar fills. | "Small leaks sink big ships. Check yours **tonight.**" |
+| 10 | [`renders/10-delivery-app.mp4`](renders/10-delivery-app.mp4) | You pay $12.50 for a delivery order: the money flows to the restaurant ($8.00), the rider ($1.60) and the app ($2.90, 23%). Times 2 million orders a day. | "The one who connects **collects.**" |
+| 11 | [`renders/11-coffee-bike.mp4`](renders/11-coffee-bike.mp4) | Got $80 and a bike? Buy the kit, sell a $1 cup with $0.65 profit, 40 cups at the 6 a.m. bus stop: $26 a day, $624 a month. | "The city wakes up at 6. Be there with **coffee.**" |
+| 12 | [`renders/12-look-rich.mp4`](renders/12-look-rich.mp4) | Same $100 a month: one pays off phones on installments, the other saves for a year and buys a coffee cart. After 2 years: $700 of used phones vs. $3,600 a year. | "You can look rich, or **get rich.**" |
 
 ## Layout
 
 ```
 shared/            engine shared by every video
   lib/stickman.js    canvas engine: stickman rig, props, atmosphere, camera
-  lib/stickman-props.js  rooms, desk work, garden, bamboo, roots, toasts, speech bubbles
+  lib/stickman-props.js  rooms, desk work, garden, bamboo, roots, toasts, speech bubbles, scooter, bicycle
   lib/stickman-ui.js     clean infographic UI: topic chip, steps, cost rows, big numbers, icons
   lib/stickman-fx.js     effects: rays, flares, bursts, confetti, money rain, snow, springs, grade
   lib/gsap.min.js    GSAP 3.14.2 (timeline that HyperFrames seeks)

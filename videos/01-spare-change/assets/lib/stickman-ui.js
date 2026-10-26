@@ -78,6 +78,10 @@
     scooter: (ctx) => { circle(ctx, -16, 14, 9, "#2b303b", 4); circle(ctx, 18, 14, 9, "#2b303b", 4); box(ctx, -20, -4, 40, 14, 6, C.coral, 4); box(ctx, -26, -20, 22, 18, 4, "#7fbf7a", 4); },
     dumbbell: (ctx) => { box(ctx, -22, -4, 44, 8, 3, "#9aa3b3", 4); box(ctx, -30, -14, 12, 28, 4, "#3b4252", 4); box(ctx, 18, -14, 12, 28, 4, "#3b4252", 4); },
     phoneApp: (ctx) => { box(ctx, -16, -26, 32, 52, 7, "#1d2230", 4); for (let i = 0; i < 4; i++) box(ctx, -10 + (i % 2) * 12, -16 + Math.floor(i / 2) * 14, 8, 8, 2, ["#7d86c9", C.amber, C.teal, C.coral][i], 0); },
+    thermos: (ctx) => { box(ctx, -14, -18, 28, 44, 8, "#c9d2de", 4); box(ctx, -10, -28, 20, 12, 4, "#3b4252", 4); box(ctx, -14, 0, 28, 8, 0, C.coral, 0); },
+    crate: (ctx) => { box(ctx, -26, -18, 52, 38, 6, "#6b4f3a", 4); ctx.strokeStyle = "#4a3628"; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(-26, 0); ctx.lineTo(26, 0); ctx.stroke(); },
+    bag: (ctx) => SM.foodBag(ctx, 0, 0, 0.6),
+    rider: (ctx) => { circle(ctx, -16, 16, 9, "#2b303b", 4); circle(ctx, 18, 16, 9, "#2b303b", 4); box(ctx, -20, 0, 40, 12, 6, "#3fa36b", 4); circle(ctx, -4, -24, 9, C.hero, 4); box(ctx, -10, -14, 14, 16, 5, C.hero, 0); box(ctx, -30, -18, 18, 18, 4, "#3fa36b", 4); },
     late: (ctx) => { circle(ctx, 0, 0, 22, C.paper, 4); ctx.lineWidth = 4; ctx.strokeStyle = C.coral; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, -13); ctx.moveTo(0, 0); ctx.lineTo(10, 5); ctx.stroke(); },
   };
   function ico(ctx, name, x, y, s = 1, a = 1) { if (a <= 0) return; ctx.save(); ctx.globalAlpha *= a; ctx.translate(x, y); ctx.scale(s, s); ICO[name](ctx); ctx.restore(); }

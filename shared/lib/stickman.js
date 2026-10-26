@@ -28,7 +28,7 @@
     out: (k) => 1 - Math.pow(1 - k, 3),
     in: (k) => k * k * k,
     outQuint: (k) => 1 - Math.pow(1 - k, 5),
-    back: (k) => { const c = 1.70158, c3 = c + 1; return 1 + c3 * Math.pow(k - 1, 3) + c * Math.pow(k - 1, 2); },
+    back: (k) => { if (k <= 0) return 0; const c = 1.70158, c3 = c + 1; return 1 + c3 * Math.pow(k - 1, 3) + c * Math.pow(k - 1, 2); },
     elastic: (k) => k === 0 ? 0 : k === 1 ? 1 : Math.pow(2, -10 * k) * Math.sin((k * 10 - 0.75) * (2 * Math.PI) / 3) + 1,
     sine: (k) => -(Math.cos(Math.PI * k) - 1) / 2,
   };

@@ -1,0 +1,283 @@
+<!doctype html>
+<html
+  lang="en"
+  data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"hook1","type":"string","label":"Hook line 1","default":"Got $80 and a bike?"},
+    {"id":"hook2","type":"string","label":"Hook line 2","default":"Sell coffee at 6 a.m."},
+    {"id":"quote1","type":"string","label":"Quote line 1","default":"The city wakes up at 6."},
+    {"id":"quote2a","type":"string","label":"Quote line 2 (before keyword)","default":"Be there with"},
+    {"id":"quote2b","type":"string","label":"Quote keyword","default":"coffee."},
+    {"id":"brand","type":"string","label":"Watermark","default":"BUSINESS STICKMAN"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/lib/gsap.min.js"></script>
+    <script src="assets/lib/stickman.js"></script>
+    <script src="assets/lib/stickman-props.js"></script>
+    <script src="assets/lib/stickman-fx.js"></script>
+    <script src="assets/lib/stickman-ui.js"></script>
+    <style>
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-800-normal.woff2") format("woff2"); font-weight: 800; }
+      :root { --ink: #eef1f6; --accent: #ffc23d; --muted: #9aa3b3; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0a0c11; }
+      #root { position: relative; width: 100%; height: 100%; font-family: "Jakarta", sans-serif; }
+      #stage { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+      .lines { position: absolute; left: 60px; right: 60px; top: 250px; text-align: center; color: var(--ink); font-weight: 800; letter-spacing: -0.02em; }
+      .lines p { font-size: 64px; line-height: 1.18; }
+      .lines p.huge { font-size: 104px; }
+      .w { display: inline-block; white-space: pre; }
+      .key { position: relative; color: var(--accent); text-shadow: 0 0 30px rgba(255, 194, 61, 0.6); }
+      .bar { position: absolute; left: 0; right: 0; bottom: -4px; height: 8px; border-radius: 4px; background: var(--accent); transform-origin: left center; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-motion-blur="on" data-motion-blur-events="on" data-composition-id="main" data-start="0" data-duration="22" data-width="1080" data-height="1920">
+      <canvas id="stage" class="clip" data-start="0" data-duration="22" data-track-index="0"></canvas>
+
+      <div id="hook" class="lines clip" data-start="0" data-duration="2.9" data-track-index="1">
+        <p id="hook-l1" class="huge key"><span class="w" data-var-text="hook1">Got $80 and a bike?</span></p>
+        <p id="hook-l2"><span class="w" data-var-text="hook2">Sell coffee at 6 a.m.</span></p>
+      </div>
+
+      <div id="quote" class="lines clip" data-start="18.4" data-duration="3.6" data-track-index="2">
+        <p><span class="w q" data-var-text="quote1">The city wakes up at 6.</span></p>
+        <p><span class="w q" data-var-text="quote2a">Be there with</span> <span class="w q key"><span data-var-text="quote2b">coffee.</span><span class="bar"></span></span></p>
+      </div>
+
+      <audio id="sfx-i1" class="clip" src="assets/sfx/pop.mp3" data-start="3.32" data-duration="0.72" data-track-index="5" data-volume="0.3"></audio>
+      <audio id="sfx-i2" class="clip" src="assets/sfx/click-soft.mp3" data-start="3.77" data-duration="0.37" data-track-index="6" data-volume="0.45"></audio>
+      <audio id="sfx-i3" class="clip" src="assets/sfx/pop.mp3" data-start="4.22" data-duration="0.72" data-track-index="5" data-volume="0.28"></audio>
+      <audio id="sfx-i4" class="clip" src="assets/sfx/click-soft.mp3" data-start="4.67" data-duration="0.37" data-track-index="6" data-volume="0.45"></audio>
+      <audio id="sfx-i5" class="clip" src="assets/sfx/pop.mp3" data-start="5.12" data-duration="0.72" data-track-index="5" data-volume="0.28"></audio>
+      <audio id="sfx-total" class="clip" src="assets/sfx/ping.mp3" data-start="5.75" data-duration="1.32" data-track-index="7" data-volume="0.3"></audio>
+      <audio id="sfx-s2" class="clip" src="assets/sfx/whoosh.mp3" data-start="7.0" data-duration="0.6" data-track-index="8" data-volume="0.3"></audio>
+      <audio id="sfx-c1" class="clip" src="assets/sfx/click-soft.mp3" data-start="8.4" data-duration="0.37" data-track-index="9" data-volume="0.45"></audio>
+      <audio id="sfx-c2" class="clip" src="assets/sfx/click-soft.mp3" data-start="9.0" data-duration="0.37" data-track-index="9" data-volume="0.45"></audio>
+      <audio id="sfx-c3" class="clip" src="assets/sfx/click-soft.mp3" data-start="9.6" data-duration="0.37" data-track-index="9" data-volume="0.45"></audio>
+      <audio id="sfx-profit" class="clip" src="assets/sfx/sparkle.mp3" data-start="10.2" data-duration="1.8" data-track-index="10" data-volume="0.35"></audio>
+      <audio id="sfx-s3" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="11.2" data-duration="0.6" data-track-index="8" data-volume="0.28"></audio>
+      <audio id="sfx-q1" class="clip" src="assets/sfx/pop.mp3" data-start="12.25" data-duration="0.72" data-track-index="11" data-volume="0.22"></audio>
+      <audio id="sfx-q2" class="clip" src="assets/sfx/pop.mp3" data-start="12.7" data-duration="0.72" data-track-index="12" data-volume="0.22"></audio>
+      <audio id="sfx-q3" class="clip" src="assets/sfx/pop.mp3" data-start="13.15" data-duration="0.72" data-track-index="11" data-volume="0.22"></audio>
+      <audio id="sfx-q4" class="clip" src="assets/sfx/pop.mp3" data-start="13.6" data-duration="0.72" data-track-index="12" data-volume="0.22"></audio>
+      <audio id="sfx-day" class="clip" src="assets/sfx/chime.mp3" data-start="14.2" data-duration="2.5" data-track-index="13" data-volume="0.28"></audio>
+      <audio id="sfx-riser" class="clip" src="assets/sfx/riser.mp3" data-start="6.6" data-duration="10.03" data-track-index="14" data-volume="0.16"></audio>
+      <audio id="sfx-month" class="clip" src="assets/sfx/impact-bass-1.mp3" data-start="16.82" data-duration="2.12" data-track-index="15" data-volume="0.45"></audio>
+      <audio id="sfx-quote" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="18.45" data-duration="0.6" data-track-index="16" data-volume="0.28"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const DUR = 22;
+      const { W, H, C, E, clamp, lerp, tw, kf, rng } = SM;
+      const FX = SM.fx, UI = SM.ui;
+      let BRAND = "BUSINESS STICKMAN";
+
+      const KIT = [["thermos", "2 thermoses", 30], ["cup", "100 cups", 10], ["beans", "Coffee & sugar", 15], ["milk", "Milk", 10], ["crate", "Crate & rack", 15]];
+      const CUP = [["Coffee & sugar", 0.15, "#8a5a36"], ["Milk", 0.10, "#e9dcc5"], ["Cup & lid", 0.10, "#aab2c0"]];
+      const S1 = 2.9, S2 = 7.0, S3 = 11.2, S4 = 15.0, Q = 18.4;
+      const GY = 1240;
+      const cash = (n) => "$" + n.toFixed(2);
+
+      // dawn sky; m: 0 night-blue .. 1 morning
+      function sky(ctx, m) {
+        const g = ctx.createLinearGradient(0, 0, 0, H);
+        g.addColorStop(0, SM.mixColor("#121827", "#1d2a44", m));
+        g.addColorStop(0.55, SM.mixColor("#2b2440", "#6a4a52", m));
+        g.addColorStop(0.68, SM.mixColor("#3d2b3a", "#c9875a", m));
+        g.addColorStop(1, "#0a0c11");
+        ctx.fillStyle = g; ctx.fillRect(-200, -200, W + 400, H + 400);
+      }
+
+      function draw(ctx, t) {
+        const morning = tw(t, S3, S4, E.inOut) * (1 - tw(t, S4, S4 + 0.6)) + tw(t, Q, Q + 2, E.out);
+        sky(ctx, 0.25 + 0.75 * clamp(morning));
+        // sun at the ending
+        const sun = tw(t, Q, Q + 2.5, E.out);
+        if (sun > 0) { SM.glow(ctx, 540, lerp(1250, 820, sun), 700, "#ffb35c", 0.6 * sun); SM.circle(ctx, 540, lerp(1250, 820, sun), 110, "#ffd27a", 0); }
+        SM.city(ctx, GY - 40, t * 5, 1, 41, 0.18, "#1b1f2c");
+        SM.groundStrip(ctx, GY, 700);
+        const hh = FX.handheld(t, 0.7);
+        ctx.save(); ctx.translate(hh.dx, hh.dy);
+
+        // ---- frame 0: the bike and the $80 ----
+        const intro = 1 - tw(t, 2.5, 3.0, E.in);
+        if (intro > 0) {
+          ctx.save(); ctx.globalAlpha *= intro;
+          SM.bicycle(ctx, 690, GY, 1.35, { steam: 1, t });
+          const ji = SM.stickman(ctx, { x: 190, y: GY, pose: { ...SM.POSE.give, head: -0.1 + Math.sin(t * 2) * 0.04 }, color: C.hero });
+          ctx.save(); ctx.translate(ji.handF[0] + 46, ji.handF[1] - 20 + Math.sin(t * 3) * 6); ctx.rotate(-0.12 + Math.sin(t * 2) * 0.05);
+          SM.glow(ctx, 0, 0, 160, C.amber, 0.5);
+          SM.box(ctx, -66, -34, 132, 68, 8, "#8fcf86", 5); SM.box(ctx, -56, -24, 112, 48, 6, "#a6dc98", 0);
+          SM.text(ctx, "$80", 0, 2, { size: 34, color: "#2f5a2a" });
+          ctx.restore();
+          ctx.restore();
+        }
+
+        // ---- STEP 1: buy the kit ----
+        const s1out = tw(t, S2 - 0.3, S2 + 0.3, E.in);
+        UI.step(ctx, 1, "Buy the kit", W / 2, 360, tw(t, S1, S1 + 0.4, E.lin) * (1 - tw(t, S2 - 0.3, S2)));
+        let total = 0;
+        KIT.forEach(([ic, name, price], i) => {
+          const t0 = S1 + 0.4 + i * 0.45;
+          const k = tw(t, t0, t0 + 0.5, E.back);
+          if (k <= 0) return;
+          total += price * clamp((t - t0) / 0.3);
+          const col = i % 3, rowI = Math.floor(i / 3);
+          const n = rowI === 0 ? 3 : 2;
+          let x = W / 2 + (col - (n - 1) / 2) * 300, y = 600 + rowI * 280;
+          x = lerp(x, W / 2, s1out); y = lerp(y, 760, s1out);
+          const sc = k * lerp(1, 0.2, s1out);
+          ctx.save(); ctx.globalAlpha *= 1 - tw(t, S2 + 0.1, S2 + 0.35); ctx.translate(x, y); ctx.scale(sc, sc);
+          SM.rr(ctx, -125, -115, 250, 230, 30); ctx.fillStyle = "#1d222d"; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = "rgba(255,255,255,0.08)"; ctx.stroke();
+          UI.ico(ctx, ic, 0, -30, 2.1);
+          SM.text(ctx, name, 0, 50, { size: 26, color: C.text });
+          SM.text(ctx, "$" + price, 0, 88, { size: 32, color: C.amber });
+          ctx.restore();
+        });
+        const totA = tw(t, S1 + 0.4, S1 + 0.8) * (1 - s1out);
+        const done = t > 5.75;
+        const tp = done && t < 6.3 ? 1 + Math.sin((t - 5.75) / 0.55 * Math.PI) * 0.15 : 1;
+        UI.bigNumber(ctx, "$" + Math.round(Math.min(80, total)), done ? "TOTAL · DONE ✓" : "TOTAL", W / 2, 1180, totA, { size: 100 * tp, color: done ? C.amber : C.hero, glowA: done ? 0.5 : 0 });
+
+        // ---- STEP 2: one cup, $1 ----
+        const s2 = tw(t, S2, S2 + 0.5, E.outQuint) * (1 - tw(t, S3 - 0.2, S3 + 0.2));
+        UI.step(ctx, 2, "Sell one cup", W / 2, 360, tw(t, S2 + 0.1, S2 + 0.5, E.lin) * (1 - tw(t, S3 - 0.3, S3)));
+        if (s2 > 0) {
+          ctx.save(); ctx.globalAlpha *= s2;
+          const cx = W / 2, cy = 700, R = 220, th = 64;
+          const ring = tw(t, S2 + 0.3, S2 + 1.2, E.inOut);
+          ctx.lineCap = "butt";
+          ctx.lineWidth = th; ctx.strokeStyle = "rgba(255,255,255,0.07)";
+          ctx.beginPath(); ctx.arc(cx, cy, R, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * ring); ctx.stroke();
+          let a0 = -Math.PI / 2;
+          const slices = [...CUP.map(([n, v, c], i) => ({ v, c, t0: 8.4 + i * 0.6 })), { v: 0.65, c: C.amber, t0: 10.2 }];
+          slices.forEach((sl, i) => {
+            const k = tw(t, sl.t0, sl.t0 + 0.5, E.outQuint);
+            if (k > 0) {
+              const pop = i === 3 ? 1 + 0.06 * Math.sin(clamp((t - 10.2) / 0.5) * Math.PI) : 1;
+              ctx.lineWidth = th * pop; ctx.strokeStyle = sl.c;
+              ctx.beginPath(); ctx.arc(cx, cy, R, a0 + 0.02, a0 + Math.PI * 2 * sl.v * k - 0.02); ctx.stroke();
+            }
+            a0 += Math.PI * 2 * sl.v;
+          });
+          const pk = tw(t, 10.2, 10.6);
+          if (pk > 0) { ctx.globalCompositeOperation = "lighter"; SM.glow(ctx, cx + 160, cy + 60, 260, C.amber, pk * 0.35); ctx.globalCompositeOperation = "source-over"; }
+          drawCup(ctx, cx, cy + 40, 1.3);
+          SM.text(ctx, "$1.00", cx, cy - 92, { size: 44, color: C.hero, alpha: tw(t, S2 + 0.5, S2 + 0.9) });
+          // rows
+          CUP.forEach(([n, v, c], i) => UI.row(ctx, 190, 1010 + i * 74, 700, n, "−" + cash(v), c, tw(t, 8.4 + i * 0.6, 8.9 + i * 0.6, E.lin), { size: 28 }));
+          UI.row(ctx, 190, 1010 + 3 * 74 + 8, 700, "PROFIT PER CUP", "+$0.65", C.amber, tw(t, 10.2, 10.7, E.lin), { size: 32, strong: true });
+          ctx.restore();
+          FX.burst(ctx, cx + 170, cy + 60, t, 10.25, { n: 24, kind: "coin", speed: 650, size: 8, life: 1.3, seed: 6 });
+        }
+
+        // ---- STEP 3: the 6 a.m. crowd ----
+        const s3 = tw(t, S3, S3 + 0.5, E.outQuint) * (1 - tw(t, S4 - 0.2, S4 + 0.2));
+        UI.step(ctx, 3, "Find the morning crowd", W / 2, 360, tw(t, S3 + 0.1, S3 + 0.5, E.lin) * (1 - tw(t, S4 - 0.3, S4)));
+        if (s3 > 0) {
+          ctx.save(); ctx.globalAlpha *= s3;
+          const by = 1060;
+          // bus stop
+          SM.box(ctx, 900, by - 330, 14, 330, 4, "#3b4252", 5);
+          SM.box(ctx, 860, by - 380, 96, 60, 12, C.teal, 5); SM.text(ctx, "BUS", 908, by - 349, { size: 24, color: C.paper });
+          SM.bicycle(ctx, 300, by, 1.0, { steam: 1, t });
+          SM.stickman(ctx, { x: 470, y: by, face: 1, pose: { ...SM.POSE.give, head: 0.05 }, color: C.hero });
+          // queue moves forward every 0.45 s
+          const ph = Math.max(0, (t - S3 - 0.8) / 0.45), n = Math.floor(ph), fr = ph - n;
+          const shift = n + E.inOut(clamp(fr * 2.2));
+          for (let j = n - 1; j <= n + 4; j++) {
+            if (j < 0) continue;
+            const s = j - shift;
+            const x = s >= 0 ? 600 + s * 110 : 600 + s * 240;
+            const a = s >= 0 ? clamp(1.2 - s * 0.2) : clamp(1 + s * 1.6);
+            const r = rng(j * 7 + 1);
+            const jq = SM.stickman(ctx, { x, y: by, face: s >= 0 ? -1 : 1, s: 0.86 + r() * 0.14, pose: s < 0 ? SM.walk(t * 9, 0.8) : { ...SM.POSE.stand, head: 0.05 * Math.sin(t * 2 + j) }, color: SM.mixColor(C.other, "#c3cad6", r()), alpha: a });
+            if (s < 0 && jq) SM.cup(ctx, jq.handF[0], jq.handF[1] + 10, 0.8);
+          }
+          for (let j = 0; j < 6; j++) { const t0 = S3 + 0.8 + j * 0.45 + 0.2; const k = tw(t, t0, t0 + 0.8, E.out); if (k > 0 && k < 1) SM.text(ctx, "+$0.65", 560, by - 290 - k * 90, { size: 30, color: C.amber, alpha: 1 - k * k }); }
+          // clock + counter
+          const clk = tw(t, S3 + 0.6, S4 - 0.7, E.lin);
+          const mins = Math.round(clk * 180), hh2 = 6 + Math.floor(mins / 60), mm = mins % 60;
+          SM.pill(ctx, hh2 + ":" + String(mm).padStart(2, "0") + " AM", W / 2, 470, { size: 32, bg: "#262b36", fg: C.hero, alpha: tw(t, S3 + 0.4, S3 + 0.7) });
+          const cups = Math.round(40 * clk);
+          const dayK = t >= 14.2 ? tw(t, 14.2, 14.6, E.back) : 0;
+          UI.bigNumber(ctx, dayK > 0 ? "$26 a day" : cups + " cups", dayK > 0 ? "40 CUPS × $0.65" : "6 – 9 AM", W / 2, 1180, 1, { size: 96 * (dayK > 0 ? lerp(1, 1.06, Math.sin(clamp((t - 14.2) / 0.5) * Math.PI)) : 1), color: dayK > 0 ? C.amber : C.hero, glowA: dayK * 0.5 });
+          ctx.restore();
+        }
+
+        // ---- payoff: the month ----
+        const s4 = tw(t, S4, S4 + 0.5, E.outQuint) * (1 - tw(t, Q - 0.3, Q + 0.2));
+        if (s4 > 0) {
+          ctx.save(); ctx.globalAlpha *= s4;
+          SM.label(ctx, "6 MORNINGS A WEEK", W / 2, 470, { size: 26, color: C.text });
+          const cw = 112, x0 = W / 2 - 3 * cw, y0 = 560;
+          ["M", "T", "W", "T", "F", "S", "S"].forEach((d, i) => SM.text(ctx, d, x0 + i * cw, y0, { size: 26, color: i < 6 ? C.amber : C.label }));
+          let lit = 0;
+          for (let w = 0; w < 4; w++) for (let d = 0; d < 7; d++) {
+            const x = x0 + d * cw, y = y0 + 70 + w * 100;
+            const work = d < 6, idx = w * 6 + d;
+            const on = work && t > S4 + 0.4 + idx * 0.055;
+            if (on) lit++;
+            SM.rr(ctx, x - 46, y - 40, 92, 80, 18);
+            ctx.fillStyle = on ? C.amber : "rgba(255,255,255,0.05)"; ctx.fill();
+            ctx.font = `800 ${on ? 24 : 18}px ${SM.FONT}`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+            if (on) { ctx.fillStyle = "#2a1c00"; ctx.fillText("$26", x, y + 1); } else if (!work) { ctx.fillStyle = C.label; ctx.fillText("OFF", x, y + 1); }
+          }
+          const big = t >= 16.8 ? tw(t, 16.8, 17.2, E.back) : 0;
+          UI.bigNumber(ctx, "$" + (lit * 26) + " / month", big > 0 ? "FROM AN $80 START" : "24 MORNINGS × $26", W / 2, 1110, 1, { size: 92 * (big > 0 ? lerp(1, 1.08, Math.sin(clamp((t - 16.8) / 0.5) * Math.PI)) : 1), color: big > 0 ? C.amber : C.hero, glowA: big * 0.6 });
+          ctx.restore();
+        }
+
+        // ---- ending: sunrise ride ----
+        const ek = tw(t, Q + 0.2, Q + 1.0, E.outQuint);
+        if (ek > 0) {
+          ctx.save(); ctx.globalAlpha *= ek;
+          const bx = lerp(-200, 560, ek);
+          const seat = SM.bicycle(ctx, bx, GY, 1.3, { steam: 1, t });
+          SM.stickman(ctx, { x: seat[0], y: seat[1] - 6, pose: { lean: 0.25, head: -0.05, aB: [1.3, 1.6], aF: [1.4, 1.7], lB: [1.0 + 0.5 * Math.sin(t * 8), 0.2], lF: [1.0 - 0.5 * Math.sin(t * 8), 0.2], seat: true }, color: C.hero });
+          ctx.restore();
+        }
+        ctx.restore();
+
+        FX.confetti(ctx, t, 16.8, { life: 3.2 });
+        FX.moneyRain(ctx, t, 16.9, { life: 2.6, n: 18 });
+        FX.leak(ctx, t, 0.12 + tw(t, 16.8, 17.2) * 0.25 * (1 - tw(t, 18, 19)));
+
+        // chrome
+        UI.topic(ctx, "BUSINESS IDEA: COFFEE BIKE", 196, tw(t, 2.9, 3.3));
+        SM.label(ctx, "EXAMPLE PRICES · CHECK LOCAL PRICES AND RULES", W / 2, 1360, { size: 15, color: "rgba(255,255,255,0.45)", spacing: 0.12, alpha: tw(t, 3.2, 3.6) * (1 - tw(t, Q - 0.3, Q)) });
+        SM.label(ctx, BRAND, W / 2, 1640, { size: 16, color: "rgba(255,255,255,0.2)", spacing: 0.5 });
+        SM.vignette(ctx, 0.65);
+        SM.grain(ctx, t, 0.05);
+      }
+      // takeaway cup in the middle of the donut
+      function drawCup(ctx, x, y, s) {
+        ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+        ctx.beginPath(); ctx.moveTo(-52, -120); ctx.lineTo(52, -120); ctx.lineTo(40, 20); ctx.lineTo(-40, 20); ctx.closePath();
+        ctx.lineWidth = 7; ctx.strokeStyle = C.out; ctx.stroke(); ctx.fillStyle = C.paper; ctx.fill();
+        SM.box(ctx, -60, -138, 120, 22, 8, "#5b4636", 6);
+        SM.box(ctx, -46, -70, 92, 40, 8, "#8a5a36", 0);
+        SM.text(ctx, "KOPI", 0, -49, { size: 22, color: C.paper });
+        ctx.restore();
+      }
+
+      document.fonts.load('800 40px "Jakarta"').then(() => {
+        try { const v = window.__hyperframes.getVariables(); if (v && v.brand) BRAND = v.brand; } catch (e) {}
+        tl.fromTo("#hook-l1", { opacity: 1, scale: 1 }, { opacity: 1, scale: 1, duration: 0.01 }, 0);
+        tl.fromTo("#hook-l2", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power4.out" }, 0.6);
+        tl.fromTo("#hook p", { opacity: 1, y: 0 }, { opacity: 0, y: -24, filter: "blur(8px)", duration: 0.4, ease: "power3.in", stagger: 0.06 }, 2.45);
+        tl.fromTo("#quote .q", { opacity: 0, filter: "blur(12px)", y: 14 }, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.55, ease: "power4.out", stagger: 0.3 }, 18.5);
+        tl.fromTo("#quote .bar", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "expo.out" }, 19.5);
+        SM.mount("stage", DUR, draw, tl);
+        window.__timelines["main"] = tl;
+      });
+    </script>
+  </body>
+</html>

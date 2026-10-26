@@ -236,5 +236,55 @@
     }
   }
 
-  Object.assign(SM, { windowSky, bed, desk, chair, laptop, deskLamp, books, chartBoard, heart, toast, say, wateringCan, bamboo, roots, soil, mound, drops });
+  // ---- vehicles ----
+  // side-view motor scooter facing right; feet on ground y; returns the seat point
+  function scooter(ctx, x, y, s = 1, opt = {}) {
+    const { col = "#3fa36b", box: hasBox = false, t = 0 } = opt;
+    ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+    for (const wx of [-95, 105]) { circle(ctx, wx, -34, 34, "#1d2230", 7); circle(ctx, wx, -34, 12, "#9aa3b3", 4); }
+    // body + floor
+    ctx.beginPath(); ctx.moveTo(-140, -60); ctx.quadraticCurveTo(-150, -120, -80, -128); ctx.lineTo(10, -128); ctx.lineTo(30, -70); ctx.lineTo(70, -70); ctx.lineTo(90, -60); ctx.closePath();
+    ctx.lineWidth = 7; ctx.strokeStyle = C.out; ctx.stroke(); ctx.fillStyle = col; ctx.fill();
+    // front shield + handlebar
+    ctx.beginPath(); ctx.moveTo(70, -70); ctx.lineTo(96, -190); ctx.lineTo(122, -190); ctx.lineTo(120, -60); ctx.closePath(); ctx.stroke(); ctx.fill();
+    box(ctx, 88, -214, 56, 14, 6, "#2b303b", 5);
+    box(ctx, 120, -176, 18, 14, 5, "#ffe29a", 0);
+    // seat
+    box(ctx, -110, -146, 120, 22, 10, "#2b303b", 5);
+    if (hasBox) { box(ctx, -170, -250, 110, 104, 12, col, 6); SM.text(ctx, "GO", -115, -198, { size: 30, color: C.paper }); }
+    ctx.restore();
+    return [x - 40 * s, y - 146 * s];
+  }
+  // bicycle facing right with a coffee rack on the back
+  function bicycle(ctx, x, y, s = 1, opt = {}) {
+    const { rack = true, steam = 0, t = 0 } = opt;
+    ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+    ctx.lineCap = "round"; ctx.lineJoin = "round";
+    for (const wx of [-110, 110]) { ctx.beginPath(); ctx.arc(wx, -52, 52, 0, Math.PI * 2); ctx.lineWidth = 16; ctx.strokeStyle = C.out; ctx.stroke(); ctx.lineWidth = 8; ctx.strokeStyle = "#3b4252"; ctx.stroke(); circle(ctx, wx, -52, 6, "#9aa3b3", 0); }
+    const fr = (pts, w = 9) => { ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]); for (const q of pts.slice(1)) ctx.lineTo(q[0], q[1]); ctx.lineWidth = w + 7; ctx.strokeStyle = C.out; ctx.stroke(); ctx.lineWidth = w; ctx.strokeStyle = C.coral; ctx.stroke(); };
+    fr([[-110, -52], [-20, -52], [60, -150], [-50, -150], [-110, -52]]);
+    fr([[-20, -52], [-50, -150], [-58, -176]]);
+    fr([[110, -52], [72, -190], [96, -200]]);
+    box(ctx, -86, -186, 60, 16, 7, "#2b303b", 5);
+    if (rack) {
+      // crate with two thermoses
+      box(ctx, -236, -160, 140, 18, 4, "#4a3628", 5);
+      box(ctx, -232, -250, 124, 92, 10, "#6b4f3a", 6);
+      for (const tx of [-200, -140]) { box(ctx, tx - 18, -320, 36, 76, 10, "#c9d2de", 5); box(ctx, tx - 12, -334, 24, 16, 5, "#3b4252", 4); }
+      SM.text(ctx, "KOPI", -170, -204, { size: 24, color: C.paper });
+      if (steam > 0) for (let i = 0; i < 3; i++) { const k = ((t * 0.7 + i / 3) % 1); ctx.strokeStyle = withA("#ffffff", steam * 0.5 * (1 - k)); ctx.lineWidth = 6; ctx.beginPath(); const sx = -170 + (i - 1) * 22, sy = -340 - k * 90; ctx.moveTo(sx, sy + 30); ctx.quadraticCurveTo(sx + 14 * Math.sin(t * 3 + i), sy + 15, sx, sy); ctx.stroke(); }
+    }
+    ctx.restore();
+    return [x - 56 * s, y - 186 * s];
+  }
+  // food delivery bag
+  function foodBag(ctx, x, y, s = 1, col = "#3fa36b") {
+    ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+    box(ctx, -40, -30, 80, 66, 10, col, 5);
+    ctx.lineWidth = 5; ctx.strokeStyle = C.out; ctx.beginPath(); ctx.arc(0, -30, 18, Math.PI, 0); ctx.stroke();
+    box(ctx, -24, -6, 48, 18, 5, C.paper, 0);
+    ctx.restore();
+  }
+
+  Object.assign(SM, { scooter, bicycle, foodBag, windowSky, bed, desk, chair, laptop, deskLamp, books, chartBoard, heart, toast, say, wateringCan, bamboo, roots, soil, mound, drops });
 })();

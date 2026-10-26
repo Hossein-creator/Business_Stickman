@@ -146,7 +146,6 @@ Pick from the open list first (see `CLAUDE.md`); when one is made, move it to "M
   *"Your 'not enough' is someone else's 'if only'."* (Close to a reference video: own story and look.)
 - **Waiting for capital:** one waits for $10,000, the other starts with $10.
   *"You're waiting for money. You need to start."* (Close to a reference video: own story and look.)
-- **Fake rich:** new phone on installments vs. a cart bought with cash. *"Look rich, or get rich."*
 - **Rise and fall:** $70 million to bankrupt, told with stickmen, no names.
   *"It's not what you earn. It's what you keep."*
 - **Who stays:** the stall is empty, but one friend still comes every day (emotional twist).
@@ -154,22 +153,23 @@ Pick from the open list first (see `CLAUDE.md`); when one is made, move it to "M
 **Business models**
 - **How a street-food cart makes money:** one portion of fried snacks, cost by cost.
 - **Why a $3 bottle of water costs 20 cents to make:** brand, shop, transport, margin.
-- **How a delivery app makes money:** the rider, the restaurant and the app split one order.
 - **How a barbershop makes money:** one $8 haircut, chair rent, tools, time per cut.
 - **How a bubble-tea shop makes money:** one $3 cup, tapioca, milk, cup and straw, rent, profit.
 - **How a phone-credit (pulsa) kiosk makes money:** tiny margin, many sales a day.
 - **How a gym makes money:** most members pay and never come.
+- **How a ride-hailing app sets prices:** surge pricing, the rider's cut, the app's cut.
 
 **Business ideas**
 - **$100 phone-accessories stall:** buy, price, sell, profit per week.
 - **Laundry pickup service:** one scooter, a few regular customers, monthly numbers.
 - **Selling home-made frozen food:** batch cost, price per pack, weekend sales.
 - **$30 shoe-cleaning service:** brushes and cleaner, $5 per pair, weekend stand.
-- **$80 coffee-on-a-bike:** thermos and cups, sell at a bus stop at 6 a.m.
 - **$20 phone-photo service for small shops:** take product photos for online sellers.
 - **$60 plant stall:** cuttings in recycled pots, cost per pot vs price.
+- **$40 ice-tea stand at a school or field:** cups, ice, syrup, price per cup, afternoon sales.
 
 ### Made
 
 1 Spare Change · 2 Chapter 1 · 3 Same 24 Hours · 4 Bamboo · 5 Payday Loop · 6 The Snowball ·
-7 Your $5 Coffee · 8 $50 Car Wash · 9 Money Leaks
+7 Your $5 Coffee · 8 $50 Car Wash · 9 Money Leaks · 10 Delivery App · 11 $80 Coffee Bike ·
+12 Look Rich or Get Rich
