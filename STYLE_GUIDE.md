@@ -53,12 +53,6 @@ Every video is built to be the most viral version of its idea, not just a good o
   and steps from `stickman-ui.js` (`ui.step`, `ui.row`, `ui.bigNumber`). Few elements, lots of
   air, nothing overlapping.
 
-## The benchmark: videos 5, 6 and 7
-
-The owner liked these best. Match them: one strong visual metaphor (hamster wheel, snowball,
-cup filling with costs), real numbers building up in front of the viewer, a big payoff with
-light and particles, slow and smooth pacing with motion blur.
-
 ## Pacing: slow, smooth, cinematic
 
 - Each beat gets **1.5–2.5 s**; let the meaning land and hold the reaction before the next beat.

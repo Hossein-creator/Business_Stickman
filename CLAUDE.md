@@ -39,8 +39,7 @@ Faceless stickman shorts made with HyperFrames (HTML + canvas → MP4).
    least one with the core themes (gratitude, comparison, everyday characters). Move made ideas to
    "Made" and add new ideas from the research to the open list.
 3. **Story:** follow `STYLE_GUIDE.md`: a hook that speaks to "you" and names the topic in frame 0,
-   a topic chip, a build-up with real numbers, a big payoff, a short quote. Videos 5, 6 and 7 are
-   the benchmark.
+   a topic chip, a build-up with real numbers, a big payoff, a short quote.
 4. **Build:** copy a project to `videos/NN-<name>/`, write the scene in `index.html`, add new props
    to `shared/lib/stickman.js`, then `./scripts/sync-shared.sh`.
 5. **Check:** `hyperframes check`, then snapshots at the key moments; look at them and fix.
