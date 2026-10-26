@@ -40,6 +40,7 @@ videos/<name>/     one HyperFrames project per video (index.html is the film)
 renders/           finished MP4s + paste-ready captions (NN-name.caption.txt)
 scripts/sync-shared.sh   copies shared/ into every video project
 scripts/caption_lint.py  checks a caption (first 125 chars, 1 ask, ≤ 5 hashtags, no links)
+.claude/skills/          project skills: generiere, stickman-scene, business-math (calc.py)
 ```
 
 ## Working on a video

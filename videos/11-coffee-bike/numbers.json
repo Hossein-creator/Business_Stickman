@@ -1,0 +1,5 @@
+{"name": "Coffee bike",
+ "kit": {"thermoses": 30, "cups": 10, "coffee & sugar": 15, "milk": 10, "crate & rack": 15},
+ "price": 1.00,
+ "unit_cost": {"coffee & sugar": 0.12, "milk": 0.13, "cup & lid": 0.10},
+ "units_per_day": 40, "days_per_month": 24, "hours_per_day": 3}

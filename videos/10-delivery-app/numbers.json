@@ -1,0 +1,4 @@
+{"name": "Delivery app", "price": 12.50,
+ "split": {"Restaurant": 8.00, "Rider": 1.60, "App": 2.90},
+ "scale": {"n": 2000000, "label": "orders a day", "of": "App"},
+ "px_per_dollar": 32}

@@ -11,6 +11,11 @@ Faceless stickman shorts made with HyperFrames (HTML + canvas → MP4).
 - Commit and push everything (sources and renders) to GitHub; nothing should exist only on the
   machine.
 
+Project skills in `.claude/skills/`: `generiere` (this whole loop as a checklist),
+`stickman-scene` (engine cheat sheet, layout rules, snapshot review) and `business-math`
+(`calc.py` checks every money number and writes the assumptions line; numbers live in
+`videos/NN-<name>/numbers.json`).
+
 ## When the user says "generiere" / "generate"
 
 1. **Research first, always: run `/anthropic-skills:ig-viral`.** Find the reels/shorts that are
