@@ -14,8 +14,8 @@
 <canvas id="c"></canvas>
 <script>
   // Brand kit for the Instagram profile, drawn with the video engine.
-  // ?which=avatar | cover-start | cover-ideas | cover-breakdowns | cover-habits   (1080 × 1080)
-  //        story-1 | story-2 | story-3                                             (1080 × 1920)
+  // ?which=avatar | cover-about | cover-ideas | cover-breakdowns | cover-habits   (1080 × 1080)
+  //        story-1-who ... story-7-save                                       (1080 × 1920)
   const { C, FONT } = SM;
   const which = new URLSearchParams(location.search).get("which") || "avatar";
   const cv = document.getElementById("c");
@@ -56,6 +56,23 @@
     fit(examples, 330, y + 215, 640, 30, { color: C.other, weight: 600, align: "left" });
   };
 
+  // one topic: name, what it is, a picture, three real examples from the videos
+  function topicStory(tag, name, lines, art, rows, note) {
+    night();
+    chip(tag, 320);
+    fit(name, W / 2, 470, 940, 120, { color: C.amber });
+    lines.forEach((l, i) => fit(l, W / 2, 580 + i * 62, 960, 46));
+    SM.glow(ctx, W / 2, 920, 360, C.amber, 0.45);
+    art();
+    rows.forEach(([a, b], i) => {
+      const y = 1230 + i * 120;
+      SM.box(ctx, 90, y - 50, 900, 100, 28, "rgba(255,255,255,0.06)", 0);
+      fit(a, 130, y, 480, 36, { weight: 600, color: C.text, align: "left" });
+      fit(b, 950, y, 330, 42, { color: C.amber, align: "right" });
+    });
+    if (note) fit(note, W / 2, 1600, 900, 26, { color: C.label, weight: 600 });
+  }
+
   const draw = {
     avatar() {
       night();
@@ -63,29 +80,62 @@
       const j = SM.stickman(ctx, { x: 370, y: 1070, s: 3.4, pose: SM.POSE.give });
       SM.coin(ctx, j.handF[0] + 120, j.handF[1] - 40, 120);
     },
-    "cover-start"() { cover("START HERE", () => SM.ui.ico(ctx, "play", W / 2, 420, 6)); },
+    "cover-about"() { cover("ABOUT US", () => SM.stickman(ctx, { x: W / 2, y: 640, s: 2.0, pose: SM.POSE.proud })); },
     "cover-ideas"() { cover("IDEAS", () => SM.cart(ctx, W / 2, 600, 1.35)); },
     "cover-breakdowns"() { cover("BREAKDOWNS", () => SM.ui.ico(ctx, "shop", W / 2, 420, 6)); },
     "cover-habits"() { cover("HABITS", () => SM.coin(ctx, W / 2, 420, 150)); },
 
-    "story-1"() {
+    "story-1-who"() {
       night();
-      chip("START HERE", 320);
-      fit("Money and business,", W / 2, 520, 940, 76);
-      fit("explained by a stickman.", W / 2, 610, 940, 76);
-      SM.glow(ctx, 640, 1030, 420, C.amber, 0.55);
-      const j = SM.stickman(ctx, { x: 450, y: 1420, s: 2.8, pose: SM.POSE.give });
-      SM.coin(ctx, j.handF[0] + 100, j.handF[1] - 30, 95);
-      fit("Real numbers. About 20 seconds each.", W / 2, 1560, 900, 40, { color: C.other, weight: 600 });
+      SM.city(ctx, 1380, 0, 0, 7, 0.3);
+      SM.groundStrip(ctx, 1380, 540);
+      chip("WHO WE ARE", 320);
+      fit("Business Stickman", W / 2, 480, 940, 96, { color: C.amber });
+      fit("One stickman. Real numbers. No face.", W / 2, 580, 940, 42, { color: C.text, weight: 600 });
+      SM.glow(ctx, W / 2, 1050, 380, C.amber, 0.5);
+      SM.stickman(ctx, { x: W / 2, y: 1380, s: 2.7, pose: SM.POSE.proud });
+      fit("We turn money and business", W / 2, 1500, 940, 44);
+      fit("into 20-second stickman stories.", W / 2, 1560, 940, 44);
     },
-    "story-2"() {
+    "story-2-what"() {
       night();
-      chip("3 KINDS OF VIDEOS", 320);
+      chip("WHAT IT'S ABOUT", 320);
+      fit("How money really works,", W / 2, 470, 960, 74);
+      fit("and how to start your own.", W / 2, 560, 960, 74, { color: C.amber });
+      SM.glow(ctx, 560, 900, 380, C.amber, 0.45);
+      const j = SM.stickman(ctx, { x: 330, y: 1120, s: 2.0, pose: SM.POSE.give });
+      SM.coin(ctx, j.handF[0] + 60, j.handF[1] - 10, 50);
+      SM.cart(ctx, 740, 1120, 1.15);
+      [["Real numbers in every video"], ["Business ideas you can start small"], ["Lessons you can use today"]].forEach(([str], i) => {
+        const y = 1270 + i * 100;
+        SM.coin(ctx, 150, y, 22);
+        fit(str, 200, y, 800, 44, { align: "left" });
+      });
+    },
+    "story-3-topics"() {
+      night();
+      chip("OUR 3 TOPICS", 320);
       card(450, (x, y) => SM.cart(ctx, x, y + 70, 0.55), "IDEAS", "Businesses you can start small", "$50 car wash, $80 coffee bike");
       card(800, (x, y) => SM.ui.ico(ctx, "shop", x, y, 2.6), "BREAKDOWNS", "How businesses really make money", "Your $5 coffee, delivery app, gym");
       card(1150, (x, y) => SM.coin(ctx, x, y, 62), "HABITS", "Money habits that add up", "Spare change, snowball, bamboo");
     },
-    "story-3"() {
+    "story-4-ideas"() {
+      topicStory("TOPIC 1 OF 3", "IDEAS", ["Businesses you can start small,", "step by step, with real numbers."],
+        () => SM.cart(ctx, W / 2, 1110, 1.05),
+        [["$50 car wash kit", "$440 a month"], ["$80 coffee bike", "$624 a month"], ["One $1 cup of coffee", "$0.65 profit"]]);
+    },
+    "story-5-breakdowns"() {
+      topicStory("TOPIC 2 OF 3", "BREAKDOWNS", ["How a business really makes money,", "cost by cost."],
+        () => SM.ui.ico(ctx, "shop", W / 2, 920, 5.5),
+        [["Your $5 coffee", "$0.60 profit"], ["A $12.50 delivery order", "app keeps $2.90"], ["A $20 gym membership", "$6 profit"]]);
+    },
+    "story-6-habits"() {
+      topicStory("TOPIC 3 OF 3", "HABITS", ["Small money habits", "that add up over the years."],
+        () => SM.jar(ctx, W / 2, 1090, 1.5, 0.7, 0, 0),
+        [["$5 a day for a year", "$1,825"], ["$100 a month for 30 years", "$149,036*"], ["$115 of leaks for 10 years", "$21,039*"]],
+        "*8% average yearly return, not guaranteed");
+    },
+    "story-7-save"() {
       night();
       chip("ONE LAST THING", 320);
       fit("Save the idea", W / 2, 520, 940, 84);
