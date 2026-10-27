@@ -36,7 +36,7 @@ How everyday businesses make money.
 
 ## 4. Profile picture
 
-`instagram/brand/avatar.png`: the stickman boss in sunglasses and a tie, cheering with two gold coins in front of a rising green chart on a bright gold sunburst. The gold stands out in a feed and still reads at small size inside the circle.
+`instagram/brand/avatar.png`: the hero stickman holding out a big gold coin with a dollar sign on the night background, a lit city skyline, dollar coins and a green arrow rising from bottom left to top right behind him. Same look as the videos; reads at small size inside the circle.
 
 ## 5. Account settings
 

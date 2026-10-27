@@ -75,46 +75,29 @@
 
   const draw = {
     avatar() {
-      // gold disc so the circle pops in a feed, rising chart behind, boss stickman in shades
-      const bg = ctx.createRadialGradient(W / 2, 470, 60, W / 2, 540, 760);
-      bg.addColorStop(0, "#ffd86b"); bg.addColorStop(0.55, C.amber); bg.addColorStop(1, "#e07a00");
-      ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
-      // sun rays
-      ctx.save(); ctx.translate(W / 2, 470); ctx.fillStyle = "rgba(255,255,255,0.13)";
-      for (let i = 0; i < 16; i++) { ctx.rotate(Math.PI / 8); ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(-60, -900); ctx.lineTo(60, -900); ctx.fill(); }
+      night();
+      // skyline behind, two layers for depth
+      SM.city(ctx, 1080, 0, 0, 11, 0.35, "#191d27");
+      SM.city(ctx, 1080, 0, 0, 4, 0.3, "#232834");
+      SM.glow(ctx, 600, 520, 480, C.amber, 0.6);
+      // coin with a clear dollar sign
+      const dollar = (x, y, r) => {
+        SM.coin(ctx, x, y, r);
+        ctx.save(); ctx.font = `800 ${Math.round(r * 1.25)}px ${FONT}`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+        ctx.lineWidth = r * 0.12; ctx.strokeStyle = "#8a5a00"; ctx.strokeText("$", x, y + r * 0.06);
+        ctx.fillStyle = "#fff4cf"; ctx.fillText("$", x, y + r * 0.06); ctx.restore();
+      };
+      [[150, 230, 46], [880, 170, 40], [1000, 560, 30], [120, 560, 34], [560, 120, 30]].forEach(([x, y, r]) => dollar(x, y, r));
+      // rising arrow, bottom left to top right, behind the stickman
+      ctx.save(); ctx.lineCap = "round"; ctx.lineJoin = "round";
+      const path = () => { ctx.beginPath(); ctx.moveTo(40, 960); ctx.lineTo(330, 700); ctx.lineTo(500, 790); ctx.lineTo(860, 370); };
+      path(); ctx.strokeStyle = C.out; ctx.lineWidth = 46; ctx.stroke();
+      path(); ctx.strokeStyle = C.green; ctx.lineWidth = 30; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(950, 265); ctx.lineTo(805, 310); ctx.lineTo(908, 418); ctx.closePath();
+      ctx.lineWidth = 10; ctx.strokeStyle = C.out; ctx.stroke(); ctx.fillStyle = C.green; ctx.fill();
       ctx.restore();
-      // rising bars + arrow
-      [[150, 330], [290, 450], [790, 560], [930, 700]].forEach(([x, h]) => SM.box(ctx, x - 55, 1080 - h, 110, h + 40, 16, "rgba(13,16,21,0.82)", 0));
-      ctx.save(); ctx.strokeStyle = C.out; ctx.lineWidth = 34; ctx.lineCap = "round"; ctx.lineJoin = "round";
-      ctx.beginPath(); ctx.moveTo(560, 900); ctx.lineTo(720, 650); ctx.lineTo(800, 720); ctx.lineTo(900, 320); ctx.stroke();
-      ctx.strokeStyle = C.green; ctx.lineWidth = 20; ctx.stroke();
-      ctx.fillStyle = C.green; ctx.strokeStyle = C.out; ctx.lineWidth = 8;
-      ctx.beginPath(); ctx.moveTo(925, 205); ctx.lineTo(830, 300); ctx.lineTo(965, 335); ctx.closePath(); ctx.stroke(); ctx.fill();
-      ctx.restore();
-      // the boss
-      const s = 3.2;
-      const j = SM.stickman(ctx, { x: 470, y: 1250, s, pose: SM.POSE.cheer });
-      const [hx, hy] = j.head;
-      // tie
-      ctx.save(); ctx.translate(j.sh[0], j.sh[1]);
-      ctx.fillStyle = C.coral; ctx.strokeStyle = C.out; ctx.lineWidth = 6;
-      ctx.beginPath(); ctx.moveTo(-14, 6); ctx.lineTo(14, 6); ctx.lineTo(8, 26); ctx.lineTo(22, 120); ctx.lineTo(0, 150); ctx.lineTo(-22, 120); ctx.lineTo(-8, 26); ctx.closePath();
-      ctx.fill(); ctx.stroke(); ctx.restore();
-      // shades
-      ctx.save(); ctx.translate(hx, hy + 6);
-      ctx.fillStyle = "#0d1015";
-      ctx.fillRect(-74, -14, 148, 12);
-      SM.box(ctx, -74, -12, 66, 40, 14, "#0d1015", 0); SM.box(ctx, 8, -12, 66, 40, 14, "#0d1015", 0);
-      ctx.fillStyle = "rgba(255,255,255,0.55)"; ctx.fillRect(-62, -4, 18, 7); ctx.fillRect(20, -4, 18, 7);
-      ctx.restore();
-      // smile
-      ctx.save(); ctx.strokeStyle = C.out; ctx.lineWidth = 7; ctx.lineCap = "round";
-      ctx.beginPath(); ctx.arc(hx, hy + 38, 22, 0.2 * Math.PI, 0.8 * Math.PI); ctx.stroke(); ctx.restore();
-      // coins in both hands and flying
-      const gold = (x, y, r, sp = 0) => { SM.circle(ctx, x, y, r + 9, C.out, 0); SM.coin(ctx, x, y, r, sp); };
-      gold(j.handF[0], j.handF[1] - 30, 64);
-      gold(j.handB[0], j.handB[1] - 30, 64);
-      [[160, 300, 36, 0], [760, 160, 30, 0], [150, 640, 28, 0]].forEach(([x, y, r, sp]) => gold(x, y, r, sp));
+      const j = SM.stickman(ctx, { x: 370, y: 1070, s: 3.4, pose: SM.POSE.give });
+      dollar(j.handF[0] + 120, j.handF[1] - 40, 120);
     },
     "cover-about"() { cover("ABOUT US", () => SM.stickman(ctx, { x: W / 2, y: 640, s: 2.0, pose: SM.POSE.proud })); },
     "cover-ideas"() { cover("IDEAS", () => SM.cart(ctx, W / 2, 600, 1.35)); },
