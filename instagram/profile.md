@@ -76,10 +76,10 @@ After two weeks, swap in the reel with the most saves and shares.
 
 | Name | Cover | What goes in |
 |---|---|---|
-| Start here | `brand/start.png` | 3 stories: what this account is, the 3 kinds of videos, "save the idea you want to start" |
-| Ideas | `brand/ideas.png` | every business-idea reel shared to story (car wash, coffee bike, ...) |
-| Breakdowns | `brand/breakdowns.png` | every business-model reel (coffee, delivery app, gym, ...) |
-| Habits | `brand/habits.png` | mindset and money-habit reels |
+| Start here | `brand/cover-start.png` | the 3 stories `brand/story-1.png`, `story-2.png`, `story-3.png` (welcome, the 3 kinds of videos, "save the idea you want to start") |
+| Ideas | `brand/cover-ideas.png` | every business-idea reel shared to story (car wash, coffee bike, ...) |
+| Breakdowns | `brand/cover-breakdowns.png` | every business-model reel (coffee, delivery app, gym, ...) |
+| Habits | `brand/cover-habits.png` | mindset and money-habit reels |
 
 Share each new reel to your story the day it goes up, then add it to the matching highlight.
 Covers are rebuilt with `node instagram/brand/shoot.js` (drawn with the video engine).

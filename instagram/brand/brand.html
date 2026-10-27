@@ -2,6 +2,7 @@
 <html><head><meta charset="utf-8">
 <style>
   @font-face { font-family: "Jakarta"; src: url("../../shared/fonts/plus-jakarta-sans-latin-800-normal.woff2") format("woff2"); font-weight: 800; }
+  @font-face { font-family: "Jakarta"; src: url("../../shared/fonts/plus-jakarta-sans-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
   html, body { margin: 0; background: #000; }
   canvas { display: block; }
 </style>
@@ -12,19 +13,48 @@
 </head><body>
 <canvas id="c"></canvas>
 <script>
-  // Brand kit for the Instagram profile: ?which=avatar | start | ideas | breakdowns | habits
-  const { C } = SM;
+  // Brand kit for the Instagram profile, drawn with the video engine.
+  // ?which=avatar | cover-start | cover-ideas | cover-breakdowns | cover-habits   (1080 × 1080)
+  //        story-1 | story-2 | story-3                                             (1080 × 1920)
+  const { C, FONT } = SM;
   const which = new URLSearchParams(location.search).get("which") || "avatar";
   const cv = document.getElementById("c");
-  const S = 1080;
-  cv.width = S; cv.height = S;
+  const W = 1080, H = which.startsWith("story") ? 1920 : 1080;
+  cv.width = W; cv.height = H;
   const ctx = cv.getContext("2d");
 
   function night() {
-    const g = ctx.createLinearGradient(0, 0, 0, S);
+    const g = ctx.createLinearGradient(0, 0, 0, H);
     g.addColorStop(0, "#1b202b"); g.addColorStop(1, "#0a0c11");
-    ctx.fillStyle = g; ctx.fillRect(0, 0, S, S);
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
   }
+  // text that shrinks until it fits maxW
+  function fit(str, x, y, maxW, size, opt = {}) {
+    const { color = C.hero, weight = 800, align = "center" } = opt;
+    ctx.font = `${weight} ${size}px ${FONT}`;
+    while (ctx.measureText(str).width > maxW && size > 20) { size -= 2; ctx.font = `${weight} ${size}px ${FONT}`; }
+    ctx.fillStyle = color; ctx.textAlign = align; ctx.textBaseline = "middle";
+    ctx.fillText(str, x, y);
+  }
+  function chip(str, y, size = 34) { SM.ui.topic(ctx, str, y, 1, { size }); }
+
+  // highlight cover: picture on top, one word underneath, all inside the circle crop
+  function cover(word, art) {
+    night();
+    SM.glow(ctx, W / 2, 420, 420, C.amber, 0.5);
+    art();
+    fit(word, W / 2, 770, 820, 118);
+    SM.box(ctx, W / 2 - 70, 850, 140, 12, 6, C.amber, 0);
+  }
+
+  const card = (y, ico, title, line, examples) => {
+    SM.box(ctx, 80, y, 920, 300, 36, "rgba(255,255,255,0.06)", 0);
+    SM.glow(ctx, 200, y + 150, 150, C.amber, 0.25);
+    ico(200, y + 150);
+    fit(title, 330, y + 80, 640, 50, { color: C.amber, align: "left" });
+    fit(line, 330, y + 150, 640, 38, { align: "left" });
+    fit(examples, 330, y + 215, 640, 30, { color: C.other, weight: 600, align: "left" });
+  };
 
   const draw = {
     avatar() {
@@ -33,11 +63,38 @@
       const j = SM.stickman(ctx, { x: 370, y: 1070, s: 3.4, pose: SM.POSE.give });
       SM.coin(ctx, j.handF[0] + 120, j.handF[1] - 40, 120);
     },
-    start() { night(); SM.glow(ctx, S / 2, S / 2, 460, C.amber, 0.45); SM.ui.ico(ctx, "play", S / 2, S / 2, 7); },
-    ideas() { night(); SM.glow(ctx, S / 2, S / 2, 460, C.amber, 0.45); SM.cart(ctx, S / 2, 760, 1.9); },
-    breakdowns() { night(); SM.glow(ctx, S / 2, S / 2, 460, C.amber, 0.45); SM.ui.ico(ctx, "shop", S / 2, S / 2, 7); },
-    habits() { night(); SM.glow(ctx, S / 2, S / 2, 460, C.amber, 0.45); SM.coin(ctx, S / 2, S / 2, 170); },
+    "cover-start"() { cover("START HERE", () => SM.ui.ico(ctx, "play", W / 2, 420, 6)); },
+    "cover-ideas"() { cover("IDEAS", () => SM.cart(ctx, W / 2, 600, 1.35)); },
+    "cover-breakdowns"() { cover("BREAKDOWNS", () => SM.ui.ico(ctx, "shop", W / 2, 420, 6)); },
+    "cover-habits"() { cover("HABITS", () => SM.coin(ctx, W / 2, 420, 150)); },
+
+    "story-1"() {
+      night();
+      chip("START HERE", 320);
+      fit("Money and business,", W / 2, 520, 940, 76);
+      fit("explained by a stickman.", W / 2, 610, 940, 76);
+      SM.glow(ctx, 640, 1030, 420, C.amber, 0.55);
+      const j = SM.stickman(ctx, { x: 450, y: 1420, s: 2.8, pose: SM.POSE.give });
+      SM.coin(ctx, j.handF[0] + 100, j.handF[1] - 30, 95);
+      fit("Real numbers. About 20 seconds each.", W / 2, 1560, 900, 40, { color: C.other, weight: 600 });
+    },
+    "story-2"() {
+      night();
+      chip("3 KINDS OF VIDEOS", 320);
+      card(450, (x, y) => SM.cart(ctx, x, y + 70, 0.55), "IDEAS", "Businesses you can start small", "$50 car wash, $80 coffee bike");
+      card(800, (x, y) => SM.ui.ico(ctx, "shop", x, y, 2.6), "BREAKDOWNS", "How businesses really make money", "Your $5 coffee, delivery app, gym");
+      card(1150, (x, y) => SM.coin(ctx, x, y, 62), "HABITS", "Money habits that add up", "Spare change, snowball, bamboo");
+    },
+    "story-3"() {
+      night();
+      chip("ONE LAST THING", 320);
+      fit("Save the idea", W / 2, 520, 940, 84);
+      fit("you want to start.", W / 2, 615, 940, 84, { color: C.amber });
+      SM.glow(ctx, W / 2, 1020, 380, C.amber, 0.5);
+      SM.jar(ctx, W / 2, 1180, 1.6, 0.7, 0, 0.6);
+      SM.pill(ctx, "3 new videos a day", W / 2, 1480, { size: 46, bg: C.amber, fg: "#2a1c00" });
+    },
   };
-  document.fonts.ready.then(() => { draw[which](); document.body.dataset.ready = "1"; });
+  document.fonts.load(`800 40px ${FONT}`).then(() => document.fonts.load(`600 40px ${FONT}`)).then(() => { draw[which](); document.body.dataset.ready = "1"; });
 </script>
 </body></html>
