@@ -75,10 +75,46 @@
 
   const draw = {
     avatar() {
-      night();
-      SM.glow(ctx, 600, 520, 480, C.amber, 0.6);
-      const j = SM.stickman(ctx, { x: 370, y: 1070, s: 3.4, pose: SM.POSE.give });
-      SM.coin(ctx, j.handF[0] + 120, j.handF[1] - 40, 120);
+      // gold disc so the circle pops in a feed, rising chart behind, boss stickman in shades
+      const bg = ctx.createRadialGradient(W / 2, 470, 60, W / 2, 540, 760);
+      bg.addColorStop(0, "#ffd86b"); bg.addColorStop(0.55, C.amber); bg.addColorStop(1, "#e07a00");
+      ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+      // sun rays
+      ctx.save(); ctx.translate(W / 2, 470); ctx.fillStyle = "rgba(255,255,255,0.13)";
+      for (let i = 0; i < 16; i++) { ctx.rotate(Math.PI / 8); ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(-60, -900); ctx.lineTo(60, -900); ctx.fill(); }
+      ctx.restore();
+      // rising bars + arrow
+      [[150, 330], [290, 450], [790, 560], [930, 700]].forEach(([x, h]) => SM.box(ctx, x - 55, 1080 - h, 110, h + 40, 16, "rgba(13,16,21,0.82)", 0));
+      ctx.save(); ctx.strokeStyle = C.out; ctx.lineWidth = 34; ctx.lineCap = "round"; ctx.lineJoin = "round";
+      ctx.beginPath(); ctx.moveTo(560, 900); ctx.lineTo(720, 650); ctx.lineTo(800, 720); ctx.lineTo(900, 320); ctx.stroke();
+      ctx.strokeStyle = C.green; ctx.lineWidth = 20; ctx.stroke();
+      ctx.fillStyle = C.green; ctx.strokeStyle = C.out; ctx.lineWidth = 8;
+      ctx.beginPath(); ctx.moveTo(925, 205); ctx.lineTo(830, 300); ctx.lineTo(965, 335); ctx.closePath(); ctx.stroke(); ctx.fill();
+      ctx.restore();
+      // the boss
+      const s = 3.2;
+      const j = SM.stickman(ctx, { x: 470, y: 1250, s, pose: SM.POSE.cheer });
+      const [hx, hy] = j.head;
+      // tie
+      ctx.save(); ctx.translate(j.sh[0], j.sh[1]);
+      ctx.fillStyle = C.coral; ctx.strokeStyle = C.out; ctx.lineWidth = 6;
+      ctx.beginPath(); ctx.moveTo(-14, 6); ctx.lineTo(14, 6); ctx.lineTo(8, 26); ctx.lineTo(22, 120); ctx.lineTo(0, 150); ctx.lineTo(-22, 120); ctx.lineTo(-8, 26); ctx.closePath();
+      ctx.fill(); ctx.stroke(); ctx.restore();
+      // shades
+      ctx.save(); ctx.translate(hx, hy + 6);
+      ctx.fillStyle = "#0d1015";
+      ctx.fillRect(-74, -14, 148, 12);
+      SM.box(ctx, -74, -12, 66, 40, 14, "#0d1015", 0); SM.box(ctx, 8, -12, 66, 40, 14, "#0d1015", 0);
+      ctx.fillStyle = "rgba(255,255,255,0.55)"; ctx.fillRect(-62, -4, 18, 7); ctx.fillRect(20, -4, 18, 7);
+      ctx.restore();
+      // smile
+      ctx.save(); ctx.strokeStyle = C.out; ctx.lineWidth = 7; ctx.lineCap = "round";
+      ctx.beginPath(); ctx.arc(hx, hy + 38, 22, 0.2 * Math.PI, 0.8 * Math.PI); ctx.stroke(); ctx.restore();
+      // coins in both hands and flying
+      const gold = (x, y, r, sp = 0) => { SM.circle(ctx, x, y, r + 9, C.out, 0); SM.coin(ctx, x, y, r, sp); };
+      gold(j.handF[0], j.handF[1] - 30, 64);
+      gold(j.handB[0], j.handB[1] - 30, 64);
+      [[160, 300, 36, 0], [760, 160, 30, 0], [150, 640, 28, 0]].forEach(([x, y, r, sp]) => gold(x, y, r, sp));
     },
     "cover-about"() { cover("ABOUT US", () => SM.stickman(ctx, { x: W / 2, y: 640, s: 2.0, pose: SM.POSE.proud })); },
     "cover-ideas"() { cover("IDEAS", () => SM.cart(ctx, W / 2, 600, 1.35)); },
