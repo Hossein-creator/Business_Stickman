@@ -102,3 +102,8 @@ git push
 
 - Send **only the video** in the session (SendUserFile, the .mp4). No summary of the story, no
   caption file in the message: the caption is on GitHub next to the video.
+- **Send it to Telegram too, always:** `python3 scripts/send_telegram.py renders/$N-$NAME.mp4`
+  sends the video with its caption to the user's bot (@Business_stickman_bot, chat id 7190934039).
+  It reads `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` from the environment; never write the token
+  into a file or a commit. If they are not set, use the token the user gave in the session, or ask
+  them to add both as environment variables. Videos over 49 MB are re-encoded to a temporary copy.
