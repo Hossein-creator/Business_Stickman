@@ -16,10 +16,11 @@
   // Brand kit for the Instagram profile, drawn with the video engine.
   // ?which=avatar | cover-about | cover-ideas | cover-breakdowns | cover-habits   (1080 × 1080)
   //        story-1-who ... story-7-save                                       (1080 × 1920)
+  //        yt-banner (2560 × 1440, text inside the 1546 × 423 safe area in the middle)
   const { C, FONT } = SM;
   const which = new URLSearchParams(location.search).get("which") || "avatar";
   const cv = document.getElementById("c");
-  const W = 1080, H = which.startsWith("story") ? 1920 : 1080;
+  const W = which === "yt-banner" ? 2560 : 1080, H = which === "yt-banner" ? 1440 : which.startsWith("story") ? 1920 : 1080;
   cv.width = W; cv.height = H;
   const ctx = cv.getContext("2d");
 
@@ -153,6 +154,24 @@
         () => SM.jar(ctx, W / 2, 1090, 1.5, 0.7, 0, 0),
         [["$5 a day for a year", "$1,825"], ["$100 a month for 30 years", "$149,036*"], ["$115 of leaks for 10 years", "$21,039*"]],
         "*8% average yearly return, not guaranteed");
+    },
+    "yt-banner"() {
+      night();
+      for (const dx of [0, 1000, 2000]) {   // city() only fills 1080 px, so tile it
+        ctx.save(); ctx.translate(dx, 0);
+        SM.city(ctx, 1440, 0, 0, 11 + dx, 0.35, "#191d27");
+        SM.city(ctx, 1440, 0, 0, 4 + dx, 0.3, "#232834");
+        ctx.restore();
+      }
+      SM.glow(ctx, W / 2, 720, 900, C.amber, 0.45);
+      // safe area: x 507..2053, y 508..931
+      const j = SM.stickman(ctx, { x: 640, y: 915, s: 1.5, pose: SM.POSE.give });
+      SM.coin(ctx, j.handF[0] + 52, j.handF[1] - 16, 52);
+      ctx.save(); ctx.font = `800 66px ${FONT}`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillStyle = "#fff4cf"; ctx.fillText("$", j.handF[0] + 52, j.handF[1] - 13); ctx.restore();
+      fit("BUSINESS STICKMAN", 1480, 600, 1000, 120, { color: C.amber });
+      fit("Business ideas with real numbers.", 1480, 720, 1000, 62);
+      SM.pill(ctx, "New Shorts every day", 1480, 840, { size: 44, bg: C.amber, fg: "#2a1c00" });
     },
     "story-7-save"() {
       night();
