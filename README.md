@@ -26,6 +26,7 @@ Videos 1–4 run 18 s; from video 5 on they run 22 s, slower, with motion blur a
 | 12 | [`renders/12-look-rich.mp4`](renders/12-look-rich.mp4) | Same $100 a month: one pays off phones on installments, the other saves for a year and buys a coffee cart. After 2 years: $700 of used phones vs. $3,600 a year. | "You can look rich, or **get rich.**" |
 | 13 | [`renders/13-gym-money.mp4`](renders/13-gym-money.mp4) | You pay $20 for the gym. Month by month the gym empties, but 1,000 members keep paying $20,000 a month. Where the $20 goes (profit $6), then 1,000 members vs. room for 100: $6,000 a month. | "They sell you the plan. You have to **show up.**" |
 | 14 | [`renders/14-shoe-cleaning.mp4`](renders/14-shoe-cleaning.mp4) | Got $30? A $30 kit (brushes, cleaner, cloths, bucket, sign), one dirty sneaker brushed clean for $5 ($4.60 profit), 8 pairs on a Saturday ($36.80), weekends only: $294 a month. | "Every dirty shoe you see is a **customer.**" |
+| 15 | [`renders/15-bubble-tea.mp4`](renders/15-bubble-tea.mp4) | You pay $4 for bubble tea. The cup fills layer by layer with every cost (pearls, tea and milk, syrup, cup, rent, staff, power): $0.70 profit. To make $3,000 a month: 143 cups every day. | "Busy is not the same as **profitable.**" |
 
 ## Layout
 

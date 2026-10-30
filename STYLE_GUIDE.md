@@ -155,7 +155,6 @@ Pick from the open list first (see `CLAUDE.md`); when one is made, move it to "M
 - **How a street-food cart makes money:** one portion of fried snacks, cost by cost.
 - **Why a $3 bottle of water costs 20 cents to make:** brand, shop, transport, margin.
 - **How a barbershop makes money:** one $8 haircut, chair rent, tools, time per cut.
-- **How a bubble-tea shop makes money:** one $3 cup, tapioca, milk, cup and straw, rent, profit.
 - **How a phone-credit kiosk makes money:** tiny margin, many sales a day.
 - **How a ride-hailing app sets prices:** surge pricing, the rider's cut, the app's cut.
 - **How a cinema makes money:** the ticket mostly goes to the film studio; the popcorn pays the rent.
@@ -174,4 +173,4 @@ Pick from the open list first (see `CLAUDE.md`); when one is made, move it to "M
 
 1 Spare Change · 2 Chapter 1 · 3 Same 24 Hours · 4 Bamboo · 5 Payday Loop · 6 The Snowball ·
 7 Your $5 Coffee · 8 $50 Car Wash · 9 Money Leaks · 10 Delivery App · 11 $80 Coffee Bike ·
-12 Look Rich or Get Rich · 13 How a Gym Makes Money · 14 $30 Shoe Cleaning
+12 Look Rich or Get Rich · 13 How a Gym Makes Money · 14 $30 Shoe Cleaning · 15 How Bubble Tea Makes Money

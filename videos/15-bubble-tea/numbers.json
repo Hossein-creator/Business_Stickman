@@ -1,0 +1,5 @@
+{"name": "Bubble tea shop", "price": 4.00,
+ "split": {"Tea & milk": 0.40, "Tapioca pearls": 0.25, "Sugar syrup": 0.10, "Cup, seal & straw": 0.25, "Rent": 1.00, "Staff": 0.90, "Power, machines, fees": 0.40, "Profit": 0.70},
+ "scale": {"n": 4300, "label": "cups a month", "of": "Profit"},
+ "px_per_dollar": 135,
+ "assumptions": "Example small bubble-tea shop, $4 a cup. Real costs vary by city."}
