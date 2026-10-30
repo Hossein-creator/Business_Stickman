@@ -1,9 +1,13 @@
 ---
 name: generiere
-description: Make the next Business Stickman short from start to finish - research, pick the topic, build, check, render, caption, commit and push. Use when the user says "generiere", "generate", "mach ein neues Video", "next video" or asks for one or more new videos.
+description: Make the next three Business Stickman shorts from start to finish - research, pick the topic, build, check, render, caption, commit and push. Use when the user says "generiere", "generate", "mach ein neues Video", "next video" or asks for one or more new videos.
 ---
 
 # generiere
+
+**"generiere" means 3 videos** (unless the user names another number): two business ideas or
+models, one mindset & money. One research pass for all three, then steps 2 to 8 for each video in
+turn; each goes to Telegram as soon as it is done. Render one at a time.
 
 The full loop for one new video. `CLAUDE.md` and `STYLE_GUIDE.md` hold the rules; this is the
 checklist that runs them in order. Do every step, every time. Nothing stays only on the machine.

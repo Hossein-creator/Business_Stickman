@@ -18,6 +18,11 @@ Project skills in `.claude/skills/`: `generiere` (this whole loop as a checklist
 
 ## When the user says "generiere" / "generate"
 
+**One "generiere" = 3 new videos**, unless the user names another number: two business ideas or
+business models and one mindset & money video. Run the whole loop below for each of the three
+(one research pass is enough for all three), and send each video to Telegram as soon as it is
+done. Render one video at a time.
+
 1. **Research first, always: run `/anthropic-skills:ig-viral`.** Find the reels/shorts that are
    working right now in this niche (motivation, mindset, money, small business; faceless and
    stickman/animation accounts), rank them by outlier multiple (views ÷ the account's own median)
