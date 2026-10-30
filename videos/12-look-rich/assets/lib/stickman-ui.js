@@ -82,6 +82,8 @@
     crate: (ctx) => { box(ctx, -26, -18, 52, 38, 6, "#6b4f3a", 4); ctx.strokeStyle = "#4a3628"; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(-26, 0); ctx.lineTo(26, 0); ctx.stroke(); },
     bag: (ctx) => SM.foodBag(ctx, 0, 0, 0.6),
     rider: (ctx) => { circle(ctx, -16, 16, 9, "#2b303b", 4); circle(ctx, 18, 16, 9, "#2b303b", 4); box(ctx, -20, 0, 40, 12, 6, "#3fa36b", 4); circle(ctx, -4, -24, 9, C.hero, 4); box(ctx, -10, -14, 14, 16, 5, C.hero, 0); box(ctx, -30, -18, 18, 18, 4, "#3fa36b", 4); },
+    brush: (ctx) => { ctx.save(); ctx.rotate(-0.25); box(ctx, -26, -14, 52, 18, 7, "#a0714a", 4); ctx.strokeStyle = "#3b2a1c"; ctx.lineWidth = 3; for (let i = 0; i < 8; i++) { ctx.beginPath(); ctx.moveTo(-21 + i * 6, 6); ctx.lineTo(-21 + i * 6, 20); ctx.stroke(); } ctx.restore(); },
+    sign: (ctx) => { ctx.lineWidth = 4; ctx.strokeStyle = C.out; ctx.beginPath(); ctx.moveTo(-16, 26); ctx.lineTo(-8, -6); ctx.moveTo(16, 26); ctx.lineTo(8, -6); ctx.stroke(); box(ctx, -26, -26, 52, 30, 5, C.paper, 4); ctx.font = `800 16px ${SM.FONT}`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillStyle = "#2f5a2a"; ctx.fillText("$5", 0, -10); },
     late: (ctx) => { circle(ctx, 0, 0, 22, C.paper, 4); ctx.lineWidth = 4; ctx.strokeStyle = C.coral; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, -13); ctx.moveTo(0, 0); ctx.lineTo(10, 5); ctx.stroke(); },
   };
   function ico(ctx, name, x, y, s = 1, a = 1) { if (a <= 0) return; ctx.save(); ctx.globalAlpha *= a; ctx.translate(x, y); ctx.scale(s, s); ICO[name](ctx); ctx.restore(); }

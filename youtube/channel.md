@@ -62,12 +62,13 @@ Description of each Short = its `renders/NN-<name>.caption.txt`. Same order and 
 | 09 | 5 Money Leaks Draining Your Account |
 | 02 | His Stall Is Packed, Yours Is Empty |
 | 03 | Same 24 Hours, Two Different Years |
+| 14 | Start a Shoe Cleaning Business With $30 |
 
 ## 6. Home page and playlists
 
 Three playlists, same as the Instagram highlights:
 
-- **Business Ideas**: 08, 11
+- **Business Ideas**: 08, 11, 14
 - **How Businesses Make Money**: 07, 10, 13
 - **Money Habits**: 01, 02, 03, 04, 05, 06, 09, 12
 

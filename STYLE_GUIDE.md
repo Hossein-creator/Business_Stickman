@@ -165,13 +165,13 @@ Pick from the open list first (see `CLAUDE.md`); when one is made, move it to "M
 - **$100 phone-accessories stall:** buy, price, sell, profit per week.
 - **Laundry pickup service:** one scooter, a few regular customers, monthly numbers.
 - **Selling home-made frozen food:** batch cost, price per pack, weekend sales.
-- **$30 shoe-cleaning service:** brushes and cleaner, $5 per pair, weekend stand.
 - **$20 phone-photo service for small shops:** take product photos for online sellers.
 - **$60 plant stall:** cuttings in recycled pots, cost per pot vs price.
+- **Sneaker cleaning by pickup:** collect shoes from a dorm or office, return them clean next day.
 - **$40 ice-tea stand at a school or field:** cups, ice, syrup, price per cup, afternoon sales.
 
 ### Made
 
 1 Spare Change · 2 Chapter 1 · 3 Same 24 Hours · 4 Bamboo · 5 Payday Loop · 6 The Snowball ·
 7 Your $5 Coffee · 8 $50 Car Wash · 9 Money Leaks · 10 Delivery App · 11 $80 Coffee Bike ·
-12 Look Rich or Get Rich · 13 How a Gym Makes Money
+12 Look Rich or Get Rich · 13 How a Gym Makes Money · 14 $30 Shoe Cleaning

@@ -1,0 +1,308 @@
+<!doctype html>
+<html
+  lang="en"
+  data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"hook1","type":"string","label":"Hook line 1","default":"Got $30?"},
+    {"id":"hook2","type":"string","label":"Hook line 2","default":"Clean shoes for $5 a pair."},
+    {"id":"quote1","type":"string","label":"Quote line 1","default":"Every dirty shoe you see"},
+    {"id":"quote2a","type":"string","label":"Quote line 2 (before keyword)","default":"is a"},
+    {"id":"quote2b","type":"string","label":"Quote keyword","default":"customer."},
+    {"id":"brand","type":"string","label":"Watermark","default":"BUSINESS STICKMAN"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/lib/gsap.min.js"></script>
+    <script src="assets/lib/stickman.js"></script>
+    <script src="assets/lib/stickman-props.js"></script>
+    <script src="assets/lib/stickman-fx.js"></script>
+    <script src="assets/lib/stickman-ui.js"></script>
+    <style>
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-800-normal.woff2") format("woff2"); font-weight: 800; }
+      :root { --ink: #eef1f6; --accent: #ffc23d; --muted: #9aa3b3; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0a0c11; }
+      #root { position: relative; width: 100%; height: 100%; font-family: "Jakarta", sans-serif; }
+      #stage { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+      .lines { position: absolute; left: 60px; right: 60px; top: 250px; text-align: center; color: var(--ink); font-weight: 800; letter-spacing: -0.02em; }
+      .lines p { font-size: 64px; line-height: 1.18; }
+      .lines p.huge { font-size: 104px; }
+      .w { display: inline-block; white-space: pre; }
+      .key { position: relative; color: var(--accent); text-shadow: 0 0 30px rgba(255, 194, 61, 0.6); }
+      .bar { position: absolute; left: 0; right: 0; bottom: -4px; height: 8px; border-radius: 4px; background: var(--accent); transform-origin: left center; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-motion-blur="on" data-motion-blur-events="on" data-composition-id="main" data-start="0" data-duration="22" data-width="1080" data-height="1920">
+      <canvas id="stage" class="clip" data-start="0" data-duration="22" data-track-index="0"></canvas>
+
+      <div id="hook" class="lines clip" data-start="0" data-duration="2.9" data-track-index="1">
+        <p id="hook-l1" class="huge key"><span class="w" data-var-text="hook1">Got $30?</span></p>
+        <p id="hook-l2"><span class="w" data-var-text="hook2">Clean shoes for $5 a pair.</span></p>
+      </div>
+
+      <div id="quote" class="lines clip" data-start="18.4" data-duration="3.6" data-track-index="2">
+        <p><span class="w q" data-var-text="quote1">Every dirty shoe you see</span></p>
+        <p><span class="w q" data-var-text="quote2a">is a</span> <span class="w q key"><span data-var-text="quote2b">customer.</span><span class="bar"></span></span></p>
+      </div>
+
+      <audio id="sfx-i1" class="clip" src="assets/sfx/pop.mp3" data-start="3.32" data-duration="0.72" data-track-index="5" data-volume="0.3"></audio>
+      <audio id="sfx-i2" class="clip" src="assets/sfx/click-soft.mp3" data-start="3.77" data-duration="0.37" data-track-index="6" data-volume="0.45"></audio>
+      <audio id="sfx-i3" class="clip" src="assets/sfx/pop.mp3" data-start="4.22" data-duration="0.72" data-track-index="5" data-volume="0.28"></audio>
+      <audio id="sfx-i4" class="clip" src="assets/sfx/click-soft.mp3" data-start="4.67" data-duration="0.37" data-track-index="6" data-volume="0.45"></audio>
+      <audio id="sfx-i5" class="clip" src="assets/sfx/pop.mp3" data-start="5.12" data-duration="0.72" data-track-index="5" data-volume="0.28"></audio>
+      <audio id="sfx-total" class="clip" src="assets/sfx/ping.mp3" data-start="5.75" data-duration="1.32" data-track-index="7" data-volume="0.3"></audio>
+      <audio id="sfx-s2" class="clip" src="assets/sfx/whoosh.mp3" data-start="7.0" data-duration="0.6" data-track-index="8" data-volume="0.3"></audio>
+      <audio id="sfx-b1" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="7.7" data-duration="0.6" data-track-index="9" data-volume="0.22"></audio>
+      <audio id="sfx-b2" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="8.3" data-duration="0.6" data-track-index="10" data-volume="0.22"></audio>
+      <audio id="sfx-b3" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="8.9" data-duration="0.6" data-track-index="9" data-volume="0.22"></audio>
+      <audio id="sfx-clean" class="clip" src="assets/sfx/sparkle.mp3" data-start="9.4" data-duration="1.8" data-track-index="11" data-volume="0.35"></audio>
+      <audio id="sfx-c1" class="clip" src="assets/sfx/click-soft.mp3" data-start="9.7" data-duration="0.37" data-track-index="12" data-volume="0.45"></audio>
+      <audio id="sfx-c2" class="clip" src="assets/sfx/click-soft.mp3" data-start="10.1" data-duration="0.37" data-track-index="12" data-volume="0.45"></audio>
+      <audio id="sfx-profit" class="clip" src="assets/sfx/ping.mp3" data-start="10.5" data-duration="1.32" data-track-index="13" data-volume="0.3"></audio>
+      <audio id="sfx-s3" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="11.2" data-duration="0.6" data-track-index="8" data-volume="0.28"></audio>
+      <audio id="sfx-q1" class="clip" src="assets/sfx/pop.mp3" data-start="12.2" data-duration="0.72" data-track-index="14" data-volume="0.22"></audio>
+      <audio id="sfx-q2" class="clip" src="assets/sfx/pop.mp3" data-start="12.8" data-duration="0.72" data-track-index="15" data-volume="0.22"></audio>
+      <audio id="sfx-q3" class="clip" src="assets/sfx/pop.mp3" data-start="13.4" data-duration="0.72" data-track-index="14" data-volume="0.22"></audio>
+      <audio id="sfx-day" class="clip" src="assets/sfx/chime.mp3" data-start="14.2" data-duration="2.5" data-track-index="16" data-volume="0.28"></audio>
+      <audio id="sfx-riser" class="clip" src="assets/sfx/riser.mp3" data-start="6.6" data-duration="10.03" data-track-index="17" data-volume="0.16"></audio>
+      <audio id="sfx-month" class="clip" src="assets/sfx/impact-bass-1.mp3" data-start="16.82" data-duration="2.12" data-track-index="18" data-volume="0.45"></audio>
+      <audio id="sfx-quote" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="18.45" data-duration="0.6" data-track-index="19" data-volume="0.28"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const DUR = 22;
+      const { W, H, C, E, clamp, lerp, tw, rng } = SM;
+      const FX = SM.fx, UI = SM.ui;
+      let BRAND = "BUSINESS STICKMAN";
+
+      // numbers from numbers.json via business-math/calc.py
+      const KIT = [["brush", "Brushes", 8], ["soap", "Cleaner", 10], ["cloth", "Cloths", 5], ["bucket", "Bucket", 3], ["sign", "Sign", 4]];
+      const PAIR = [["Cleaner", 0.30, "#ef8fb5"], ["Cloth & water", 0.10, C.teal]];
+      const PER_DAY = 36.80, PAIRS = 8;
+      const S1 = 2.9, S2 = 7.0, S3 = 11.2, S4 = 15.0, Q = 18.4;
+      const GY = 1240;
+      const WIPE0 = 7.6, WIPE1 = 9.4;
+
+      // sneaker, side view, toe to the right; (x, y) = bottom of the sole
+      const DIRT = [[-110, -70, 26], [-60, -40, 20], [-10, -95, 18], [40, -55, 24], [95, -45, 18], [-125, -105, 14], [10, -40, 14], [120, -30, 12]];
+      function upper(ctx) {
+        ctx.beginPath();
+        ctx.moveTo(-142, -26); ctx.lineTo(-146, -118);
+        ctx.quadraticCurveTo(-120, -142, -78, -132);
+        ctx.quadraticCurveTo(-58, -100, -30, -104);
+        ctx.lineTo(48, -84);
+        ctx.quadraticCurveTo(140, -66, 150, -26);
+        ctx.closePath();
+      }
+      function shoe(ctx, x, y, s, dirt) {
+        ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+        upper(ctx); ctx.lineWidth = 9; ctx.strokeStyle = C.out; ctx.stroke(); ctx.fillStyle = SM.mixColor(C.hero, "#b9a58a", dirt * 0.5); ctx.fill();
+        // stripe and heel tab
+        ctx.save(); upper(ctx); ctx.clip();
+        ctx.beginPath(); ctx.moveTo(-120, -40); ctx.quadraticCurveTo(-10, -50, 80, -96); ctx.lineTo(90, -76); ctx.quadraticCurveTo(0, -30, -110, -26); ctx.closePath();
+        ctx.fillStyle = SM.mixColor(C.teal, "#6b6250", dirt * 0.6); ctx.fill();
+        ctx.fillStyle = SM.mixColor(C.coral, "#7a5a48", dirt * 0.6); ctx.fillRect(-150, -125, 22, 100);
+        // dirt splashes
+        if (dirt > 0) {
+          ctx.globalAlpha = dirt;
+          DIRT.forEach(([dx, dy, r], i) => { ctx.beginPath(); ctx.ellipse(dx, dy, r * 1.3, r, i * 0.7, 0, Math.PI * 2); ctx.fillStyle = i % 2 ? "#5a4330" : "#6b4f3a"; ctx.fill(); });
+          ctx.globalAlpha = 1;
+        }
+        ctx.restore();
+        // laces
+        ctx.lineWidth = 6; ctx.lineCap = "round"; ctx.strokeStyle = C.out;
+        for (let i = 0; i < 4; i++) { const lx = -36 + i * 22; ctx.beginPath(); ctx.moveTo(lx - 6, -112 + i * 6); ctx.lineTo(lx + 12, -96 + i * 6); ctx.stroke(); }
+        // sole
+        SM.box(ctx, -152, -30, 310, 32, 14, SM.mixColor(C.paper, "#7a6a55", dirt * 0.8), 8);
+        ctx.restore();
+      }
+      // dirty shoe that is wiped clean from heel to toe as k goes 0 -> 1
+      function wipeShoe(ctx, x, y, s, k) {
+        if (k <= 0) { shoe(ctx, x, y, s, 1); return; }
+        if (k >= 1) { shoe(ctx, x, y, s, 0); return; }
+        const wx = x + lerp(-170, 175, k) * s;
+        ctx.save(); ctx.beginPath(); ctx.rect(wx, y - 400 * s, 2000, 600 * s); ctx.clip(); shoe(ctx, x, y, s, 1); ctx.restore();
+        ctx.save(); ctx.beginPath(); ctx.rect(wx - 2000, y - 400 * s, 2000, 600 * s); ctx.clip(); shoe(ctx, x, y, s, 0); ctx.restore();
+      }
+
+      function draw(ctx, t) {
+        SM.background(ctx);
+        SM.city(ctx, GY - 40, t * 5, 1, 23, 0.2, "#1b1f2c");
+        SM.groundStrip(ctx, GY, 700);
+        const hh = FX.handheld(t, 0.7);
+        ctx.save(); ctx.translate(hh.dx, hh.dy);
+
+        // ---- frame 0: a dirty sneaker and $30 ----
+        const intro = 1 - tw(t, 2.5, 3.0, E.in);
+        if (intro > 0) {
+          ctx.save(); ctx.globalAlpha *= intro;
+          SM.glow(ctx, 640, 960, 420, C.amber, 0.25);
+          shoe(ctx, 650, 1050 + Math.sin(t * 2) * 4, 1.45, 1);
+          SM.label(ctx, "DIRTY", 650, 1110, { size: 24, color: C.coral });
+          const ji = SM.stickman(ctx, { x: 170, y: GY, pose: { ...SM.POSE.give, head: -0.1 + Math.sin(t * 2) * 0.04 }, color: C.hero });
+          ctx.save(); ctx.translate(ji.handF[0] + 46, ji.handF[1] - 20 + Math.sin(t * 3) * 6); ctx.rotate(-0.12 + Math.sin(t * 2) * 0.05);
+          SM.glow(ctx, 0, 0, 160, C.amber, 0.5);
+          SM.box(ctx, -66, -34, 132, 68, 8, "#8fcf86", 5); SM.box(ctx, -56, -24, 112, 48, 6, "#a6dc98", 0);
+          SM.text(ctx, "$30", 0, 2, { size: 34, color: "#2f5a2a" });
+          ctx.restore();
+          ctx.restore();
+        }
+
+        // ---- STEP 1: buy the kit ----
+        const s1out = tw(t, S2 - 0.3, S2 + 0.3, E.in);
+        UI.step(ctx, 1, "Buy the kit", W / 2, 360, tw(t, S1, S1 + 0.4, E.lin) * (1 - tw(t, S2 - 0.3, S2)));
+        let total = 0;
+        KIT.forEach(([ic, name, price], i) => {
+          const t0 = S1 + 0.4 + i * 0.45;
+          const k = tw(t, t0, t0 + 0.5, E.back);
+          if (k <= 0) return;
+          total += price * clamp((t - t0) / 0.3);
+          const col = i % 3, rowI = Math.floor(i / 3);
+          const n = rowI === 0 ? 3 : 2;
+          let x = W / 2 + (col - (n - 1) / 2) * 300, y = 600 + rowI * 280;
+          x = lerp(x, W / 2, s1out); y = lerp(y, 760, s1out);
+          const sc = k * lerp(1, 0.2, s1out);
+          ctx.save(); ctx.globalAlpha *= 1 - tw(t, S2 + 0.1, S2 + 0.35); ctx.translate(x, y); ctx.scale(sc, sc);
+          SM.rr(ctx, -125, -115, 250, 230, 30); ctx.fillStyle = "#1d222d"; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = "rgba(255,255,255,0.08)"; ctx.stroke();
+          UI.ico(ctx, ic, 0, -30, 2.1);
+          SM.text(ctx, name, 0, 50, { size: 28, color: C.text });
+          SM.text(ctx, "$" + price, 0, 88, { size: 32, color: C.amber });
+          ctx.restore();
+        });
+        const totA = tw(t, S1 + 0.4, S1 + 0.8) * (1 - s1out);
+        const done = t > 5.75;
+        const tp = done && t < 6.3 ? 1 + Math.sin((t - 5.75) / 0.55 * Math.PI) * 0.15 : 1;
+        UI.bigNumber(ctx, "$" + Math.round(Math.min(30, total)), done ? "TOTAL KIT" : "TOTAL", W / 2, 1180, totA, { size: 100 * tp, color: done ? C.amber : C.hero, glowA: done ? 0.5 : 0 });
+
+        // ---- STEP 2: clean one pair ----
+        const s2 = tw(t, S2, S2 + 0.5, E.outQuint) * (1 - tw(t, S3 - 0.2, S3 + 0.2));
+        UI.step(ctx, 2, "Clean one pair", W / 2, 360, tw(t, S2 + 0.1, S2 + 0.5, E.lin) * (1 - tw(t, S3 - 0.3, S3)));
+        if (s2 > 0) {
+          ctx.save(); ctx.globalAlpha *= s2;
+          const sx = W / 2, sy = 800, ss = 1.75;
+          const wk = tw(t, WIPE0, WIPE1, E.inOut);
+          const clean = t >= WIPE1;
+          if (clean) SM.glow(ctx, sx, sy - 120, 420, C.amber, 0.4 * tw(t, WIPE1, WIPE1 + 0.4));
+          wipeShoe(ctx, sx, sy, ss, wk);
+          UI.glint(ctx, sx - 270, sy - 260, 540, 280, tw(t, WIPE1, WIPE1 + 0.7, E.inOut));
+          // the brush scrubs across
+          if (t > WIPE0 - 0.2 && t < WIPE1 + 0.3) {
+            const ba = tw(t, WIPE0 - 0.2, WIPE0) * (1 - tw(t, WIPE1, WIPE1 + 0.3));
+            const bx = sx + lerp(-170, 175, wk) * ss, by = sy - 150 + Math.sin(t * 30) * 14;
+            UI.ico(ctx, "brush", bx, by, 2.4, ba);
+            FX.burst(ctx, bx, by + 40, t, WIPE0 + 0.6, { n: 10, kind: "spark", speed: 260, size: 5, life: 0.6, seed: 3 });
+            FX.burst(ctx, bx, by + 40, t, WIPE0 + 1.2, { n: 10, kind: "spark", speed: 260, size: 5, life: 0.6, seed: 4 });
+          }
+          SM.label(ctx, clean ? "CLEAN" : "DIRTY", sx, sy + 70, { size: 26, color: clean ? C.amber : C.coral });
+          const pk = t >= S2 + 0.4 ? tw(t, S2 + 0.4, S2 + 0.8, E.back) : 0;
+          SM.pill(ctx, "$5.00 a pair", sx, 480, { size: 38, bg: "#262b36", fg: C.hero, alpha: clamp(pk), scale: pk });
+          PAIR.forEach(([n, v, c], i) => UI.row(ctx, 190, 1010 + i * 74, 700, n, "−$" + v.toFixed(2), c, tw(t, 9.7 + i * 0.4, 10.2 + i * 0.4, E.lin), { size: 28 }));
+          UI.row(ctx, 190, 1010 + 2 * 74 + 8, 700, "PROFIT PER PAIR", "+$4.60", C.amber, tw(t, 10.5, 11.0, E.lin), { size: 32, strong: true });
+          ctx.restore();
+          FX.burst(ctx, sx, sy - 120, t, WIPE1, { n: 22, kind: "spark", speed: 600, size: 7, life: 1.2, seed: 9 });
+        }
+
+        // ---- STEP 3: a weekend stand ----
+        const s3 = tw(t, S3, S3 + 0.5, E.outQuint) * (1 - tw(t, S4 - 0.2, S4 + 0.2));
+        UI.step(ctx, 3, "Open on weekends", W / 2, 360, tw(t, S3 + 0.1, S3 + 0.5, E.lin) * (1 - tw(t, S4 - 0.3, S4)));
+        if (s3 > 0) {
+          ctx.save(); ctx.globalAlpha *= s3;
+          const by = 1060;
+          // stand: sign, stool, bucket
+          SM.box(ctx, 128, by - 300, 10, 300, 4, "#3b4252", 4);
+          SM.box(ctx, 40, by - 380, 200, 96, 14, C.paper, 6);
+          SM.text(ctx, "SHOES", 140, by - 352, { size: 26, color: C.out });
+          SM.text(ctx, "CLEANED $5", 140, by - 314, { size: 24, color: "#2f5a2a" });
+          UI.ico(ctx, "bucket", 210, by - 26, 1.1);
+          SM.box(ctx, 400, by - 70, 120, 18, 6, C.wood, 5);
+          SM.box(ctx, 412, by - 52, 14, 52, 3, C.woodDark, 4); SM.box(ctx, 494, by - 52, 14, 52, 3, C.woodDark, 4);
+          const ph = Math.max(0, (t - S3 - 0.8) / 0.4), n = Math.min(PAIRS, Math.floor(ph)), fr = ph - Math.floor(ph);
+          // hero scrubs the shoe on the stool
+          SM.stickman(ctx, { x: 330, y: by, face: 1, pose: { ...SM.POSE.work, aF: [0.8 + Math.sin(t * 16) * 0.15, 1.6] }, color: C.hero });
+          shoe(ctx, 462, by - 70, 0.36, n >= PAIRS ? 0 : 1 - fr);
+          // queue moves forward each pair
+          const shift = n + (n >= PAIRS ? 0 : E.inOut(clamp(fr * 2.2)));
+          for (let j = n - 1; j <= n + 4; j++) {
+            if (j < 0 || j >= PAIRS + 2) continue;
+            const s = j - shift;
+            const x = s >= 0 ? 640 + s * 110 : 640 + s * 240;
+            const a = s >= 0 ? clamp(1.2 - s * 0.2) : clamp(1 + s * 1.6);
+            const r = rng(j * 7 + 1);
+            SM.stickman(ctx, { x, y: by, face: s >= 0 ? -1 : 1, s: 0.86 + r() * 0.14, pose: s < 0 ? SM.walk(t * 9, 0.8) : { ...SM.POSE.stand, head: 0.05 * Math.sin(t * 2 + j) }, color: SM.mixColor(C.other, "#c3cad6", r()), alpha: a });
+          }
+          for (let j = 0; j < PAIRS; j++) { const t0 = S3 + 0.8 + (j + 1) * 0.4; const k = tw(t, t0, t0 + 0.8, E.out); if (k > 0 && k < 1) SM.text(ctx, "+$4.60", 470, by - 230 - k * 90, { size: 30, color: C.amber, alpha: 1 - k * k }); }
+          // clock + counter
+          const clk = tw(t, S3 + 0.6, S3 + 0.8 + PAIRS * 0.4, E.lin);
+          const mins = Math.round(clk * 300), h24 = 10 + Math.floor(mins / 60), mm = mins % 60;
+          const h12 = h24 > 12 ? h24 - 12 : h24;
+          SM.pill(ctx, "SAT " + h12 + ":" + String(mm).padStart(2, "0") + (h24 >= 12 ? " PM" : " AM"), W / 2, 470, { size: 32, bg: "#262b36", fg: C.hero, alpha: tw(t, S3 + 0.4, S3 + 0.7) });
+          const dayK = t >= 14.2 ? tw(t, 14.2, 14.6, E.back) : 0;
+          UI.bigNumber(ctx, dayK > 0 ? "$36.80 a day" : n + " pairs", dayK > 0 ? "8 PAIRS × $4.60" : "10 AM – 3 PM", W / 2, 1180, 1, { size: 92 * (dayK > 0 ? lerp(1, 1.06, Math.sin(clamp((t - 14.2) / 0.5) * Math.PI)) : 1), color: dayK > 0 ? C.amber : C.hero, glowA: dayK * 0.5 });
+          ctx.restore();
+        }
+
+        // ---- payoff: the month, weekends only ----
+        const s4 = tw(t, S4, S4 + 0.5, E.outQuint) * (1 - tw(t, Q - 0.3, Q + 0.2));
+        if (s4 > 0) {
+          ctx.save(); ctx.globalAlpha *= s4;
+          SM.label(ctx, "ONLY WEEKENDS · 5 HOURS A DAY", W / 2, 470, { size: 26, color: C.text });
+          const cw = 112, x0 = W / 2 - 3 * cw, y0 = 560;
+          ["M", "T", "W", "T", "F", "S", "S"].forEach((d, i) => SM.text(ctx, d, x0 + i * cw, y0, { size: 26, color: i >= 5 ? C.amber : C.label }));
+          let lit = 0;
+          for (let w = 0; w < 4; w++) for (let d = 0; d < 7; d++) {
+            const x = x0 + d * cw, y = y0 + 70 + w * 100;
+            const work = d >= 5, idx = w * 2 + (d - 5);
+            const on = work && t > S4 + 0.4 + idx * 0.16;
+            if (on) lit++;
+            SM.rr(ctx, x - 46, y - 40, 92, 80, 18);
+            ctx.fillStyle = on ? C.amber : "rgba(255,255,255,0.05)"; ctx.fill();
+            ctx.font = `800 ${on ? 21 : 18}px ${SM.FONT}`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+            if (on) { ctx.fillStyle = "#2a1c00"; ctx.fillText("$36.80", x, y + 1); } else if (!work) { ctx.fillStyle = C.label; ctx.fillText("OFF", x, y + 1); }
+          }
+          const big = t >= 16.8 ? tw(t, 16.8, 17.2, E.back) : 0;
+          UI.bigNumber(ctx, "$" + Math.floor(lit * PER_DAY) + " / month", big > 0 ? "FROM A $30 START" : "8 WEEKEND DAYS × $36.80", W / 2, 1110, 1, { size: 92 * (big > 0 ? lerp(1, 1.08, Math.sin(clamp((t - 16.8) / 0.5) * Math.PI)) : 1), color: big > 0 ? C.amber : C.hero, glowA: big * 0.6 });
+          ctx.restore();
+        }
+
+        // ---- ending: the clean sneaker ----
+        const ek = tw(t, Q + 0.2, Q + 1.2, E.outQuint);
+        if (ek > 0) {
+          ctx.save(); ctx.globalAlpha *= ek;
+          SM.glow(ctx, W / 2, 1000, 480, C.amber, 0.45);
+          shoe(ctx, W / 2, lerp(1250, 1120, ek) + Math.sin(t * 2) * 5, 1.6, 0);
+          UI.glint(ctx, W / 2 - 280, 840, 560, 300, tw(t, Q + 1.4, Q + 2.3, E.inOut));
+          ctx.restore();
+        }
+        ctx.restore();
+
+        FX.confetti(ctx, t, 16.8, { life: 3.2 });
+        FX.moneyRain(ctx, t, 16.9, { life: 2.6, n: 18 });
+        FX.leak(ctx, t, 0.12 + tw(t, 16.8, 17.2) * 0.25 * (1 - tw(t, 18, 19)));
+
+        // chrome
+        UI.topic(ctx, "BUSINESS IDEA: SHOE CLEANING", 196, tw(t, 2.9, 3.3));
+        SM.label(ctx, "EXAMPLE PRICES · RENT AND PERMITS NOT INCLUDED · CHECK LOCAL RULES", W / 2, 1360, { size: 15, color: "rgba(255,255,255,0.45)", spacing: 0.12, alpha: tw(t, 3.2, 3.6) * (1 - tw(t, Q - 0.3, Q)) });
+        SM.label(ctx, BRAND, W / 2, 1640, { size: 16, color: "rgba(255,255,255,0.2)", spacing: 0.5 });
+        SM.vignette(ctx, 0.65);
+        SM.grain(ctx, t, 0.05);
+      }
+
+      document.fonts.load('800 40px "Jakarta"').then(() => {
+        try { const v = window.__hyperframes.getVariables(); if (v && v.brand) BRAND = v.brand; } catch (e) {}
+        tl.fromTo("#hook-l1", { opacity: 1, scale: 1 }, { opacity: 1, scale: 1, duration: 0.01 }, 0);
+        tl.fromTo("#hook-l2", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power4.out" }, 0.6);
+        tl.fromTo("#hook p", { opacity: 1, y: 0 }, { opacity: 0, y: -24, filter: "blur(8px)", duration: 0.4, ease: "power3.in", stagger: 0.06 }, 2.45);
+        tl.fromTo("#quote .q", { opacity: 0, filter: "blur(12px)", y: 14 }, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.55, ease: "power4.out", stagger: 0.3 }, 18.5);
+        tl.fromTo("#quote .bar", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "expo.out" }, 19.5);
+        SM.mount("stage", DUR, draw, tl);
+        window.__timelines["main"] = tl;
+      });
+    </script>
+  </body>
+</html>

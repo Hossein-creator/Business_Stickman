@@ -1,0 +1,5 @@
+{"name": "Shoe cleaning",
+ "kit": {"brushes": 8, "cleaner": 10, "cloths": 5, "bucket": 3, "sign": 4},
+ "price": 5.00,
+ "unit_cost": {"cleaner": 0.30, "cloth wear & water": 0.10},
+ "units_per_day": 8, "days_per_month": 8, "hours_per_day": 5}
