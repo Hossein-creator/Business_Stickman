@@ -1,0 +1,6 @@
+{"name": "Plant stall",
+ "kit": {"potting soil": 25, "cuttings & seeds": 15, "tray": 10, "watering can": 5, "labels & sign": 5},
+ "price": 3.00,
+ "unit_cost": {"soil": 0.40, "cutting": 0.25, "label": 0.05},
+ "units_per_day": 12, "days_per_month": 8, "hours_per_day": 5,
+ "assumptions": "Example prices. Pots are free recycled cups and tins. Cuttings take about 3 weeks to root. 12 plants a day, 8 weekend days a month. Rent, permits and slow days not included."}
