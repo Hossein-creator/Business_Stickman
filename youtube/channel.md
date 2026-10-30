@@ -65,6 +65,7 @@ Description of each Short = its `renders/NN-<name>.caption.txt`. Same order and 
 | 14 | Start a Shoe Cleaning Business With $30 |
 | 15 | What a Bubble Tea Shop Keeps From Your $4 |
 | 16 | Start a Plant Stall With $60 |
+| 17 | Waiting for $10,000? He Started With $10 |
 
 ## 6. Home page and playlists
 
@@ -72,7 +73,7 @@ Three playlists, same as the Instagram highlights:
 
 - **Business Ideas**: 08, 11, 14, 16
 - **How Businesses Make Money**: 07, 10, 13, 15
-- **Money Habits**: 01, 02, 03, 04, 05, 06, 09, 12
+- **Money Habits**: 01, 02, 03, 04, 05, 06, 09, 12, 17
 
 Home page sections: Shorts (popular), then the three playlists. Add every new Short to its
 playlist the day it goes up.

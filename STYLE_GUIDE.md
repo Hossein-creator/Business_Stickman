@@ -145,8 +145,6 @@ Pick from the open list first (see `CLAUDE.md`); when one is made, move it to "M
 - **Gratitude chain:** a rider wants a car, the driver (installments) wants a scooter, the couple
   on the scooter wants the seller's freedom, the hospital patient wants to be the rider.
   *"Your 'not enough' is someone else's 'if only'."* (Close to a reference video: own story and look.)
-- **Waiting for capital:** one waits for $10,000, the other starts with $10.
-  *"You're waiting for money. You need to start."* (Close to a reference video: own story and look.)
 - **Rise and fall:** $70 million to bankrupt, told with stickmen, no names.
   *"It's not what you earn. It's what you keep."*
 - **Who stays:** the stall is empty, but one friend still comes every day (emotional twist).
@@ -172,4 +170,4 @@ Pick from the open list first (see `CLAUDE.md`); when one is made, move it to "M
 
 1 Spare Change · 2 Chapter 1 · 3 Same 24 Hours · 4 Bamboo · 5 Payday Loop · 6 The Snowball ·
 7 Your $5 Coffee · 8 $50 Car Wash · 9 Money Leaks · 10 Delivery App · 11 $80 Coffee Bike ·
-12 Look Rich or Get Rich · 13 How a Gym Makes Money · 14 $30 Shoe Cleaning · 15 How Bubble Tea Makes Money · 16 $60 Plant Stall
+12 Look Rich or Get Rich · 13 How a Gym Makes Money · 14 $30 Shoe Cleaning · 15 How Bubble Tea Makes Money · 16 $60 Plant Stall · 17 Waiting for Money

@@ -1,0 +1,193 @@
+<!doctype html>
+<html
+  lang="en"
+  data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"hook1","type":"string","label":"Hook line 1","default":"You’re waiting for $10,000."},
+    {"id":"hook2","type":"string","label":"Hook line 2","default":"He started with $10."},
+    {"id":"quote1","type":"string","label":"Quote line 1","default":"You don’t need more money."},
+    {"id":"quote2a","type":"string","label":"Quote line 2 (before keyword)","default":"You need to"},
+    {"id":"quote2b","type":"string","label":"Quote keyword","default":"start."},
+    {"id":"brand","type":"string","label":"Watermark","default":"BUSINESS STICKMAN"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/lib/gsap.min.js"></script>
+    <script src="assets/lib/stickman.js"></script>
+    <script src="assets/lib/stickman-props.js"></script>
+    <script src="assets/lib/stickman-fx.js"></script>
+    <script src="assets/lib/stickman-ui.js"></script>
+    <style>
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "Jakarta"; src: url("assets/fonts/plus-jakarta-sans-latin-800-normal.woff2") format("woff2"); font-weight: 800; }
+      :root { --ink: #eef1f6; --accent: #ffc23d; --muted: #9aa3b3; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0a0c11; }
+      #root { position: relative; width: 100%; height: 100%; font-family: "Jakarta", sans-serif; }
+      #stage { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+      .lines { position: absolute; left: 60px; right: 60px; top: 250px; text-align: center; color: var(--ink); font-weight: 800; letter-spacing: -0.02em; }
+      .lines p { font-size: 70px; line-height: 1.16; }
+      .lines p.big { font-size: 96px; }
+      .w { display: inline-block; white-space: pre; }
+      .key { position: relative; color: var(--accent); text-shadow: 0 0 30px rgba(255, 194, 61, 0.6); }
+      .bar { position: absolute; left: 0; right: 0; bottom: -4px; height: 8px; border-radius: 4px; background: var(--accent); transform-origin: left center; }
+      .soft { color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-motion-blur="on" data-motion-blur-events="on" data-composition-id="main" data-start="0" data-duration="22" data-width="1080" data-height="1920">
+      <canvas id="stage" class="clip" data-start="0" data-duration="22" data-track-index="0"></canvas>
+
+      <div id="hook" class="lines clip" data-start="0" data-duration="3.0" data-track-index="1">
+        <p id="hook-l1"><span class="w" data-var-text="hook1">You’re waiting for $10,000.</span></p>
+        <p id="hook-l2" class="key"><span class="w" data-var-text="hook2">He started with $10.</span></p>
+      </div>
+
+      <div id="quote" class="lines clip" data-start="18.4" data-duration="3.6" data-track-index="2">
+        <p class="soft"><span class="w q" data-var-text="quote1">You don’t need more money.</span></p>
+        <p class="big"><span class="w q" data-var-text="quote2a">You need to</span> <span class="w q key"><span data-var-text="quote2b">start.</span><span class="bar"></span></span></p>
+      </div>
+
+      <audio id="sfx-split" class="clip" src="assets/sfx/whoosh.mp3" data-start="2.9" data-duration="0.6" data-track-index="5" data-volume="0.3"></audio>
+      <audio id="sfx-c1" class="clip" src="assets/sfx/pop.mp3" data-start="4.2" data-duration="0.72" data-track-index="6" data-volume="0.22"></audio>
+      <audio id="sfx-c2" class="clip" src="assets/sfx/pop.mp3" data-start="5.0" data-duration="0.72" data-track-index="7" data-volume="0.22"></audio>
+      <audio id="sfx-c3" class="clip" src="assets/sfx/pop.mp3" data-start="5.8" data-duration="0.72" data-track-index="6" data-volume="0.22"></audio>
+      <audio id="sfx-cart" class="clip" src="assets/sfx/sparkle.mp3" data-start="7.5" data-duration="1.8" data-track-index="8" data-volume="0.32"></audio>
+      <audio id="sfx-wait1" class="clip" src="assets/sfx/click-soft.mp3" data-start="7.6" data-duration="0.37" data-track-index="9" data-volume="0.35"></audio>
+      <audio id="sfx-shop" class="clip" src="assets/sfx/chime.mp3" data-start="11.3" data-duration="2.5" data-track-index="10" data-volume="0.3"></audio>
+      <audio id="sfx-wait2" class="clip" src="assets/sfx/click-soft.mp3" data-start="11.4" data-duration="0.37" data-track-index="9" data-volume="0.35"></audio>
+      <audio id="sfx-riser" class="clip" src="assets/sfx/riser.mp3" data-start="5.4" data-duration="10.03" data-track-index="11" data-volume="0.15"></audio>
+      <audio id="sfx-end" class="clip" src="assets/sfx/impact-bass-1.mp3" data-start="15.4" data-duration="2.12" data-track-index="12" data-volume="0.45"></audio>
+      <audio id="sfx-quote" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="18.45" data-duration="0.6" data-track-index="13" data-volume="0.28"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const DUR = 22;
+      const { W, H, C, E, clamp, lerp, tw, rng } = SM;
+      const FX = SM.fx, UI = SM.ui;
+      let BRAND = "BUSINESS STICKMAN";
+
+      // same three years: one waits for $10,000, one starts with $10 of iced tea
+      const GY = 1110, XL = 270, XR = 810;
+      const A = 3.4, B = 7.4, CC = 11.2, SUM = 15.2, Q = 18.4;
+
+      function bill(ctx, x, y, str, rot = 0) {
+        ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+        SM.glow(ctx, 0, 0, 120, C.amber, 0.4);
+        SM.box(ctx, -56, -28, 112, 56, 8, "#8fcf86", 5); SM.box(ctx, -46, -19, 92, 38, 6, "#a6dc98", 0);
+        SM.text(ctx, str, 0, 2, { size: 28, color: "#2f5a2a" });
+        ctx.restore();
+      }
+
+      function draw(ctx, t) {
+        SM.background(ctx, "#151922", "#08090d");
+        const hh = FX.handheld(t, 0.6);
+        const endK = tw(t, Q - 0.4, Q + 0.4, E.inOut);
+        const split = tw(t, 2.9, 3.5, E.outQuint);
+        const stage = t < B ? 0 : t < CC ? 1 : 2;
+        ctx.save(); ctx.translate(hh.dx, hh.dy);
+
+        ctx.save(); ctx.globalAlpha *= 1 - endK;
+        const grey = tw(t, A, SUM, E.inOut);
+        SM.glow(ctx, XL, 900, 520, "#7d86c9", 0.12 * (1 - grey));
+        SM.glow(ctx, XR, 900, 520, C.amber, 0.12 + 0.18 * tw(t, A, SUM));
+        SM.groundStrip(ctx, GY, 700);
+        ctx.fillStyle = "rgba(255,255,255,0.10)"; ctx.fillRect(538, lerp(GY, 420, split), 4, lerp(0, GY - 420 + 260, split));
+        SM.label(ctx, "WAITING", XL, 440, { size: 32, color: C.other, alpha: split });
+        SM.label(ctx, "STARTED", XR, 440, { size: 32, color: C.amber, alpha: split });
+
+        // ---------- LEFT: on the bench, dreaming of $10,000 ----------
+        SM.bench(ctx, XL, GY, 1.3);
+        const jl = SM.stickman(ctx, { x: XL, y: GY - 62, s: 1.15, pose: SM.poseMix(SM.POSE.sit, SM.POSE.sitSlump, grey), color: SM.mixColor(C.hero, C.other, grey) });
+        const bub = SM.thought(ctx, XL + 20, 640, 250, 110, tw(t, 0.1, 0.6, E.lin), jl.head, { fill: SM.mixColor(C.paper, "#9aa3b3", grey) });
+        if (bub) { ctx.save(); ctx.translate(XL + 20, 640); ctx.scale(bub.sc, bub.sc); SM.text(ctx, "$10,000", 0, 2, { size: 44, color: SM.mixColor("#2f5a2a", "#4a505c", grey) }); ctx.restore(); }
+        const lp = ["SAVING UP...", "NOT READY YET", "STILL WAITING"][stage];
+        const lpk = t < A ? 0 : tw(t, [A, B, CC][stage], [A, B, CC][stage] + 0.4, E.lin);
+        SM.pill(ctx, lp, XL, 540, { size: 26, bg: "#262b36", fg: C.other, scale: Math.max(0.001, E.back(lpk)), alpha: clamp(lpk * 2) * (1 - tw(t, SUM - 0.3, SUM)) });
+
+        // ---------- RIGHT: $10 -> iced tea -> cart -> shop ----------
+        const kA = 1 - tw(t, B - 0.2, B + 0.3), kB = tw(t, B, B + 0.8, E.inOut) * (1 - tw(t, CC - 0.2, CC + 0.3)), kC = tw(t, CC, CC + 1.0, E.lin);
+        if (kA > 0) {
+          ctx.save(); ctx.globalAlpha *= kA;
+          const j = SM.stickman(ctx, { x: XR - 120, y: GY, s: 1.15, pose: t < A ? SM.POSE.give : SM.poseMix(SM.POSE.stand, SM.POSE.give, 0.5 + 0.5 * Math.sin((t - A) * 7)), color: C.hero });
+          if (t < A) bill(ctx, j.handF[0] + 50, j.handF[1] - 10 + Math.sin(t * 3) * 5, "$10", -0.1);
+          const crate = tw(t, A - 0.3, A + 0.3, E.back);
+          if (crate > 0) {
+            ctx.save(); ctx.translate(XR + 60, GY); ctx.scale(crate, crate);
+            UI.ico(ctx, "crate", 0, -40, 2.4);
+            for (let i = 0; i < 4; i++) SM.cup(ctx, -42 + i * 28, -88, 0.6);
+            ctx.restore();
+          }
+          for (let i = 0; i < 4; i++) { const t0 = A + 0.8 + i * 0.8; const k = tw(t, t0, t0 + 0.8, E.out); if (k > 0 && k < 1) SM.coin(ctx, XR + 60, GY - 160 - k * 120, 16, k * 8, 1 - k * k); }
+          ctx.restore();
+        }
+        if (kB > 0) {
+          ctx.save(); ctx.globalAlpha *= clamp(kB * 2);
+          SM.stickman(ctx, { x: XR - 160, y: GY, s: 1.1, pose: SM.POSE.proud, color: C.hero });
+          SM.cart(ctx, XR + 60, GY, 0.85, { awning: kB, sign: kB > 0.6 ? "ICED TEA" : null, light: kB, t });
+          ctx.restore();
+        }
+        if (kC > 0) {
+          SM.shop(ctx, XR, GY, 0.82, { grow: kC, sign: "TEA HOUSE", light: kC, t });
+          SM.stickman(ctx, { x: XR - 40, y: GY, s: 1.0, pose: SM.POSE.proud, color: C.hero, glowA: 0.3 * kC, alpha: clamp(kC * 2) });
+          SM.stickman(ctx, { x: XR + 200, y: GY, s: 0.85, face: -1, pose: SM.POSE.give, color: C.other, alpha: clamp(kC * 2) });
+        }
+        FX.burst(ctx, XR + 60, GY - 200, t, B + 0.3, { n: 24, kind: "spark", speed: 600, size: 7, life: 1.1, seed: 4 });
+        FX.burst(ctx, XR, GY - 300, t, CC + 0.6, { n: 30, kind: "coin", speed: 700, size: 8, life: 1.3, seed: 7 });
+        const rp = ["DAY 1: $10 OF ICED TEA", "MONTH 6: A CART", "YEAR 3: A SHOP"][stage];
+        const rpk = t < A ? 0 : tw(t, [A, B, CC][stage], [A, B, CC][stage] + 0.4, E.lin);
+        SM.pill(ctx, rp, XR, 540, { size: 26, bg: C.amber, fg: "#2a1c00", scale: Math.max(0.001, E.back(rpk)), alpha: clamp(rpk * 2) * (1 - tw(t, SUM - 0.3, SUM)) });
+
+        // day counter, the same for both
+        const day = Math.max(1, Math.round(1095 * tw(t, A, SUM - 0.4, E.inOut)));
+        SM.pill(ctx, "DAY " + day.toLocaleString("en-US"), W / 2, 340, { size: 30, bg: "#262b36", fg: C.hero, alpha: tw(t, A - 0.3, A) * (1 - tw(t, SUM - 0.3, SUM)) });
+
+        // ---------- after 3 years ----------
+        const sk = tw(t, SUM, SUM + 0.5, E.outQuint);
+        if (sk > 0) {
+          ctx.fillStyle = `rgba(10,12,17,${0.55 * sk})`; ctx.fillRect(0, 0, 538, GY);
+          const big = t >= SUM + 0.2 ? tw(t, SUM + 0.2, SUM + 0.6, E.back) : 0;
+          SM.label(ctx, "SAME 3 YEARS", W / 2, 340, { size: 26, color: C.text, alpha: sk });
+          UI.bigNumber(ctx, "Waiting", "STILL NOT ENOUGH", XL, 1230, sk, { size: 64, color: C.other, glowA: 0 });
+          UI.bigNumber(ctx, "A business", "STARTED WITH $10", XR, 1230, sk, { size: 64 * lerp(1, 1.06, Math.sin(clamp((t - SUM - 0.2) / 0.5) * Math.PI)), color: C.amber, glowA: big * 0.5 });
+          FX.rays(ctx, XR, 800, t, sk * 0.4 * (1 - tw(t, Q - 0.5, Q)), "#ffd27a", 12, 520);
+        }
+        ctx.restore();
+
+        // ---------- ending: the tea house, open ----------
+        if (endK > 0) {
+          ctx.save(); ctx.globalAlpha *= endK;
+          SM.glow(ctx, 540, 1000, 600, C.amber, 0.35);
+          SM.groundStrip(ctx, 1240, 700);
+          SM.shop(ctx, 600, 1240, 1.15, { grow: 1, sign: "TEA HOUSE", light: 1, t });
+          SM.stickman(ctx, { x: 300, y: 1240, pose: SM.POSE.proud, color: C.hero, glowA: 0.3 });
+          ctx.restore();
+        }
+        ctx.restore();
+
+        // chrome
+        UI.topic(ctx, "WAITING FOR MONEY", 196, tw(t, 3.0, 3.4));
+        SM.label(ctx, "A STORY, NOT A PROMISE · MOST BUSINESSES GROW SLOWER", W / 2, 1360, { size: 15, color: "rgba(255,255,255,0.45)", spacing: 0.12, alpha: tw(t, 3.4, 3.8) * (1 - tw(t, Q - 0.3, Q)) });
+        SM.label(ctx, BRAND, W / 2, 1640, { size: 16, color: "rgba(255,255,255,0.2)", spacing: 0.5 });
+        FX.leak(ctx, t, 0.1 + tw(t, SUM, SUM + 0.4) * 0.2 * (1 - tw(t, SUM + 1.5, SUM + 2.5)));
+        SM.vignette(ctx, 0.65);
+        SM.grain(ctx, t, 0.05);
+      }
+
+      document.fonts.load('800 40px "Jakarta"').then(() => {
+        try { const v = window.__hyperframes.getVariables(); if (v && v.brand) BRAND = v.brand; } catch (e) {}
+        tl.fromTo("#hook-l1", { opacity: 1 }, { opacity: 1, duration: 0.01 }, 0);
+        tl.fromTo("#hook-l2", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power4.out" }, 0.7);
+        tl.fromTo("#hook p", { opacity: 1, y: 0 }, { opacity: 0, y: -24, filter: "blur(8px)", duration: 0.4, ease: "power3.in", stagger: 0.06 }, 2.45);
+        tl.fromTo("#quote .q", { opacity: 0, filter: "blur(12px)", y: 14 }, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.55, ease: "power4.out", stagger: 0.3 }, 18.5);
+        tl.fromTo("#quote .bar", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "expo.out" }, 19.6);
+        SM.mount("stage", DUR, draw, tl);
+        window.__timelines["main"] = tl;
+      });
+    </script>
+  </body>
+</html>

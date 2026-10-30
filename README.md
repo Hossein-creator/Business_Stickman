@@ -28,6 +28,7 @@ Videos 1–4 run 18 s; from video 5 on they run 22 s, slower, with motion blur a
 | 14 | [`renders/14-shoe-cleaning.mp4`](renders/14-shoe-cleaning.mp4) | Got $30? A $30 kit (brushes, cleaner, cloths, bucket, sign), one dirty sneaker brushed clean for $5 ($4.60 profit), 8 pairs on a Saturday ($36.80), weekends only: $294 a month. | "Every dirty shoe you see is a **customer.**" |
 | 15 | [`renders/15-bubble-tea.mp4`](renders/15-bubble-tea.mp4) | You pay $4 for bubble tea. The cup fills layer by layer with every cost (pearls, tea and milk, syrup, cup, rent, staff, power): $0.70 profit. To make $3,000 a month: 143 cups every day. | "Busy is not the same as **profitable.**" |
 | 16 | [`renders/16-plant-stall.mp4`](renders/16-plant-stall.mp4) | Got $60? A $60 kit (soil, cuttings, tray, can, labels; pots recycled), 3 weeks of growth from day 1 to day 21, $2.30 profit per $3 plant, 12 plants on a Saturday ($27.60), weekends only: $220 a month. | "Everything big starts as a **seed.**" |
+| 17 | [`renders/17-waiting-for-money.mp4`](renders/17-waiting-for-money.mp4) | You're waiting for $10,000, he started with $10. Split screen over the same 1,095 days: one waits on a bench, the other goes from a crate of iced tea to a cart to a tea house. | "You don't need more money. You need to **start.**" |
 
 ## Layout
 
