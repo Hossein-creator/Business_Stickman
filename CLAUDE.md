@@ -64,5 +64,5 @@ Project skills in `.claude/skills/`: `generiere` (this whole loop as a checklist
    `python3 scripts/caption_lint.py renders/NN-<name>.caption.txt`, commit and push it with the
    render. Do not send the caption in the session.
 8. **Telegram, always, when a video is done:** send the video with its caption to the user's bot
-   with `python3 scripts/send_telegram.py renders/NN-<name>.mp4` (chat id 7190934039). The script
+   with `python3 scripts/send_telegram.py renders/NN-<name>.mp4` (chat id 8735567411, bot @Abasy03_bot). The script
    reads `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` from the environment; never commit the token.
